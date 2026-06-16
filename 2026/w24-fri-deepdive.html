@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK 딥다이브 — 2026.06.12 (금)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #0a0e17; color: #e0e6ed; line-height: 1.8; font-size: 15px; }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px; }
+
+  .header { text-align: center; padding: 40px 20px 30px; background: linear-gradient(135deg, #0f1923 0%, #1a1a2e 50%, #16213e 100%); border-radius: 16px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.06); }
+  .header-icon { font-size: 40px; margin-bottom: 12px; }
+  .header h1 { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+  .header .date { font-size: 13px; color: #7a8ba3; margin-top: 6px; }
+  .header .subtitle { font-size: 13px; color: #ff9f43; margin-top: 10px; font-weight: 500; }
+
+  /* 시장 체온계 */
+  .thermo { background: linear-gradient(135deg, #131a26, #16213e); border-radius: 14px; padding: 24px 22px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.06); }
+  .thermo h2 { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 4px; }
+  .thermo-sub { font-size: 12px; color: #7a8ba3; margin-bottom: 18px; }
+  .thermo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .thermo-box { background: rgba(0,0,0,0.25); border-radius: 10px; padding: 14px 16px; }
+  .thermo-label { font-size: 11px; color: #7a8ba3; text-transform: uppercase; letter-spacing: 0.5px; }
+  .thermo-value { font-size: 22px; font-weight: 900; color: #fff; margin: 4px 0; }
+  .thermo-desc { font-size: 12px; color: #b8c9d9; line-height: 1.6; }
+  .t-fear { color: #ff9f43; } .t-greed { color: #6bcb77; } .t-neutral { color: #ffd93d; }
+
+  .sector-card { border-radius: 14px; padding: 28px 24px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.06); }
+  .sector-ai { background: linear-gradient(135deg, #1a1a2e, #1e3a5f); }
+  .sector-bio { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); }
+  .sector-space { background: linear-gradient(135deg, #1a1a2e, #1b3a2d); }
+
+  .sector-title { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+  .sector-ai .sector-title { color: #64b5f6; }
+  .sector-bio .sector-title { color: #ce93d8; }
+  .sector-space .sector-title { color: #81c784; }
+  .sector-issue { font-size: 14px; color: #7a8ba3; margin-bottom: 16px; font-weight: 500; }
+
+  /* 테제 점수 바 */
+  .thesis { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.22); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; }
+  .thesis-score { font-size: 26px; font-weight: 900; color: #4ecdc4; min-width: 56px; text-align: center; }
+  .thesis-bar-wrap { flex: 1; }
+  .thesis-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; margin-bottom: 5px; }
+  .thesis-bar { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #4ecdc4, #6bcb77); }
+  .thesis-delta { font-size: 12px; color: #b8c9d9; }
+  .up { color: #6bcb77; font-weight: 700; } .down { color: #ff6b6b; font-weight: 700; }
+
+  .analysis { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 22px 20px; margin-bottom: 20px; }
+  .analysis h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .analysis p { font-size: 14px; color: #b8c9d9; line-height: 1.9; margin-bottom: 12px; }
+  .analysis p:last-child { margin-bottom: 0; }
+  .analysis strong { color: #e0e6ed; }
+
+  .signal-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; background: rgba(78,205,196,0.15); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.3); margin-bottom: 12px; }
+
+  .valuechain { background: rgba(0,0,0,0.15); border-radius: 12px; padding: 22px 20px; margin-bottom: 20px; }
+  .valuechain h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 14px; }
+  .chain-flow { display: flex; align-items: stretch; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .chain-step { flex: 1; min-width: 140px; background: rgba(255,255,255,0.04); border-radius: 8px; padding: 14px 12px; text-align: center; position: relative; }
+  .chain-step-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a8ba3; margin-bottom: 6px; }
+  .chain-step-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .chain-step-companies { font-size: 11px; color: #4ecdc4; line-height: 1.5; }
+  .chain-arrow { display: flex; align-items: center; color: #445566; font-size: 18px; font-weight: 700; }
+  .chain-insight { font-size: 13px; color: #b8c9d9; line-height: 1.7; padding: 12px 14px; background: rgba(78,205,196,0.06); border-radius: 8px; }
+
+  .stock-card { background: rgba(0,0,0,0.3); border-radius: 14px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.08); }
+  .stock-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .stock-name { font-size: 20px; font-weight: 900; color: #fff; }
+  .stock-score { font-size: 28px; font-weight: 900; color: #4ecdc4; }
+  .stock-ticker { font-size: 13px; color: #7a8ba3; margin-bottom: 20px; }
+
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .metric-box { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 12px 10px; text-align: center; }
+  .metric-label { font-size: 10px; color: #7a8ba3; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .metric-value { font-size: 17px; font-weight: 900; color: #e0e6ed; }
+  .metric-sub { font-size: 10px; color: #7a8ba3; margin-top: 2px; }
+
+  .score-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .score-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; }
+  .score-item > div { flex: 1; }
+  .score-item-label { font-size: 12px; color: #7a8ba3; margin-bottom: 6px; }
+  .score-item-value { font-size: 15px; font-weight: 900; color: #4ecdc4; }
+  .score-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 2px; }
+  .fill-high { background: #4ecdc4; } .fill-mid { background: #ffd93d; } .fill-low { background: #ff6b6b; }
+
+  .stock-section { margin-bottom: 20px; }
+  .stock-section h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .stock-section h4.why { color: #64b5f6; }
+  .stock-section h4.pros { color: #6bcb77; }
+  .stock-section h4.cons { color: #ff6b6b; }
+  .stock-section h4.strategy { color: #ffd93d; }
+  .stock-section h4.source { color: #7a8ba3; }
+  .stock-section p, .stock-section li { font-size: 14px; color: #b8c9d9; line-height: 1.9; }
+  .stock-section ul { padding-left: 18px; margin-bottom: 8px; }
+  .stock-section li { margin-bottom: 8px; }
+  .stock-section li strong { color: #e0e6ed; }
+
+  .entry-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .entry-table th { text-align: left; color: #7a8ba3; font-weight: 500; padding: 8px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .entry-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e0e6ed; }
+  .entry-table .highlight-row { background: rgba(78, 205, 196, 0.06); }
+
+  .kr-related { background: rgba(255,159,67,0.08); border: 1px solid rgba(255,159,67,0.15); border-radius: 10px; padding: 16px 18px; margin-top: 16px; }
+  .kr-flag { font-size: 12px; font-weight: 700; color: #ff9f43; margin-bottom: 6px; }
+  .kr-related p { font-size: 13px; color: #b8c9d9; line-height: 1.7; }
+  .kr-related strong { color: #ff9f43; }
+
+  .broker-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px 18px; margin-top: 16px; border: 1px solid rgba(255,255,255,0.06); }
+  .broker-box h4 { font-size: 12px; font-weight: 700; color: #7a8ba3; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .broker-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; }
+  .broker-row:last-child { border-bottom: none; }
+  .broker-ticker { font-weight: 700; color: #e0e6ed; }
+  .broker-market { color: #7a8ba3; font-size: 12px; }
+  .broker-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+  .broker-yes { background: rgba(107,203,119,0.15); color: #6bcb77; border: 1px solid rgba(107,203,119,0.25); }
+  .broker-no { background: rgba(255,107,107,0.15); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.25); }
+  .broker-partial { background: rgba(255,215,61,0.15); color: #ffd93d; border: 1px solid rgba(255,215,61,0.25); }
+  .broker-note { font-size: 12px; color: #7a8ba3; line-height: 1.6; margin-top: 10px; padding: 10px 12px; background: rgba(255,255,255,0.02); border-radius: 6px; }
+  .broker-note strong { color: #b8c9d9; }
+
+  .portfolio { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 14px; padding: 28px 24px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.06); }
+  .portfolio h2 { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+  .portfolio-subtitle { font-size: 13px; color: #7a8ba3; margin-bottom: 20px; }
+  .portfolio-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
+  .portfolio-table th { text-align: left; color: #7a8ba3; font-weight: 500; padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .portfolio-table td { padding: 10px 6px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #e0e6ed; font-size: 12px; }
+  .status-hold { color: #6bcb77; } .status-wait { color: #ffd93d; } .status-watch { color: #7a8ba3; }
+
+  .allocation { margin-bottom: 20px; }
+  .alloc-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 13px; }
+  .alloc-label { width: 80px; color: #7a8ba3; }
+  .alloc-bar-bg { flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 5px; overflow: hidden; }
+  .alloc-bar { height: 100%; border-radius: 5px; }
+  .alloc-bar.ai { background: #64b5f6; } .alloc-bar.bio { background: #ce93d8; } .alloc-bar.space { background: #81c784; }
+  .alloc-pct { width: 40px; text-align: right; font-weight: 700; color: #e0e6ed; }
+
+  .cash-note { background: rgba(255,215,61,0.08); border-left: 3px solid #ffd93d; border-radius: 0 8px 8px 0; padding: 14px 16px; font-size: 14px; color: #b8c9d9; line-height: 1.7; }
+  .cash-note strong { color: #ffd93d; }
+
+  .analyst-view { background: linear-gradient(135deg, #16213e, #1a1a2e); border-radius: 14px; padding: 28px 24px; margin-bottom: 24px; border: 1px solid rgba(78,205,196,0.15); }
+  .analyst-view h2 { font-size: 18px; font-weight: 900; color: #4ecdc4; margin-bottom: 16px; }
+  .analyst-view p { font-size: 15px; color: #c8d8e8; line-height: 2.0; margin-bottom: 14px; }
+  .analyst-view strong { color: #fff; }
+
+  /* 용어 사전 */
+  .glossary { background: rgba(0,0,0,0.2); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+  .glossary h2 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .gloss-item { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .gloss-item:last-child { border-bottom: none; }
+  .gloss-term { font-size: 14px; font-weight: 700; color: #4ecdc4; margin-bottom: 4px; }
+  .gloss-def { font-size: 13px; color: #b8c9d9; line-height: 1.7; }
+  .gloss-def strong { color: #e0e6ed; }
+
+  .readings { background: rgba(0,0,0,0.2); border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+  .readings h2 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .reading-item { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .reading-item:last-child { border-bottom: none; }
+  .reading-sector { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .reading-sector.ai { color: #64b5f6; } .reading-sector.bio { color: #ce93d8; } .reading-sector.space { color: #81c784; }
+  .reading-title { font-size: 14px; font-weight: 700; color: #e0e6ed; margin-bottom: 4px; }
+  .reading-source { font-size: 12px; color: #7a8ba3; }
+  .reading-why { font-size: 13px; color: #b8c9d9; line-height: 1.6; margin-top: 6px; }
+
+  .footer { text-align: center; padding: 24px; font-size: 11px; color: #445566; line-height: 1.6; }
+  .highlight { color: #4ecdc4; font-weight: 700; }
+  .danger { color: #ff6b6b; font-weight: 700; }
+  .warn { color: #ffd93d; font-weight: 700; }
+  .safe { color: #6bcb77; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ════════════ HEADER ════════════ -->
+  <div class="header">
+    <div class="header-icon">🔬</div>
+    <h1>MK 애널리스트 딥다이브</h1>
+    <div class="date">2026년 6월 12일 금요일 · W24</div>
+    <div class="subtitle">숫자로 증명하고, 장단점을 숨기지 않는다</div>
+  </div>
+
+  <!-- ════════════ 시장 체온계 ════════════ -->
+  <div class="thermo">
+    <h2>🌡️ 시장 체온계</h2>
+    <div class="thermo-sub">오늘 시장이 어떤 온도인지 — 진입 타이밍의 배경 (2026.06.12 기준)</div>
+    <div class="thermo-grid">
+      <div class="thermo-box">
+        <div class="thermo-label">공포·탐욕 지수</div>
+        <div class="thermo-value t-fear">37</div>
+        <div class="thermo-desc">CNN F&amp;G. <strong class="t-fear">공포(Fear)</strong> 구간. 대중이 겁먹은 상태 = 분할매수 적기. 6/10 33 → 6/11 37로 소폭 회복.</div>
+      </div>
+      <div class="thermo-box">
+        <div class="thermo-label">VIX 변동성</div>
+        <div class="thermo-value t-neutral">19.3</div>
+        <div class="thermo-desc">3월 중동發 30 돌파 후 진정. 20 미만은 '정상 범위'지만, 6월 반도체 차익실현으로 다시 들썩이는 중.</div>
+      </div>
+      <div class="thermo-box">
+        <div class="thermo-label">미 10년물 금리</div>
+        <div class="thermo-value t-fear">4.47%</div>
+        <div class="thermo-desc">여전히 4%대 고착. 금리가 높으면 적자·고밸류 성장주(양자·SMR·바이오)에 역풍. 6/10 4.55% → 4.47% 소폭 완화.</div>
+      </div>
+      <div class="thermo-box">
+        <div class="thermo-label">달러 인덱스(DXY)</div>
+        <div class="thermo-value t-neutral">99.8</div>
+        <div class="thermo-desc">100 부근. 달러가 강하면 원화 환산 수익이 깎이지만, 미국주 매수 시 환차익 여지도. 중립.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 피지컬 AI (40%) ════════════ -->
+  <div class="sector-card sector-ai">
+    <div class="sector-title">🤖 피지컬 AI <span style="font-size:12px; color:#7a8ba3;">· 비중 40%</span></div>
+    <div class="sector-issue">이번 주 핵심 이슈 — 2026이 '휴머노이드 양산 원년'이 된 이유, 그리고 병목은 감속기다</div>
+
+    <div class="thesis">
+      <div class="thesis-score">88</div>
+      <div class="thesis-bar-wrap">
+        <div class="thesis-bar-bg"><div class="thesis-bar" style="width:88%;"></div></div>
+        <div class="thesis-delta">테제 점수 <span class="up">▲3</span> (전주 85) — Tesla·Figure·Apptronik 동시 양산 진입으로 부품 수요 확정. 단 中 경쟁 부상이 상단을 제한.</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <span class="signal-badge">📡 선행 시그널 · 뉴스 미반영</span>
+      <h3>📖 심층 분석 — 화살이 아니라 화살촉을 사라</h3>
+      <p>
+        지난 화요일 레이더에서 휴머노이드 '양산 원년' 신호를 전해드렸습니다. 오늘은 그 신호를 숫자로 해부합니다.
+        시장은 Tesla Optimus, Figure 같은 <strong>완성품 회사</strong>에 열광하지만, 정작 누가 이길지는 아무도 모릅니다.
+        반면 <strong>어떤 로봇이 이기든 반드시 들어가는 부품</strong>이 있습니다 — 정밀 감속기(하모닉 드라이브)입니다.
+      </p>
+      <p>
+        휴머노이드 한 대에는 감속기가 <strong>평균 12~15개</strong> 들어갑니다(관절마다 하나). 개당 약 <strong>$200~$500</strong>.
+        Tesla는 Optimus V3를 연중 공개하고 <strong>3분기(7~8월) 대량 양산</strong>을 공언했으며, 연 100만 대 → 장기 1,000만 대를 목표로 합니다.
+        Figure 02, Apptronik Apollo도 <strong>Q2 2026에 동시에 파일럿 고객 납품</strong>을 시작했습니다 — 세 프로그램이 한꺼번에 초기 양산에 진입한 건 처음입니다.
+      </p>
+      <p>
+        가장 강력한 선행 시그널은 <strong>리드타임</strong>입니다. 주요 공급사(Harmonic Drive, Schaeffler)의 감속기 조립품 납기가
+        현재 <strong>26주(약 6개월) 이상</strong>으로 벌어졌습니다. 납기가 길어진다는 건 <strong>주문이 생산능력을 초과</strong>했다는 뜻 —
+        매출에 잡히기 전, 공급망에서 먼저 울리는 신호입니다. 아직 주요 언론이 다루지 않는 영역입니다.
+      </p>
+      <p>
+        다만 균형을 위해 반대편도 봅니다. 중국 <strong>Suzhou Green Harmonic(쑤저우 그린)</strong>이 Tesla에 감속기를 공급하며 점유율 ~25%를 확보했고,
+        일본 대비 <strong>30~40% 저렴한 가격</strong>으로 2026년 Optimus 감속기의 60%를 노립니다. 일본 독점 구도가 영원하지 않다는 경고입니다.
+      </p>
+    </div>
+
+    <div class="valuechain">
+      <h3>🔗 밸류체인 맵 — 누가 돈을 버나?</h3>
+      <div class="chain-flow">
+        <div class="chain-step">
+          <div class="chain-step-label">설계·두뇌</div>
+          <div class="chain-step-name">AI 칩·SW</div>
+          <div class="chain-step-companies">NVIDIA, Google<br>Tesla (Dojo)</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step" style="border: 1px solid rgba(78,205,196,0.3);">
+          <div class="chain-step-label">핵심 부품 ⭐</div>
+          <div class="chain-step-name">감속기·모터·센서</div>
+          <div class="chain-step-companies">Harmonic Drive<br>나브테스코, 에스피지</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <div class="chain-step-label">완성품</div>
+          <div class="chain-step-name">로봇 제조</div>
+          <div class="chain-step-companies">Tesla, Figure<br>Apptronik, 샤오미</div>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <div class="chain-step-label">활용</div>
+          <div class="chain-step-name">물류·제조</div>
+          <div class="chain-step-companies">Amazon, 폭스콘<br>BMW, 삼성전자</div>
+        </div>
+      </div>
+      <div class="chain-insight">
+        💡 <strong>지금 가장 확실한 수혜는 "핵심 부품"</strong>입니다. 완성품 승자는 미정이지만 감속기는 누가 이기든 필요합니다.
+        AI 칩은 이미 주가에 반영(NVIDIA), 부품은 아직 '전통 산업재'로 상대적 저평가. 단, 중국 침투로 '독점 프리미엄'은 서서히 깎입니다.
+      </div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div>
+          <div class="stock-name">Harmonic Drive Systems</div>
+          <div class="stock-ticker">6324.T (도쿄증권거래소) · 정밀 감속기 글로벌 1위 (점유율 ~60%)</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="stock-score">82</div>
+          <div style="font-size:10px; color:#7a8ba3;">종합 점수</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box"><div class="metric-label">현재가</div><div class="metric-value">¥6,280</div><div class="metric-sub">6/11 종가</div></div>
+        <div class="metric-box"><div class="metric-label">전고 대비</div><div class="metric-value">~¥7,200</div><div class="metric-sub">최근 고점권 근접</div></div>
+        <div class="metric-box"><div class="metric-label">사업 비중</div><div class="metric-value">로봇 1위</div><div class="metric-sub">+반도체+의료</div></div>
+        <div class="metric-box"><div class="metric-label">글로벌 점유율</div><div class="metric-value safe">~60%</div><div class="metric-sub">2위와 30%p+</div></div>
+        <div class="metric-box"><div class="metric-label">신성장 계획</div><div class="metric-value">26~30</div><div class="metric-sub">AI로봇·항공·e모빌</div></div>
+        <div class="metric-box"><div class="metric-label">공급 리드타임</div><div class="metric-value warn">26주+</div><div class="metric-sub">수요 초과 신호</div></div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item"><div><div class="score-item-label">저평가도</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:63%;"></div></div></div><div class="score-item-value">19/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">성장성</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:90%;"></div></div></div><div class="score-item-value">27/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">해자 (Moat)</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:88%;"></div></div></div><div class="score-item-value">22/25</div></div>
+        <div class="score-item"><div><div class="score-item-label">리스크 (높을수록 안전)</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:60%;"></div></div></div><div class="score-item-value">9/15</div></div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 왜 주목인가 — 시장이 놓치는 것</h4>
+        <p>시장은 하모닉 드라이브를 <strong>"일본 전통 산업 자동화 부품주"</strong>로 분류합니다. 그래서 로봇·AI ETF에 잘 안 들어가고 AI 프리미엄을 거의 못 받습니다.</p>
+        <p>하지만 Tesla Optimus, Figure 02, 샤오미 CyberOne의 관절에 <strong>전부 이 회사 감속기가 들어갑니다.</strong> 점유율 ~60%, 2위와 격차 30%p+.
+        2026년 5월엔 <strong>AI로봇·항공우주·e모빌리티를 축으로 한 2026~2030 신성장 계획</strong>을 발표하며 스스로 '로봇 회사'로 재포지셔닝 중입니다.</p>
+        <p>다만 주가는 이미 사람들이 눈치채기 시작해 최근 고점권(¥7,000대)에서 ¥6,280으로 일부 조정. <strong>'완전 저평가'는 아니고 '구조적 수혜 + 조정 매수' 구간</strong>으로 봅니다.</p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>대체 난이도 최상:</strong> 하모닉 기어 원천기술·정밀도 우위. 로봇사가 바꾸고 싶어도 동급 대안이 적습니다.</li>
+          <li><strong>고객 다변화:</strong> 로봇 + 반도체 장비 + 의료. 한 섹터가 식어도 다른 축이 버팁니다.</li>
+          <li><strong>리드타임 26주:</strong> 납기 지연 = 수주가 생산능력을 초과했다는 직접 증거. 향후 매출의 선행지표.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크 — 반드시 알고 투자</h4>
+        <ul>
+          <li><strong>중국 침투 가속:</strong> Suzhou Green Harmonic이 Tesla에 30~40% 싸게 공급, 2026 Optimus 60% 목표. 중저가 구간 잠식이 예상보다 빠릅니다.</li>
+          <li><strong>엔화 환율:</strong> 일본주 → 엔/원 변동이 원화 수익에 직접 영향. 엔 약세면 주가가 올라도 원화 환산 수익이 줄 수 있습니다.</li>
+          <li><strong>밸류 부담:</strong> 이미 고점권. 양산이 2027~28로 밀리면 주가 횡보·조정 가능. 추격매수 금물.</li>
+          <li><strong>유동성:</strong> 일본 중형주 → 지정가 주문 권장.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 3단계 분할</h4>
+        <table class="entry-table">
+          <tr><th>단계</th><th>조건</th><th>비중</th><th>메모</th></tr>
+          <tr class="highlight-row"><td><strong>1차</strong></td><td>¥6,000 이하</td><td>30%</td><td>현재가 -4% 부근 조정 대기</td></tr>
+          <tr><td><strong>2차</strong></td><td>¥5,200 이하</td><td>40%</td><td>시장 조정 시 적극 매수</td></tr>
+          <tr><td><strong>3차</strong></td><td>분기 실적 확인 후</td><td>30%</td><td>로봇 매출 성장 재확인 시</td></tr>
+          <tr style="background: rgba(255,107,107,0.06);"><td><strong>손절 검토</strong></td><td>중국 점유율 급반전</td><td>—</td><td>주력 고객 이탈 시 테제 재점검</td></tr>
+          <tr style="background: rgba(107,203,119,0.06);"><td><strong>목표가</strong></td><td>¥9,000</td><td>—</td><td>12~18개월. 양산 본격화 시</td></tr>
+        </table>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <ul>
+          <li>휴머노이드 공급망/리드타임 — 36Kr, RivCut 제조 리포트 (2026.06)</li>
+          <li>Tesla Optimus V3 양산 일정 — TradingKey (2026.06)</li>
+          <li>Harmonic Drive 2026~2030 신성장 계획 — 회사 IR (2026.05)</li>
+        </ul>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 관련주</div>
+        <p><strong>에스피지 (058610)</strong> — 국내 감속기 1위. 현대로보틱스·두산로보틱스 납품. 소형주 리스크는 있으나 국내 로봇 양산 수혜를 가장 직접적으로 받습니다.</p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row"><div><span class="broker-ticker">Harmonic Drive (6324.T)</span><span class="broker-market"> · 도쿄</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">에스피지 (058610)</span><span class="broker-market"> · 코스닥</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-note"><strong>일본 주식:</strong> 삼성증권 mPOP/HTS → 해외주식 → 일본. 거래시간 한국 09:00~11:30, 12:30~15:00. 엔화 환전 필요. 수수료 0.25% + 환전 스프레드 ~1%. 사전 해외주식 거래 신청 1회 필요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 우주 (30%) ════════════ -->
+  <div class="sector-card sector-space">
+    <div class="sector-title">🚀 우주 <span style="font-size:12px; color:#7a8ba3;">· 비중 30%</span></div>
+    <div class="sector-issue">이번 주 핵심 이슈 — Rocket Lab, 오늘(6/12) 나스닥100 편입 + 백로그 $2.2B로 더블</div>
+
+    <div class="thesis">
+      <div class="thesis-score">90</div>
+      <div class="thesis-bar-wrap">
+        <div class="thesis-bar-bg"><div class="thesis-bar" style="width:90%;"></div></div>
+        <div class="thesis-delta">테제 점수 <span class="up">▲5</span> (전주 85) — 방산 수주·나스닥100 편입으로 '니치 발사업체 → 우주 인프라 대장주' 격상. 단 밸류는 부담.</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <span class="signal-badge">📡 정부 계약 · 확정 수요</span>
+      <h3>📖 심층 분석 — '전망'이 아니라 '확정된 돈'</h3>
+      <p>
+        우주는 더 이상 "언젠가 될 것"이 아닙니다. 미 국방부(Department of War)가 Rocket Lab에 <strong>$190M HASTE 블록바이(극초음속 시험비행 20회)</strong>를 발주했고,
+        Anduril·Raytheon과의 협업도 확대됐습니다. 이건 전망이 아니라 <strong>"이 돈은 반드시 쓰인다"는 확정 수요</strong>입니다.
+      </p>
+      <p>
+        Q1 2026 실적이 이를 증명합니다. 분기 매출 <strong>$200M(사상 최대, +63.5% YoY)</strong>, 백로그 <strong>$2.2B(+108% YoY)</strong> — 1개 분기에만 31건의 발사 계약을 따내며 2025년 연간 전체를 넘어섰습니다.
+        그리고 오늘 <strong>2026년 6월 12일, 나스닥100 지수 편입</strong>이 발표됐습니다. 지수 추종 패시브 자금이 강제로 들어온다는 의미입니다.
+      </p>
+      <p>
+        다음 카탈리스트는 중형 로켓 <strong>Neutron</strong>입니다. 이미 최대 규모 계약(Neutron 5회 + Electron 3회, 2026~2029)을 확보했고 상업 매니페스트가 빠르게 차고 있습니다.
+        Neutron이 뜨면 SpaceX Falcon 9 시장까지 넘봅니다. <strong>'SpaceX 다음'이라는 자리를 실적으로 증명 중</strong>입니다.
+      </p>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div>
+          <div class="stock-name">Rocket Lab</div>
+          <div class="stock-ticker">RKLB (NASDAQ) · 소형 발사 + 우주 시스템 · 🆕 나스닥100 편입</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="stock-score">80</div>
+          <div style="font-size:10px; color:#7a8ba3;">종합 점수</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box"><div class="metric-label">현재가</div><div class="metric-value">$113.65</div><div class="metric-sub">6/12</div></div>
+        <div class="metric-box"><div class="metric-label">52주 범위</div><div class="metric-value">$25~$151</div><div class="metric-sub">고점 근접</div></div>
+        <div class="metric-box"><div class="metric-label">1년 수익률</div><div class="metric-value safe">+352%</div><div class="metric-sub">이미 많이 옴</div></div>
+        <div class="metric-box"><div class="metric-label">Q1 매출</div><div class="metric-value safe">$200M</div><div class="metric-sub">+63.5% YoY</div></div>
+        <div class="metric-box"><div class="metric-label">백로그</div><div class="metric-value safe">$2.2B</div><div class="metric-sub">+108% YoY</div></div>
+        <div class="metric-box"><div class="metric-label">손익</div><div class="metric-value warn">-$0.07 EPS</div><div class="metric-sub">적자 축소 중</div></div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item"><div><div class="score-item-label">저평가도</div><div class="score-bar"><div class="score-bar-fill fill-low" style="width:40%;"></div></div></div><div class="score-item-value">12/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">성장성</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:97%;"></div></div></div><div class="score-item-value">29/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">해자 (Moat)</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:92%;"></div></div></div><div class="score-item-value">23/25</div></div>
+        <div class="score-item"><div><div class="score-item-label">리스크 (높을수록 안전)</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:70%;"></div></div></div><div class="score-item-value">10/15</div></div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>SpaceX 다음가는 실적:</strong> 민간 발사 횟수 세계 2위. 50회+ 성공 누적 = 실전 경험이 곧 해자.</li>
+          <li><strong>발사+위성 수직통합:</strong> 로켓도 위성도 직접. 국방부 입장에선 '한 회사 원스톱' 가능한 드문 후보.</li>
+          <li><strong>방산 수주 + 지수 편입:</strong> $190M HASTE, Anduril/Raytheon 협업에 더해 나스닥100 편입으로 패시브 매수세 유입.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크 — 지금이 비싸다</h4>
+        <ul>
+          <li><strong>밸류에이션 과열:</strong> 1년 +352%, 52주 고점($151) 근접. 좋은 회사 ≠ 좋은 가격. 추격매수는 손실 위험이 큽니다.</li>
+          <li><strong>여전히 적자:</strong> 흑자전환은 Neutron 매출화 이후. 개발비 증가로 지연 가능.</li>
+          <li><strong>발사 실패 리스크:</strong> 한 번의 실패가 분기 실적과 신뢰를 흔듭니다. Neutron 첫 발사 성공 여부가 분기점.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 비싸므로 '인내가 핵심'</h4>
+        <p style="margin-bottom:12px; color:#ffd93d;">⚠️ 현재가는 목표 진입가를 크게 상회합니다. 지금은 <strong>관찰(Watch)</strong>, 조정을 기다리는 종목입니다.</p>
+        <table class="entry-table">
+          <tr><th>단계</th><th>조건</th><th>비중</th><th>메모</th></tr>
+          <tr class="highlight-row"><td><strong>1차</strong></td><td>$90 이하</td><td>30%</td><td>고점 -20% 조정 시</td></tr>
+          <tr><td><strong>2차</strong></td><td>$72 이하</td><td>40%</td><td>시장 패닉 시 적극 매수</td></tr>
+          <tr><td><strong>3차</strong></td><td>Neutron 첫 발사 성공</td><td>30%</td><td>최대 카탈리스트 확인 후</td></tr>
+          <tr style="background:rgba(255,107,107,0.06);"><td><strong>손절</strong></td><td>$55 이탈</td><td>—</td><td>Neutron 취소 등 근본 악재 시</td></tr>
+          <tr style="background:rgba(107,203,119,0.06);"><td><strong>목표가</strong></td><td>$160~$180</td><td>—</td><td>18~24개월. Neutron 상업운용 정착 시</td></tr>
+        </table>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 관련주</div>
+        <p><strong>한화에어로스페이스 (012450)</strong> — 누리호 엔진 주도, 방산+우주 겸업. 우주 매출 비중은 아직 낮지만 한국 우주의 실질 수혜주. PER 부담 → 조정 시 진입 권장.</p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row"><div><span class="broker-ticker">Rocket Lab (RKLB)</span><span class="broker-market"> · NASDAQ</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">한화에어로스페이스 (012450)</span><span class="broker-market"> · 코스피</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">SpaceX</span><span class="broker-market"> · 비상장</span></div><span class="broker-badge broker-no">❌ 직접 불가</span></div>
+        <div class="broker-note"><strong>SpaceX 간접 노출:</strong> 비상장이라 직접 매수 불가. <strong>ARKX(ARK Space ETF)</strong> 등으로 간접 노출 가능하며 삼성증권에서 거래됩니다. 미국주 거래시간 한국 23:30~06:00(서머타임 22:30~05:00).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ SMR (10%) ════════════ -->
+  <div class="sector-card" style="background: linear-gradient(135deg, #1a1a2e, #3a2a1e);">
+    <div class="sector-title" style="color:#ff9f43;">⚛️ 소형 원자로 (SMR) <span style="font-size:12px; color:#7a8ba3;">· 비중 10%</span></div>
+    <div class="sector-issue">이번 주 핵심 이슈 — Oklo, NRC 설계기준 승인 + 14GW 파이프라인. AI 전력의 답</div>
+
+    <div class="thesis">
+      <div class="thesis-score">82</div>
+      <div class="thesis-bar-wrap">
+        <div class="thesis-bar-bg"><div class="thesis-bar" style="width:82%;"></div></div>
+        <div class="thesis-delta">테제 점수 <span class="up">▲4</span> (전주 78) — NRC 설계기준 승인으로 규제 리스크 완화 + 빅테크 전력계약 확대. 단 상용화는 2027+.</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <span class="signal-badge">📡 인허가 + 스마트머니</span>
+      <h3>📖 심층 분석 — AI의 진짜 병목은 GPU가 아니라 전력</h3>
+      <p>
+        AI 데이터센터 한 곳의 전력은 소도시급입니다. IEA는 글로벌 데이터센터 전력을 2025년 ~400TWh → 2030년 <strong>1,000~1,500TWh</strong>로 전망합니다.
+        태양광·풍력은 해·바람이 멈추면 끊깁니다. 24시간 도는 데이터센터엔 한계죠. <strong>SMR은 24시간 안정발전 + 탄소제로 + 센터 옆 설치</strong> 세 박자를 갖춘 거의 유일한 해법입니다.
+      </p>
+      <p>
+        이번 분기 결정적 신호: <strong>NRC가 Oklo Aurora의 핵심 설계기준(Principal Design Criteria)을 5월 승인</strong>했습니다. 가장 큰 리스크였던 규제 불확실성이 크게 줄었습니다.
+        동시에 고객 파이프라인이 폭증 — Switch 12GW 마스터계약, Equinix 500MW(LOI + $25M 선급), Meta 1.2GW(오하이오) 등 <strong>총 14GW</strong>가 줄을 섰습니다.
+      </p>
+      <p>
+        반대편도 봅니다. Oklo는 <strong>아직 매출 0(Pre-revenue)</strong>, 상용발전은 아이다호 INL에서 <strong>2027년 말</strong> 목표입니다. 주가는 고점 $193 → $58로 <strong>-70%</strong> 빠진 상태 —
+        '기대가 과했다가 식은' 구간입니다. 인내가 필요하지만, 그래서 진입가 매력은 오히려 생겼습니다.
+      </p>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div>
+          <div class="stock-name">Oklo Inc.</div>
+          <div class="stock-ticker">OKLO (NYSE) · 초소형 원자로 · Sam Altman 이사회 의장</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="stock-score">76</div>
+          <div style="font-size:10px; color:#7a8ba3;">종합 점수</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box"><div class="metric-label">현재가</div><div class="metric-value">$57.86</div><div class="metric-sub">6/12</div></div>
+        <div class="metric-box"><div class="metric-label">52주 범위</div><div class="metric-value">$45~$194</div><div class="metric-sub">고점 -70%</div></div>
+        <div class="metric-box"><div class="metric-label">시총</div><div class="metric-value">$10.1B</div></div>
+        <div class="metric-box"><div class="metric-label">매출</div><div class="metric-value warn">Pre-Rev</div><div class="metric-sub">상용 2027E</div></div>
+        <div class="metric-box"><div class="metric-label">고객 파이프라인</div><div class="metric-value safe">14GW</div><div class="metric-sub">Switch·Meta·Equinix</div></div>
+        <div class="metric-box"><div class="metric-label">규제</div><div class="metric-value safe">설계기준 승인</div><div class="metric-sub">NRC, 2026.05</div></div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item"><div><div class="score-item-label">저평가도</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:60%;"></div></div></div><div class="score-item-value">18/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">성장성</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:90%;"></div></div></div><div class="score-item-value">27/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">해자 (Moat)</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:80%;"></div></div></div><div class="score-item-value">20/25</div></div>
+        <div class="score-item"><div><div class="score-item-label">리스크 (높을수록 안전)</div><div class="score-bar"><div class="score-bar-fill fill-low" style="width:47%;"></div></div></div><div class="score-item-value">7/15</div></div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>14GW 고객 줄서기:</strong> 발전소 짓기 전부터 수요 확정(Switch·Meta·Equinix). 건설 리스크가 낮습니다.</li>
+          <li><strong>NRC 설계기준 승인:</strong> 가장 큰 규제 리스크 완화. 통합 라이선스 경로가 명확해졌습니다.</li>
+          <li><strong>Sam Altman 의장:</strong> AI×에너지 교차점에서 최강 네트워크. 재활용 핵연료로 연료비·폐기물도 절감.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크</h4>
+        <ul>
+          <li><strong>매출 0:</strong> 상용발전 2027년 말. 그전까지 2년+ 인내. 주가 횡보·추가 하락 가능.</li>
+          <li><strong>희석 리스크:</strong> 적자 기업은 증자로 자금을 조달 → 주식 수 증가로 주당가치 희석 가능.</li>
+          <li><strong>변동성 극심:</strong> 1년 새 $45~$194. 포지션은 작게, 분할로만 접근하세요.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략</h4>
+        <table class="entry-table">
+          <tr><th>단계</th><th>조건</th><th>비중</th><th>메모</th></tr>
+          <tr class="highlight-row"><td><strong>1차</strong></td><td>$50 이하</td><td>30%</td><td>현재가 -14%, 52주 하단권</td></tr>
+          <tr><td><strong>2차</strong></td><td>$45 이하</td><td>40%</td><td>52주 저점 부근 적극 매수</td></tr>
+          <tr><td><strong>3차</strong></td><td>통합 라이선스 진전</td><td>30%</td><td>규제 추가 해소 확인</td></tr>
+          <tr style="background:rgba(255,107,107,0.06);"><td><strong>손절</strong></td><td>주요 고객 이탈</td><td>—</td><td>파이프라인 붕괴 시 테제 재검토</td></tr>
+          <tr style="background:rgba(107,203,119,0.06);"><td><strong>목표가</strong></td><td>$110~$130</td><td>—</td><td>24~36개월. 첫 상용 발전 가시화 시</td></tr>
+        </table>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 관련주</div>
+        <p><strong>두산에너빌리티 (034020)</strong> — NuScale 등에 SMR 핵심기기(증기발생기 등)를 납품하는 한국 유일 SMR 밸류체인 대형주. 양산 시 직접 수혜 + 유동성 양호.</p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row"><div><span class="broker-ticker">Oklo (OKLO)</span><span class="broker-market"> · NYSE</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">NuScale (SMR)</span><span class="broker-market"> · NYSE</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">Cameco (CCJ)</span><span class="broker-market"> · NYSE 우라늄</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">두산에너빌리티 (034020)</span><span class="broker-market"> · 코스피</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 제약바이오 (10%) ════════════ -->
+  <div class="sector-card sector-bio">
+    <div class="sector-title">💊 제약바이오 <span style="font-size:12px; color:#7a8ba3;">· 비중 10%</span></div>
+    <div class="sector-issue">이번 주 핵심 이슈 — 'AI 신약' 옥석 가리기. Recursion 좌초 vs Schrödinger Phase 3 성공</div>
+
+    <div class="thesis">
+      <div class="thesis-score">70</div>
+      <div class="thesis-bar-wrap">
+        <div class="thesis-bar-bg"><div class="thesis-bar" style="width:70%;"></div></div>
+        <div class="thesis-delta">테제 점수 <span class="down">▼2</span> (전주 72) — Recursion 리드물질 중단으로 'AI=만능' 서사 후퇴. 단, 진짜 실력자(Schrödinger)는 부각.</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <span class="signal-badge">📡 임상 데이터 · 옥석 가리기</span>
+      <h3>📖 심층 분석 — 환상은 깨지고, 실력은 증명된다</h3>
+      <p>
+        지난 샘플에서 우리는 Recursion(RXRX)을 AI 신약 대표주로 봤습니다. 솔직하게 정정합니다 — Recursion의 간판 물질 <strong>REC-994가 2025년 5월 효능 미확인으로 중단</strong>됐습니다.
+        "AI면 다 된다"는 환상이 깨진 사건입니다. <strong>틀린 전제는 빨리 인정하는 게 애널리스트의 일</strong>입니다.
+      </p>
+      <p>
+        그러나 산업 전체가 죽은 건 아닙니다. 같은 기간 <strong>Schrödinger</strong>가 공동 발명한 <strong>zasocitinib(차세대 경구 TYK2 억제제)</strong>이
+        파트너 Takeda를 통해 <strong>중증 건선 Phase 3 두 건에서 긍정적 topline</strong>을 발표했습니다. 'predict-first(예측 우선)' 방식으로 발굴된 가장 앞선 분자 중 하나입니다.
+      </p>
+      <p>
+        교훈은 분명합니다. 순수 임상 베팅(Recursion형)은 한 방에 반토막 날 수 있지만, <strong>Schrödinger는 신약 파이프라인 + 소프트웨어 라이선스(현금 매출)</strong>를 함께 가진 '곡괭이 파는' 모델입니다.
+        AI 신약 골드러시에서 누가 캐든 도구를 파는 쪽이 더 안전합니다.
+      </p>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div>
+          <div class="stock-name">Schrödinger</div>
+          <div class="stock-ticker">SDGR (NASDAQ) · 물리기반 신약 설계 SW + 자체 파이프라인</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="stock-score">74</div>
+          <div style="font-size:10px; color:#7a8ba3;">종합 점수</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box"><div class="metric-label">현재가</div><div class="metric-value">$14.40</div><div class="metric-sub">6/9</div></div>
+        <div class="metric-box"><div class="metric-label">52주 범위</div><div class="metric-value">$11~$28</div><div class="metric-sub">하단권</div></div>
+        <div class="metric-box"><div class="metric-label">애널 목표</div><div class="metric-value safe">$20.9</div><div class="metric-sub">+45% 여지</div></div>
+        <div class="metric-box"><div class="metric-label">투자의견</div><div class="metric-value safe">Strong Buy</div><div class="metric-sub">매수 6 · 매도 0</div></div>
+        <div class="metric-box"><div class="metric-label">핵심 자산</div><div class="metric-value">zaso</div><div class="metric-sub">P3 성공(Takeda)</div></div>
+        <div class="metric-box"><div class="metric-label">수익 모델</div><div class="metric-value safe">SW+신약</div><div class="metric-sub">'곡괭이' 매출</div></div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item"><div><div class="score-item-label">저평가도</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:80%;"></div></div></div><div class="score-item-value">24/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">성장성</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:67%;"></div></div></div><div class="score-item-value">20/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">해자 (Moat)</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:80%;"></div></div></div><div class="score-item-value">20/25</div></div>
+        <div class="score-item"><div><div class="score-item-label">리스크 (높을수록 안전)</div><div class="score-bar"><div class="score-bar-fill fill-mid" style="width:67%;"></div></div></div><div class="score-item-value">10/15</div></div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>Phase 3 성공 실적:</strong> zasocitinib이 Takeda 통해 건선 P3 긍정 topline. AI/물리기반 설계의 실증 사례.</li>
+          <li><strong>이중 수익 모델:</strong> 빅파마에 설계 SW를 파는 라이선스 매출(현금) + 자체 파이프라인 업사이드. 순수 임상주보다 변동성이 낮습니다.</li>
+          <li><strong>밸류 매력:</strong> $14, 52주 하단권. 애널 평균 목표 $20.9(+45%), 의견 Strong Buy.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크</h4>
+        <ul>
+          <li><strong>여전히 적자:</strong> 소프트웨어 흑자에도 파이프라인 R&D로 전체는 적자. 흑자전환 시점 불확실.</li>
+          <li><strong>로열티 의존:</strong> zaso의 경제적 이익은 Takeda 상업화 성과에 좌우. 직접 통제력이 제한적입니다.</li>
+          <li><strong>섹터 센티먼트:</strong> Recursion 좌초로 'AI 바이오' 전반 투자심리가 위축. 단기 동반 약세 가능.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 <span style="font-size:11px; color:#ff6b6b;">· 포트폴리오 10% 이내</span></h4>
+        <table class="entry-table">
+          <tr><th>단계</th><th>조건</th><th>비중</th><th>메모</th></tr>
+          <tr class="highlight-row"><td><strong>1차</strong></td><td>$13.5 이하</td><td>30%</td><td>52주 하단 지지선</td></tr>
+          <tr><td><strong>2차</strong></td><td>$11.5 이하</td><td>40%</td><td>52주 저점 부근 적극 매수</td></tr>
+          <tr><td><strong>3차</strong></td><td>SW 매출 가속 확인</td><td>30%</td><td>분기 라이선스 매출 성장 시</td></tr>
+          <tr style="background:rgba(255,107,107,0.06);"><td><strong>손절</strong></td><td>$10.5 이탈</td><td>—</td><td>52주 저점 하회 시 재점검</td></tr>
+          <tr style="background:rgba(107,203,119,0.06);"><td><strong>목표가</strong></td><td>$22~$28</td><td>—</td><td>18~24개월. 파이프라인 진전 시</td></tr>
+        </table>
+        <p style="font-size:13px; color:#ff6b6b; margin-top:10px;">⚠️ 바이오는 본질적으로 고위험. 잃어도 괜찮은 금액만, 비중은 10% 이내로 제한하세요.</p>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 관련주</div>
+        <p><strong>신테카바이오 (226330)</strong> — 국내 AI 신약 대표주. 자체 플랫폼 'DeepMatcher'. 다만 파이프라인이 초기 단계라 Schrödinger보다 리스크가 큽니다.</p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row"><div><span class="broker-ticker">Schr&ouml;dinger (SDGR)</span><span class="broker-market"> · NASDAQ</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">Recursion (RXRX)</span><span class="broker-market"> · NASDAQ</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">신테카바이오 (226330)</span><span class="broker-market"> · 코스닥</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-note"><strong>미국 주식:</strong> 삼성증권 mPOP → 해외주식 → 미국. 거래시간 한국 23:30~06:00(서머타임 22:30~05:00). 달러 환전 필요, 수수료 0.25%. 프리/애프터마켓 이용 가능.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 양자컴퓨팅 (10%) ════════════ -->
+  <div class="sector-card" style="background: linear-gradient(135deg, #1a1a2e, #1e2a3f); border: 1px solid rgba(167,139,250,0.1);">
+    <div class="sector-title" style="color:#a78bfa;">🔮 양자컴퓨팅 <span style="font-size:12px; color:#7a8ba3;">· 비중 10% · 🟢 보유</span></div>
+    <div class="sector-issue">이번 주 핵심 이슈 — IonQ 오류정정 돌파(논리오류율 4~9배↓) + 매출 +755%. 우리 보유 종목</div>
+
+    <div class="thesis">
+      <div class="thesis-score">78</div>
+      <div class="thesis-bar-wrap">
+        <div class="thesis-bar-bg"><div class="thesis-bar" style="width:78%;"></div></div>
+        <div class="thesis-delta">테제 점수 <span class="up">▲6</span> (전주 72) — IonQ QEC 실증 + 매출 폭증으로 '상용화 시계' 가속. 단 밸류는 여전히 극단적.</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <span class="signal-badge">📡 기술 돌파 · 보유 종목</span>
+      <h3>📖 심층 분석 — 오류정정, 양자의 'ChatGPT 순간'을 당긴다</h3>
+      <p>
+        양자컴퓨팅의 최대 적은 <strong>오류</strong>입니다. 큐비트는 극도로 불안정해 계산 중 오류가 쏟아집니다. 이걸 못 잡으면 상용화는 불가능합니다.
+        그래서 이번 분기 IonQ의 성과가 중요합니다 — 트랩이온 프로세서에서 <strong>9종 양자오류정정(QEC) 코드를 실증</strong>, 바륨 이온 40개로
+        <strong>논리오류율을 초전도 대비 4~9배 낮추고</strong> 논리 메모리 수명 <strong>3.95초</strong>를 달성했습니다.
+      </p>
+      <p>
+        하드웨어 확장도 진행 중입니다. Horizon Quantum이 더블린 본사에 <strong>256큐비트 트랩이온 시스템</strong>을 IonQ로부터 도입하고, IonQ–SkyWater 거래도 클로징됩니다.
+        IonQ의 강점은 '개수'가 아니라 '품질(fidelity)' — 큐비트 하나하나의 정확도가 가장 높고 결맞음(coherence) 시간이 초전도 대비 길다는 점입니다.
+      </p>
+      <p>
+        실적이 이를 뒷받침합니다. Q1 2026 GAAP 매출 <strong>$64.7M(+755% YoY)</strong>, 연간 가이던스 <strong>$260~270M로 상향</strong>, 잔여 이행의무(RPO) <strong>$470M(+554%)</strong>.
+        매출이 실제로 팔리고 있다는 증거입니다. <strong>2029~2030년이 양자의 'ChatGPT 순간'</strong>이 될 수 있고, 그땐 이미 비쌀 겁니다. 지금 소량씩 모으는 게 우리 전략입니다.
+      </p>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div>
+          <div class="stock-name">IonQ, Inc.</div>
+          <div class="stock-ticker">IONQ (NYSE) · 트랩이온 양자컴퓨터 · 🟢 보유 종목 (4주차)</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="stock-score">74</div>
+          <div style="font-size:10px; color:#7a8ba3;">종합 점수</div>
+        </div>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box"><div class="metric-label">현재가</div><div class="metric-value">$57.99</div><div class="metric-sub">6/12</div></div>
+        <div class="metric-box"><div class="metric-label">52주 범위</div><div class="metric-value">$26~$85</div><div class="metric-sub">중상단</div></div>
+        <div class="metric-box"><div class="metric-label">Q1 매출</div><div class="metric-value safe">$64.7M</div><div class="metric-sub">+755% YoY</div></div>
+        <div class="metric-box"><div class="metric-label">FY 가이던스</div><div class="metric-value safe">$260~270M</div><div class="metric-sub">상향</div></div>
+        <div class="metric-box"><div class="metric-label">RPO(수주잔고)</div><div class="metric-value safe">$470M</div><div class="metric-sub">+554% YoY</div></div>
+        <div class="metric-box"><div class="metric-label">보유 상태</div><div class="metric-value" style="color:#a78bfa;">4주차</div><div class="metric-sub">홀드 중</div></div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item"><div><div class="score-item-label">저평가도</div><div class="score-bar"><div class="score-bar-fill fill-low" style="width:33%;"></div></div></div><div class="score-item-value">10/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">성장성</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:97%;"></div></div></div><div class="score-item-value">29/30</div></div>
+        <div class="score-item"><div><div class="score-item-label">해자 (Moat)</div><div class="score-bar"><div class="score-bar-fill fill-high" style="width:84%;"></div></div></div><div class="score-item-value">21/25</div></div>
+        <div class="score-item"><div><div class="score-item-label">리스크 (높을수록 안전)</div><div class="score-bar"><div class="score-bar-fill fill-low" style="width:47%;"></div></div></div><div class="score-item-value">7/15</div></div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why" style="color:#a78bfa;">🔍 왜 IonQ인가 — 보유 근거 점검</h4>
+        <p>양자컴퓨터 방식은 크게 초전도(Google·IBM), 트랩이온(IonQ), 광자(PsiQuantum). <strong>IonQ의 트랩이온은 큐비트 품질(fidelity)이 가장 높습니다.</strong>
+        "코어 수가 많은 것 vs 코어 하나가 좋은 것"의 차이로, 초기 시장에선 정확도 높은 쪽이 실제 문제를 풀어 고객을 잡습니다.</p>
+        <p>이번 분기 QEC 실증과 매출 +755%는 <strong>보유 테제를 강화</strong>합니다. 미 공군·육군, Goldman Sachs, Hyundai 등 계약 레퍼런스도 탄탄합니다. <strong>판단: 보유 유지(Hold), 조정 시 분할 추가.</strong></p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>매출 +755%:</strong> 양자 기업 중 최고 성장. 기술이 실제로 팔린다는 증거.</li>
+          <li><strong>QEC 실증:</strong> 논리오류율 초전도 대비 4~9배↓ — 상용화 타임라인을 앞당기는 핵심 진전.</li>
+          <li><strong>클라우드 접근성:</strong> AWS·Azure·Google Cloud에서 모두 사용 가능 → 고객이 하드웨어를 안 사도 됨.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크</h4>
+        <ul>
+          <li><strong>극단적 밸류:</strong> 매출 대비 시총(PS)이 수십 배. 기대가 과하게 반영 → 실적 미스 시 급락. 실제로 최근 21% 플래시 크래시도 있었습니다.</li>
+          <li><strong>경쟁 격화:</strong> Google·IBM(초전도), Quantinuum(트랩이온 경쟁자). 기술 우위가 흔들리면 점유율 상실.</li>
+          <li><strong>상용화 불확실:</strong> '진짜 쓸모 있는 문제'를 푸는 단계엔 아직 미도달. 기대 선반영 리스크 상존.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 보유 전략 (이미 4주차 보유)</h4>
+        <table class="entry-table">
+          <tr><th>단계</th><th>조건</th><th>비중</th><th>메모</th></tr>
+          <tr><td><strong>현재</strong></td><td>보유 유지(Hold)</td><td>보유분</td><td>8/12 실적까지 홀드</td></tr>
+          <tr class="highlight-row"><td><strong>추가 매수</strong></td><td>$45 이하</td><td>+소량</td><td>52주 중단. 정부 신규 수주 시</td></tr>
+          <tr><td><strong>적극 매수</strong></td><td>$28 이하</td><td>+적극</td><td>시장 패닉 시. 펀더멘탈 변화 없으면 기회</td></tr>
+          <tr style="background:rgba(255,107,107,0.06);"><td><strong>비중 축소</strong></td><td>기술 우위 상실</td><td>—</td><td>경쟁사가 트랩이온 압도 시</td></tr>
+          <tr style="background:rgba(107,203,119,0.06);"><td><strong>목표</strong></td><td>$85~$120</td><td>—</td><td>24~36개월. 상용화 진전 시</td></tr>
+        </table>
+        <p style="font-size:12px; color:#7a8ba3; margin-top:8px;">📅 다음 카탈리스트: 2026.08.12 Q2 실적. 애널 평균 목표 $67.6.</p>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 관련주</div>
+        <p><strong>국내 순수 양자 상장주는 아직 없습니다.</strong> 삼성전자(양자 연구), SK텔레콤(양자암호)이 있으나 매출 비중이 미미. 직접 투자는 미국 상장(IonQ·Rigetti·D-Wave)이 사실상 유일.</p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row"><div><span class="broker-ticker">IonQ (IONQ)</span><span class="broker-market"> · NYSE</span></div><span class="broker-badge broker-yes">✅ 거래 가능 · 보유 중</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">Rigetti (RGTI)</span><span class="broker-market"> · NASDAQ</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">D-Wave (QBTS)</span><span class="broker-market"> · NYSE</span></div><span class="broker-badge broker-yes">✅ 거래 가능</span></div>
+        <div class="broker-row"><div><span class="broker-ticker">Quantinuum</span><span class="broker-market"> · 비상장(Honeywell)</span></div><span class="broker-badge broker-partial">🟡 HON 통해 간접</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 포트폴리오 대시보드 ════════════ -->
+  <div class="portfolio">
+    <h2>📋 MK 포트폴리오 대시보드</h2>
+    <div class="portfolio-subtitle">IonQ는 실보유. 나머지는 가상 추적(워치리스트)입니다. 매수 결정 시 실포트폴리오로 전환합니다.</div>
+
+    <table class="portfolio-table">
+      <tr><th>종목</th><th>섹터</th><th>상태</th><th>점수</th><th>진입가</th><th>현재가</th><th>카탈리스트</th><th>삼성</th></tr>
+      <tr style="background: rgba(167,139,250,0.06);"><td><strong>IONQ</strong></td><td>🔮</td><td class="status-hold">🟢 보유(4주차)</td><td>74</td><td>—</td><td>$57.99</td><td>8/12 실적</td><td class="safe">✅</td></tr>
+      <tr><td><strong>6324.T</strong></td><td>🤖</td><td class="status-wait">🟡 대기</td><td>82</td><td>¥6,000↓</td><td>¥6,280</td><td>양산 Q3</td><td class="safe">✅</td></tr>
+      <tr><td><strong>RKLB</strong></td><td>🚀</td><td class="status-watch">⚪ 관찰(고평가)</td><td>80</td><td>$90↓</td><td>$113.65</td><td>Neutron 발사</td><td class="safe">✅</td></tr>
+      <tr><td><strong>OKLO</strong></td><td>⚛️</td><td class="status-wait">🟡 대기</td><td>76</td><td>$50↓</td><td>$57.86</td><td>라이선스 진전</td><td class="safe">✅</td></tr>
+      <tr><td><strong>SDGR</strong></td><td>💊</td><td class="status-wait">🟡 대기</td><td>74</td><td>$13.5↓</td><td>$14.40</td><td>SW 매출</td><td class="safe">✅</td></tr>
+    </table>
+
+    <h3 style="font-size:13px; color:#7a8ba3; margin:20px 0 12px; text-transform:uppercase; letter-spacing:1px;">권장 자산 배분</h3>
+    <div class="allocation">
+      <div class="alloc-row"><span class="alloc-label">🤖 피지컬AI</span><div class="alloc-bar-bg"><div class="alloc-bar ai" style="width:40%;"></div></div><span class="alloc-pct">40%</span></div>
+      <div class="alloc-row"><span class="alloc-label">🚀 우주</span><div class="alloc-bar-bg"><div class="alloc-bar space" style="width:30%;"></div></div><span class="alloc-pct">30%</span></div>
+      <div class="alloc-row"><span class="alloc-label">⚛️ SMR</span><div class="alloc-bar-bg"><div class="alloc-bar" style="width:10%; background:#ff9f43; border-radius:5px;"></div></div><span class="alloc-pct">10%</span></div>
+      <div class="alloc-row"><span class="alloc-label">💊 바이오</span><div class="alloc-bar-bg"><div class="alloc-bar bio" style="width:10%;"></div></div><span class="alloc-pct">10%</span></div>
+      <div class="alloc-row"><span class="alloc-label">🔮 양자</span><div class="alloc-bar-bg"><div class="alloc-bar" style="width:10%; background:#a78bfa; border-radius:5px;"></div></div><span class="alloc-pct">10%</span></div>
+    </div>
+
+    <div class="cash-note">
+      <strong>이번 주 핵심 메시지 —</strong><br>
+      시장은 '공포(F&amp;G 37)' 구간이지만 우리 워치리스트 다수는 아직 비쌉니다. 특히 <strong>RKLB는 1년 +352%로 추격매수 금지</strong> — 조정을 기다리세요.
+      반대로 OKLO(고점 -70%)·SDGR(52주 하단)은 진입가에 근접 중. <strong>현금을 지키며 종목별 목표가에서만 분할매수</strong> — 조급함이 가장 큰 적입니다.
+    </div>
+  </div>
+
+  <!-- ════════════ 애널리스트 뷰 ════════════ -->
+  <div class="analyst-view">
+    <h2>🧠 애널리스트 뷰 — 큰 그림</h2>
+    <p>금리가 4%대에 고착(10년물 4.47%)된 환경은 <strong>적자·고밸류 성장주(양자·SMR·바이오)에 역풍</strong>입니다. 그래서 이들은 변동성이 크고, 우리는 '싸게 모으는' 종목으로 다룹니다.</p>
+    <p>반면 <strong>피지컬 AI와 우주는 이미 '실적과 수주'로 증명</strong>되고 있습니다. Rocket Lab의 백로그 더블·나스닥100 편입, 감속기 26주 리드타임이 그 증거입니다. 문제는 가격 — 좋은 회사를 비싸게 사면 안 됩니다.</p>
+    <p><strong>향후 3~6개월 전략:</strong> ① RKLB·6324.T는 조정 대기, ② OKLO·SDGR은 목표가 근접 시 분할, ③ IONQ는 보유 유지하며 8/12 실적 확인. 카탈리스트(Tesla 양산 Q3, IonQ Q2 실적, Neutron 첫 발사)가 분기점입니다. <strong>현금을 지키는 것도 포지션입니다.</strong></p>
+  </div>
+
+  <!-- ════════════ 용어 사전 ════════════ -->
+  <div class="glossary">
+    <h2>📖 용어 사전 — 이번 주 등장 용어</h2>
+    <div class="gloss-item">
+      <div class="gloss-term">백로그(Backlog) · 수주잔고</div>
+      <div class="gloss-def">아직 매출로 안 잡힌 '계약된 일감'. <strong>실전 적용:</strong> RKLB 백로그가 $1.1B→$2.2B로 1년 새 2배 = 향후 2~3년 매출이 미리 보장된 셈. 성장주의 핵심 선행지표.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">리드타임(Lead Time)</div>
+      <div class="gloss-def">주문 후 납품까지 걸리는 시간. <strong>실전 적용:</strong> 감속기 리드타임 26주 = 주문이 생산능력을 초과했다는 신호. 뉴스보다 먼저 공급망에서 울리는 수요 시그널.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">양자오류정정(QEC)</div>
+      <div class="gloss-def">불안정한 큐비트의 오류를 잡아 '논리 큐비트'를 만드는 기술. <strong>실전 적용:</strong> IonQ가 논리오류율을 4~9배 낮춘 것 = 양자컴퓨터 상용화 시계를 당기는 결정적 진전.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Pre-revenue(매출 전)</div>
+      <div class="gloss-def">아직 제품 매출이 없는 단계. <strong>실전 적용:</strong> Oklo는 14GW 고객을 확보했어도 발전소 가동(2027E) 전까진 매출 0. 기대로 사는 주식 = 변동성 큼, 비중은 작게.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">공포·탐욕 지수 (F&amp;G)</div>
+      <div class="gloss-def">시장 심리를 0(극공포)~100(극탐욕)으로 본 CNN 지표. <strong>실전 적용:</strong> 현재 37(공포). 대중이 겁먹을 때가 분할매수 적기 — 단, 목표가 규율을 지킬 때만.</div>
+    </div>
+  </div>
+
+  <!-- ════════════ 추천 원문 ════════════ -->
+  <div class="readings">
+    <h2>🔗 이번 주 추천 원문 · 데이터</h2>
+    <div class="reading-item">
+      <div class="reading-sector space">우주</div>
+      <div class="reading-title">Rocket Lab Q1 2026 8-K (실적 원문)</div>
+      <div class="reading-source">SEC EDGAR · 2026.05.07</div>
+      <div class="reading-why">매출 $200M, 백로그 $2.2B, 31건 발사계약. 원문으로 직접 확인하는 습관이 뉴스 헤드라인보다 정확합니다.</div>
+    </div>
+    <div class="reading-item">
+      <div class="reading-sector ai">피지컬 AI</div>
+      <div class="reading-title">"휴머노이드 2026 — 양산 원년" 공급망 해부</div>
+      <div class="reading-source">36Kr / RivCut 제조 리포트 · 2026.06</div>
+      <div class="reading-why">Tesla·Figure·Apptronik 동시 양산 진입과 감속기 26주 리드타임, 중국 침투까지 밸류체인 전체를 정리.</div>
+    </div>
+    <div class="reading-item">
+      <div class="reading-sector bio">제약바이오</div>
+      <div class="reading-title">"AI-Discovered Drugs Reach Phase III — 2026이 진실의 해"</div>
+      <div class="reading-source">humAI Blog · 2026</div>
+      <div class="reading-why">Insilico·Schrödinger·Recursion의 임상 현황을 냉정하게 비교. 'AI 신약'의 환상과 실체를 구분하는 데 유용.</div>
+    </div>
+  </div>
+
+  <!-- ════════════ Footer ════════════ -->
+  <div class="footer">
+    본 리포트는 SEC, USPTO, ClinicalTrials.gov, NRC, 공급망 데이터 등 공개 정보와<br>
+    전문 기관 리서치를 종합한 <strong>정보 제공 목적</strong>이며,<br>
+    <strong>최종 투자 판단과 책임은 본인에게 있습니다.</strong><br>
+    가격·지표는 작성 시점(2026.06.12) 기준이며 실시간과 차이가 있을 수 있습니다.<br><br>
+    MK 전담 애널리스트 리포트 · 매주 화·금 발행 · W24 딥다이브
+  </div>
+
+</div>
+</body>
+</html>
