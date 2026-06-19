@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Art Basel 2026 · 갤러리 체크리스트</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#0e0e0e;color:#eee;
+ font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;font-size:16px}
+header{position:sticky;top:0;z-index:20;background:#0e0e0e;
+ padding:calc(env(safe-area-inset-top) + 12px) 14px 8px;border-bottom:1px solid #222}
+h1{margin:0 0 2px;font-size:17px;font-weight:700;letter-spacing:.2px}
+.sub{font-size:11.5px;color:#777;margin-bottom:10px}
+.stats{display:flex;gap:8px;margin-bottom:10px}
+.stat{flex:1;background:#1a1a1a;border-radius:10px;padding:7px 4px;text-align:center}
+.stat b{display:block;font-size:18px;line-height:1.1}
+.stat span{font-size:10px;color:#888}
+.stat.v b{color:#9ece6a}.stat.n b{color:#f7a072}
+.tools{display:flex;gap:6px;margin-bottom:8px}
+#q{flex:1;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:9px;color:#eee;
+ padding:8px 11px;font-size:14px;outline:none}
+.filters{display:flex;gap:6px}
+.fbtn{flex:1;background:#1a1a1a;border:1px solid #2a2a2a;color:#aaa;border-radius:9px;
+ padding:7px 0;font-size:12.5px;font-weight:600;cursor:pointer}
+.fbtn.on{background:#eee;color:#111;border-color:#eee}
+main{padding:8px 10px 120px}
+.sec{margin-top:14px}
+.sec h2{font-size:12px;font-weight:700;color:#8ab4f8;text-transform:uppercase;
+ letter-spacing:1px;margin:0 0 6px;padding:0 4px;display:flex;justify-content:space-between}
+.sec h2 em{color:#666;font-style:normal;font-weight:500}
+.row{display:flex;align-items:flex-start;gap:11px;padding:11px 12px;background:#161616;
+ border:1px solid #1f1f1f;border-radius:11px;margin-bottom:6px;cursor:pointer;transition:.12s}
+.row:active{background:#202020}
+.box{flex:0 0 22px;height:22px;border:2px solid #555;border-radius:7px;margin-top:1px;
+ display:flex;align-items:center;justify-content:center;font-size:14px;color:#0e0e0e;font-weight:800}
+.row.done{opacity:.5}
+.row.done .box{background:#9ece6a;border-color:#9ece6a}
+.row.done .name{text-decoration:line-through;text-decoration-color:#666}
+.nm{flex:1;min-width:0}
+.name{font-size:15px;line-height:1.3}
+.star{color:#f5c518}
+.note{font-size:11.5px;color:#f5c518;margin-top:2px;opacity:.85}
+.hidden{display:none!important}
+.empty{text-align:center;color:#555;padding:40px 20px;font-size:13px}
+footer{position:fixed;left:0;right:0;bottom:0;z-index:20;
+ padding:10px 12px calc(env(safe-area-inset-bottom) + 10px);
+ background:linear-gradient(180deg,rgba(14,14,14,0),#0e0e0e 28%)}
+#export{width:100%;background:#f7a072;color:#1a1a1a;border:0;border-radius:12px;
+ padding:14px;font-size:15px;font-weight:700;cursor:pointer}
+#out{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:none;
+ flex-direction:column;padding:calc(env(safe-area-inset-top) + 14px) 14px 14px}
+#out.on{display:flex}
+#out h3{margin:0 0 4px;font-size:15px}
+#out p{margin:0 0 8px;font-size:12px;color:#999}
+#ta{flex:1;width:100%;background:#161616;border:1px solid #2a2a2a;border-radius:10px;
+ color:#ddd;font-size:12.5px;padding:11px;resize:none;font-family:ui-monospace,monospace}
+.obtns{display:flex;gap:8px;margin-top:10px}
+.obtns button{flex:1;border:0;border-radius:11px;padding:13px;font-size:14px;font-weight:700;cursor:pointer}
+#copy{background:#9ece6a;color:#111}#close{background:#2a2a2a;color:#ddd}
+</style>
+</head>
+<body>
+<header>
+ <h1>Art Basel 2026 · 갤러리 체크리스트</h1>
+ <div class="sub">Messe Basel · 6.18–21 · 290 갤러리 — 탭하면 방문 체크 (자동저장)</div>
+ <div class="stats">
+  <div class="stat"><b id="s-all">0</b><span>전체</span></div>
+  <div class="stat v"><b id="s-done">0</b><span>방문</span></div>
+  <div class="stat n"><b id="s-left">0</b><span>미방문</span></div>
+ </div>
+ <div class="tools"><input id="q" placeholder="갤러리 검색…" autocomplete="off"></div>
+ <div class="filters">
+  <button class="fbtn on" data-f="all">전체</button>
+  <button class="fbtn" data-f="left">미방문</button>
+  <button class="fbtn" data-f="done">방문</button>
+ </div>
+</header>
+<main id="list"></main>
+<footer><button id="export">미방문 목록 내보내기 →</button></footer>
+
+<div id="out">
+ <h3>미방문 갤러리 목록</h3>
+ <p>전체 선택해서 복사 → 봇에게 그대로 붙여넣으면 네트워킹 브리핑을 만들어줍니다.</p>
+ <textarea id="ta" readonly></textarea>
+ <div class="obtns"><button id="copy">📋 전체 복사</button><button id="close">닫기</button></div>
+</div>
+
+<script>
+const DATA={
+"Galleries":["303 Gallery","47 Canal","A Gentil Carioca","Miguel Abreu Gallery","Acquavella Galleries","Antenna Space","Applicat-Prazan","The Approach","Arcadia Missa","Alfonso Artiaco","von Bartha","Beijing Commune","galería elba benítez","Balice Hertling","Bernier/Eliades","Berry Campbell","blank projects","Marianne Boesky Gallery","Tanya Bonakdar Gallery","Bortolami","Galerie Isabella Bortolozzi","BQ","The Breeder","Ben Brown Fine Arts","Galerie Buchholz","Cabinet","Canada","Galerie Gisela Capitain","Cardi Gallery","carlier gebauer","Carlos/Ishikawa","Casas Riegner","Galeria Pedro Cera","Chapter NY","Chemould Prescott Road","ChertLüdde","James Cohan Gallery","Sadie Coles HQ","Commonwealth and Council","Dawid Radziszewski","Contemporary Fine Arts","Galleria Continua","Paula Cooper Gallery","Pilar Corrias","Galleria Raffaella Cortese","Crèvecœur","Galerie Chantal Crousel","Croy Nielsen","Thomas Dane Gallery","Massimo De Carlo","Di Donna","Galerie Ecart","Galerie Eigen + Art","galerie frank elbaz","Emalin","Empty Gallery","Larkin Erdmann","Experimenter","Konrad Fischer Galerie","Foksal Gallery Foundation","Fortes D'Aloia & Gabriel","Peter Freeman, Inc.","Frith Street Gallery","Gaga","Gagosian","Galerie Christophe Gaillard","Galerie 1900-2000","Galleria dello Scudo","François Ghebaly","Gladstone Gallery","Gomide&Co","Galería Elvira González","Goodman Gallery","Marian Goodman Gallery","Maxwell Graham","Galerie Bärbel Grässlin","Gray","Greene Naftali","greengrassi","Galerie Karsten Greve","Cristina Guerra Contemporary Art","Galerie Haas","Hauser & Wirth","Hazlitt Holland-Hibbert","Herald St","Galerie Max Hetzler","Hollybush Gardens","Xavier Hufkens","hunt kastner","Gallery Hyundai","Taka Ishii Gallery","Bernard Jacobson Gallery","Alison Jacques","Galerie Martin Janda","Catriona Jeffries","Jenkins Johnson Gallery","Annely Juda Fine Art","Kadel Willborn","Kalfayan Galleries","Casey Kaplan","Jan Kaps","Karma","Karma International","kaufmann repetto","Sean Kelly","Tina Keng Gallery","Kerlin Gallery","Anton Kern Gallery","Kiang Malingue","Galerie Peter Kilchmann","Tina Kim Gallery","David Kordansky Gallery","Sylvia Kouvali","Kraupa-Tuskany Zeidler","Andrew Kreps Gallery","Galerie Krinzinger","Kukje Gallery","kurimanzutto","Labor","Galerie Lahumière","Landau Fine Art","Layr","LC Queisser","Lehmann Maupin","Tanya Leighton","Galerie Lelong & Co.","Lévy Gorvy Dayan","Lisson Gallery","Luxembourg + Co.","Magazzino","Magician Space","Mai 36","Galerie Marcelle Alix","Gió Marconi","Matthew Marks Gallery","Galerie Max Mayer","Mayoral","Mazzoleni","Galerie Greta Meert","Anthony Meier","Galerie Urs Meile","Mendes Wood DM","Mennour","Meyer Riegger","Galleria Massimo Minini","Galerie Le Minotaure","Victoria Miro","Modern Art","The Modern Institute","mor charpentier","mother's tankstation limited","Galerie nächst St. Stephan Rosemarie Schwarzwälder","Galerie Nagel Draxler","Richard Nagy Ltd.","Edward Tyler Nahem","Helly Nahmad Gallery","Galerie Neu","neugerriemschneider","Galleria Franco Noero","Galerie Nordenhake","Galerie Nathalie Obadia","OMR","Galleria Lorcan O'Neill Roma","Ortuzar","P420","P.P.O.W","Pace Gallery","Maureen Paley","Perrotin","Petzel","Galeria Plan B","Pippy Houldsworth","Phillida Reid","Gregor Podnar","Prats Nogueras Blanchard","Galerie Eva Presenhuber","ProjecteSD","Almine Rech","Reena Spaulings Fine Art","Regen Projects","Thaddaeus Ropac","Lia Rumma","Deborah Schamoni","Esther Schipper","Galerie Rüdiger Schöttle","Galerie Thomas Schulte","Sfeir-Semler Gallery","Jack Shainman Gallery","ShanghART Gallery","Sies + Höke","Sikkema Malloy Jenkins","Jessica Silverman","Silverlens","Skarstedt","Skopia / P.-H. Jaccaud","Société","Galerie Pietro Spartà","Sprovieri","Sprüth Magers","Nils Stærk","Galerie Gregor Staiger","Stampa","Standard (Oslo)","Galleria Christian Stein","Stevenson","Galeria Luisa Strina","Take Ninagawa","Galerie Bene Taschen","Templon","The Third Gallery Aya","Galerie Barbara Thumm","Tokyo Gallery + BTAP","Tornabuoni Art","Trautwein Herleth","Travesía Cuatro","Galerie Tschudi","Tucci Russo","Galerie Georges-Philippe & Nathalie Vallois","Van de Weghe","Tim Van Laere Gallery","Vedovi Gallery","Vielmetter Los Angeles","Vitamin Creative Space","Galleri Nicolai Wallner","Offer Waterman","Michael Werner","White Cube","Barbara Wien","Galerie Jocelyn Wolff","Yares Art","Galerie Thomas Zander","David Zwirner"],
+"Feature (역사적·재조명)":["acb","Château Shatto","Galería Guillermo de Osma","Galerie Cécile Fakhoury","Galerie Kaléidoscope","The Mayor Gallery","ML Fine Art","Galería Leandro Navarro","Kotaro Nukaga","Richard Saltoun","Giorgio Persano","Proyectos Ultravioleta","Repetto Gallery","SCAI The Bathhouse","Vadehra Art Gallery","Galerie Hubert Winter"],
+"Statements (신진 솔로)":["Galerie Anne-Sarah Bénichou","Blue Velvet","David Peter Francis","Gypsum Gallery","Kosaku Kanechika","Eli Kerr","Noah Klink","Silke Lindner","Lodos","Marfa' Projects","Kai Matsumiya","Galerie Molitor","ROH","sans titre","a.SQUIRE","Tarq","Wschód","Sophie Tappeiner"],
+"Premiere (최근 5년작)":["Athr Gallery","Galería Ehrhardt Flórez","Thomas Erben Gallery","Fanta-MLN","Selma Feriani Gallery","Franz Kaka","Lars Friedrich","Felix Gaudlitz","Ginny on Frederick","Hoffman Donahue","Laveronica arte contemporanea","Magenta Plains","Öktem Aykut","PKM Gallery","SpazioA","Galeria Stereo","White Space"],
+"Edition (판화·에디션)":["Cristea Roberts Gallery","Gemini G.E.L.","knust kunz gallery editions","Carolina Nitsch","René Schmitt","Susan Sheehan Gallery","STPI"]
+};
+const NOTES={};
+const KEY="abb2026_visited";
+let state=JSON.parse(localStorage.getItem(KEY)||"{}");
+let filter="all",query="";
+const list=document.getElementById("list");
+
+function id(s){return s.replace(/[^a-zA-Z0-9]/g,"_");}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+
+function render(){
+ list.innerHTML="";let all=0,done=0;
+ for(const sec in DATA){
+  const items=DATA[sec].filter(n=>{
+   if(query&&!n.toLowerCase().includes(query))return false;
+   const v=!!state[n];
+   if(filter==="left"&&v)return false;
+   if(filter==="done"&&!v)return false;
+   return true;});
+  DATA[sec].forEach(n=>{all++;if(state[n])done++;});
+  if(!items.length)continue;
+  const sd=document.createElement("div");sd.className="sec";
+  const visN=DATA[sec].filter(n=>state[n]).length;
+  sd.innerHTML=`<h2>${sec.split(" (")[0]} <em>${visN}/${DATA[sec].length}</em></h2>`;
+  items.forEach(n=>{
+   const r=document.createElement("div");
+   r.className="row"+(state[n]?" done":"");
+   const note=NOTES[n]?`<div class="note">★ ${NOTES[n]}</div>`:"";
+   const star=NOTES[n]?'<span class="star">★ </span>':"";
+   r.innerHTML=`<div class="box">${state[n]?"✓":""}</div>`+
+     `<div class="nm"><div class="name">${star}${n}</div>${note}</div>`;
+   r.onclick=()=>{state[n]=!state[n];if(!state[n])delete state[n];save();render();};
+   sd.appendChild(r);
+  });
+  list.appendChild(sd);
+ }
+ if(!list.children.length)list.innerHTML='<div class="empty">조건에 맞는 갤러리가 없습니다.</div>';
+ document.getElementById("s-all").textContent=all;
+ document.getElementById("s-done").textContent=done;
+ document.getElementById("s-left").textContent=all-done;
+}
+
+document.getElementById("q").oninput=e=>{query=e.target.value.toLowerCase().trim();render();};
+document.querySelectorAll(".fbtn").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("on"));
+ b.classList.add("on");filter=b.dataset.f;render();});
+
+document.getElementById("export").onclick=()=>{
+ let t="[Art Basel 2026 · 미방문 갤러리]\n";let any=false;
+ for(const sec in DATA){
+  const left=DATA[sec].filter(n=>!state[n]);
+  if(!left.length)continue;any=true;
+  t+="\n■ "+sec.split(" (")[0]+"\n"+left.map(n=>"- "+n).join("\n")+"\n";
+ }
+ if(!any)t+="\n전부 방문 완료 🎉";
+ document.getElementById("ta").value=t;
+ document.getElementById("out").classList.add("on");
+};
+document.getElementById("copy").onclick=()=>{
+ const ta=document.getElementById("ta");ta.select();
+ navigator.clipboard.writeText(ta.value).then(()=>{
+  document.getElementById("copy").textContent="✓ 복사됨";
+  setTimeout(()=>document.getElementById("copy").textContent="📋 전체 복사",1500);
+ }).catch(()=>{document.execCommand("copy");});
+};
+document.getElementById("close").onclick=()=>document.getElementById("out").classList.remove("on");
+render();
+</script>
+</body>
+</html>
