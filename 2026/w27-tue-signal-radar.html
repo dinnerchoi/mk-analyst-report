@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK 시그널 레이더 — 2026.06.29 (월·W27 캐치업)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #0a0e17;
+    color: #e0e6ed;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(135deg, #0f1923 0%, #1a1a2e 50%, #16213e 100%);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .header-icon { font-size: 40px; margin-bottom: 12px; }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header .date {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-top: 6px;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #4ecdc4;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  /* ── 시장 체온계 ── */
+  .thermometer {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .thermometer h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thermo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .thermo-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .thermo-label {
+    font-size: 11px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .thermo-value {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 4px 0;
+  }
+  .thermo-value.fear { color: #ff6b6b; }
+  .thermo-value.neutral { color: #ffd93d; }
+  .thermo-value.greed { color: #6bcb77; }
+  .thermo-sub {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .thermo-sub.fear { color: #ff6b6b; }
+  .thermo-sub.greed { color: #6bcb77; }
+  .thermo-insight {
+    background: rgba(78, 205, 196, 0.08);
+    border-left: 3px solid #4ecdc4;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.7;
+  }
+  .thermo-insight strong { color: #4ecdc4; }
+  .flow-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+  }
+  .flow-row:last-child { border-bottom: none; }
+  .flow-positive { color: #6bcb77; font-weight: 700; }
+  .flow-negative { color: #ff6b6b; font-weight: 700; }
+
+  /* ── 섹터 카드 ── */
+  .sector-card {
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .sector-ai { background: linear-gradient(135deg, #1a1a2e, #1e3a5f); }
+  .sector-space { background: linear-gradient(135deg, #1a1a2e, #1b3a2d); }
+  .sector-smr { background: linear-gradient(135deg, #1a1a2e, #3a2a1e); }
+  .sector-bio { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); }
+  .sector-quantum { background: linear-gradient(135deg, #1a1a2e, #1e2a3f); }
+
+  .sector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .sector-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sector-ai .sector-title { color: #64b5f6; }
+  .sector-space .sector-title { color: #81c784; }
+  .sector-smr .sector-title { color: #ff9f43; }
+  .sector-bio .sector-title { color: #ce93d8; }
+  .sector-quantum .sector-title { color: #a78bfa; }
+
+  /* ── 테제 박스 ── */
+  .thesis-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+  .thesis-label {
+    font-size: 11px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .thesis-text {
+    font-size: 14px;
+    color: #e0e6ed;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .thesis-score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .thesis-score {
+    font-size: 32px;
+    font-weight: 900;
+    color: #4ecdc4;
+  }
+  .thesis-score-detail {
+    font-size: 12px;
+    color: #7a8ba3;
+    line-height: 1.5;
+  }
+  .score-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s;
+  }
+  .score-bar-fill.high { background: linear-gradient(90deg, #4ecdc4, #44bd8e); }
+  .score-bar-fill.mid { background: linear-gradient(90deg, #ffd93d, #f0a500); }
+  .score-bar-fill.low { background: linear-gradient(90deg, #ff6b6b, #c0392b); }
+
+  /* ── 시그널 ── */
+  .signal-block {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 3px solid;
+  }
+  .signal-block.bullish { border-left-color: #6bcb77; }
+  .signal-block.bearish { border-left-color: #ff6b6b; }
+  .signal-block.neutral { border-left-color: #ffd93d; }
+
+  .signal-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .signal-badge.pre-news { background: #4ecdc4; color: #0a0e17; }
+  .signal-badge.confirmed { background: #ffd93d; color: #0a0e17; }
+
+  .signal-source {
+    font-size: 11px;
+    color: #7a8ba3;
+    margin-bottom: 6px;
+  }
+  .signal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .signal-explain {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .signal-explain strong { color: #e0e6ed; }
+
+  /* ── 카탈리스트 캘린더 ── */
+  .catalyst-section {
+    margin-top: 20px;
+  }
+  .catalyst-section h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .catalyst-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .catalyst-date {
+    background: rgba(78, 205, 196, 0.15);
+    color: #4ecdc4;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .catalyst-desc {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.6;
+  }
+
+  /* ── 센티먼트 ── */
+  .sentiment-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 8px;
+  }
+  .sentiment-gauge {
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .sentiment-gauge.low { color: #6bcb77; }
+  .sentiment-gauge.mid { color: #ffd93d; }
+  .sentiment-gauge.high { color: #ff6b6b; }
+  .sentiment-label {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.6;
+  }
+
+  /* ── 워치리스트 ── */
+  .watchlist {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .watchlist h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .watchlist-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 16px;
+  }
+  .watch-change {
+    background: rgba(107, 203, 119, 0.1);
+    border: 1px solid rgba(107, 203, 119, 0.2);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .watch-change-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .watch-ticker {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .watch-arrow {
+    font-size: 13px;
+    color: #6bcb77;
+    font-weight: 700;
+  }
+  .watch-reason {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.7;
+  }
+  .watch-nochange {
+    font-size: 13px;
+    color: #556677;
+    font-style: italic;
+  }
+
+  /* ── 용어 사전 ── */
+  .glossary-section {
+    background: linear-gradient(135deg, #1e2d3d, #1a2a3a);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(78, 205, 196, 0.15);
+  }
+  .glossary-section h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #4ecdc4;
+    margin-bottom: 6px;
+  }
+  .glossary-section .glossary-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+  }
+  .glossary-card {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    border-left: 3px solid #4ecdc4;
+  }
+  .glossary-card:last-child { margin-bottom: 0; }
+  .glossary-card .g-term {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .glossary-card .g-term-en {
+    font-size: 12px;
+    color: #4ecdc4;
+    margin-bottom: 10px;
+  }
+  .glossary-card .g-explain {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.9;
+  }
+  .glossary-card .g-explain strong { color: #e0e6ed; }
+  .glossary-card .g-example {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(78,205,196,0.06);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #8ab4b0;
+    line-height: 1.7;
+  }
+  .glossary-card .g-example strong { color: #4ecdc4; }
+
+  /* ── 전문가 레퍼런스 ── */
+  .expert-section {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a1e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,159,67,0.15);
+  }
+  .expert-section h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #ff9f43;
+    margin-bottom: 6px;
+  }
+  .expert-section .expert-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+  }
+  .expert-card {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .expert-card:last-child { margin-bottom: 0; }
+  .expert-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .expert-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,159,67,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .expert-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .expert-title {
+    font-size: 11px;
+    color: #7a8ba3;
+    line-height: 1.4;
+  }
+  .expert-quote {
+    font-size: 14px;
+    color: #e0c8a0;
+    line-height: 1.9;
+    padding: 14px 18px;
+    background: rgba(255,159,67,0.06);
+    border-left: 3px solid #ff9f43;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .expert-context {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .expert-context strong { color: #e0e6ed; }
+  .expert-source {
+    font-size: 11px;
+    color: #556677;
+    margin-top: 8px;
+  }
+  .expert-sector-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .tag-ai { background: rgba(100,181,246,0.15); color: #64b5f6; }
+  .tag-bio { background: rgba(206,147,216,0.15); color: #ce93d8; }
+  .tag-space { background: rgba(129,199,132,0.15); color: #81c784; }
+  .tag-macro { background: rgba(255,215,61,0.15); color: #ffd93d; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #445566;
+    line-height: 1.6;
+  }
+  .footer a { color: #4ecdc4; text-decoration: none; }
+
+  /* ── Utility ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    margin: 8px 0;
+  }
+  .highlight { color: #4ecdc4; font-weight: 700; }
+  .danger { color: #ff6b6b; font-weight: 700; }
+  .warn { color: #ffd93d; font-weight: 700; }
+  .safe { color: #6bcb77; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ════════════ HEADER ════════════ -->
+  <div class="header">
+    <div class="header-icon">📡</div>
+    <h1>MK 시그널 레이더</h1>
+    <div class="date">2026년 6월 29일 월요일 · W27 (수동 캐치업)</div>
+    <div class="subtitle">뉴스에 나오기 전, 업계 시그널을 먼저 잡는다</div>
+  </div>
+
+  <!-- 캐치업 안내 -->
+  <div style="background:rgba(255,159,67,0.07); border:1px solid rgba(255,159,67,0.18); border-radius:12px; padding:16px 18px; margin-bottom:24px; font-size:13px; color:#e0c8a0; line-height:1.8;">
+    <strong style="color:#ff9f43;">📌 캐치업 발행</strong> — 원래 시그널 레이더는 화요일 자동 발행이지만,
+    이번 주는 W26을 건너뛴 만큼 <strong style="color:#fff;">월요일에 수동으로 따라잡기 발행</strong>합니다.
+    데이터는 모두 <strong style="color:#fff;">2026년 6월 말 최신</strong> 기준이며, 직전 리포트는 W25(6/16·6/19)였습니다.
+    이번 주는 <strong style="color:#81c784;">SpaceX 사상 최대 IPO</strong>가 우주 섹터의 분수령이고,
+    보유 종목 <strong style="color:#a78bfa;">IonQ</strong>는 DARPA 급등분을 일부 반납하며 $51 부근으로 눌렸습니다.
+  </div>
+
+  <!-- ════════════ 시장 체온계 ════════════ -->
+  <div class="thermometer">
+    <h2>🌡️ 시장 체온계</h2>
+    <p style="font-size:14px; color:#b8c9d9; margin-bottom:20px; line-height:1.8;">
+      주식을 사기 전에 <strong style="color:#fff;">"지금 시장 전체의 분위기가 어떤지"</strong>를 먼저 확인해야 합니다.
+      아무리 좋은 종목이라도 시장 전체가 폭락하면 같이 빠지거든요.
+      아래 4가지 숫자는 <strong style="color:#fff;">시장의 건강 상태를 진단하는 혈압·맥박·체온·혈당</strong> 같은 것입니다.
+    </p>
+
+    <!-- ① 공포 & 탐욕 지수 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ff6b6b;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">① 공포 &amp; 탐욕 지수</div>
+          <div style="font-size:11px; color:#556677;">CNN · 6/29 기준</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value fear">25</div>
+          <div class="thermo-sub fear">공포</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 투자자들이 지금 <strong style="color:#e0e6ed;">겁에 질려 있는지, 욕심에 눈이 먼 상태인지</strong>를 0~100 숫자 하나로 보여줍니다.
+        주가 모멘텀·옵션 거래·안전자산 수요 등 7가지를 종합합니다.<br><br>
+        <strong style="color:#fff;">지금 25면:</strong> "공포" 구간입니다. 워런 버핏의 <strong style="color:#ff6b6b;">"남들이 두려워할 때 탐욕스러워져라"</strong>가 적용되는 영역이죠.
+        다만 이번 공포는 패닉 매도라기보다 <strong style="color:#e0e6ed;">아래 ③④에서 보듯 '매파 연준' 경계감</strong>에서 옵니다.
+        즉 줍줍 환경이긴 하지만, <strong style="color:#4ecdc4;">한 방에 사기보다 분할로 모아가기 좋은</strong> 결의 공포입니다.
+      </div>
+    </div>
+
+    <!-- ② VIX -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #6bcb77;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">② 변동성 지수 (VIX)</div>
+          <div style="font-size:11px; color:#556677;">S&P500 옵션에서 산출 · "공포 지수"</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value greed">18.4</div>
+          <div class="thermo-sub safe">안정 (▼)</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 앞으로 30일간 시장이 얼마나 출렁일지를 예측하는 숫자. 바다의 파도 높이를 재는 것과 같습니다.<br><br>
+        <strong style="color:#fff;">지금 18.4(전일 대비 -2.5%)면:</strong> 6월 중순 26 부근에서 <strong style="color:#6bcb77;">크게 가라앉아 '잔잔한 바다'</strong>로 돌아온 상태입니다.
+        여기서 한 가지 흥미로운 신호 — <strong style="color:#e0e6ed;">공포탐욕은 25(공포)인데 VIX는 18(안정)</strong>입니다.
+        이 둘의 엇갈림은 <strong style="color:#4ecdc4;">'급락 공포'가 아니라 '방향성 불안'</strong>이라는 뜻이에요.
+        즉 시장이 무너질까봐 떠는 게 아니라, 연준이 어디로 갈지 몰라 관망 중이라는 신호입니다.
+      </div>
+    </div>
+
+    <!-- ③ 미국 10년물 금리 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #64b5f6;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">③ 미국 10년물 국채 금리</div>
+          <div style="font-size:11px; color:#556677;">전 세계 모든 투자의 기준점</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#64b5f6;">4.37%</div>
+          <div class="thermo-sub safe">7주 최저 (▼)</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 미국 정부한테 10년간 돈을 빌려주면 받는 이자율. 이게 <strong style="color:#e0e6ed;">성장주(우리 5섹터 전부!)의 천적</strong>입니다.
+        금리가 오르면 "은행 이자로 안전하게 벌지 뭐하러 위험한 성장주를?" 심리가 커져 성장주가 눌립니다.<br><br>
+        <strong style="color:#fff;">지금 4.37%, 7주 만의 최저면:</strong> 인플레 우려가 완화되며 <strong style="color:#6bcb77;">금리가 조용히 내려오는 중</strong>입니다 — 성장주에 순풍.
+        다만 ④와 함께 봐야 합니다. <strong style="color:#ffd93d;">연준 자체는 여전히 '매파'</strong>(12월 인상 가능성을 시장이 80%로 보는 중)라,
+        금리 하락이 '추세'가 될지 '일시적 안도'일지는 7월 FOMC와 CPI가 가릅니다.
+      </div>
+    </div>
+
+    <!-- ④ 달러 인덱스 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ffd93d;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">④ 달러 인덱스 (DXY)</div>
+          <div style="font-size:11px; color:#556677;">달러가 주요 6개 통화 대비 얼마나 강한지</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#ffd93d;">101.4</div>
+          <div class="thermo-sub" style="color:#ffd93d;">강세권 상단</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 미국 달러의 힘을 숫자로. 100이 기준, 높으면 달러 강세입니다.<br><br>
+        <strong style="color:#fff;">지금 101.4(52주 범위 95.6~101.8)면:</strong> <strong style="color:#ffd93d;">1년 중 거의 최강 구간</strong>입니다.
+        매파 연준이 달러를 떠받치고 있죠. 성장주에는 살짝 역풍(외국인 매수 둔화)이지만,
+        <strong style="color:#e0e6ed;">삼성증권에서 미국 주식을 사는 우리 입장</strong>에서는 환전 타이밍이 미묘합니다.
+        지금 환전하면 비싼 달러를 사는 것이라, <strong style="color:#4ecdc4;">달러가 더 빠질 때를 노려 환전 분할</strong>하거나
+        mPOP의 자동 환전 예약(원하는 환율 지정)을 걸어두는 게 유리합니다.
+      </div>
+    </div>
+
+    <!-- 4개 지표 요약 -->
+    <div style="background:rgba(78,205,196,0.06); border-radius:10px; padding:16px 18px; margin-bottom:20px; border:1px solid rgba(78,205,196,0.15);">
+      <div style="font-size:14px; color:#4ecdc4; font-weight:700; margin-bottom:8px;">📋 4가지 체온계 요약 — 이번 주 진단</div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        · <strong style="color:#ff6b6b;">공포탐욕 25</strong> → 공포 구간 → <strong style="color:#e0e6ed;">분할 줍줍 환경</strong><br>
+        · <strong style="color:#6bcb77;">VIX 18.4 ↓</strong> → 급락 공포는 없음 → <strong style="color:#e0e6ed;">'방향성 불안'이지 패닉 아님</strong><br>
+        · <strong style="color:#64b5f6;">10년물 4.37% ↓</strong> → 7주 최저, 성장주 순풍 → <strong style="color:#e0e6ed;">단, 매파 연준이 변수</strong><br>
+        · <strong style="color:#ffd93d;">달러 101.4 ↑</strong> → 강세권 상단 → <strong style="color:#e0e6ed;">환전은 서두르지 말 것</strong><br><br>
+        <strong style="color:#fff;">종합 판단: 금리·변동성은 우호적으로 풀렸지만, '매파 연준'이라는 위쪽 뚜껑이 남아 있습니다.
+        좋은 종목을 분할로 모아가되, 7월 FOMC 전까지 현금 여력을 남겨두는 균형이 정답입니다.</strong>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px; color:#7a8ba3; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">섹터별 자금 흐름 (이번 주)</h3>
+    <div style="font-size:13px; color:#7a8ba3; margin-bottom:12px; line-height:1.7;">
+      이번 주 기관 자금이 어디로 들어가고 빠졌는지. 돈이 들어오는 섹터는 상승 압력이 생깁니다.
+    </div>
+    <div class="flow-row">
+      <span>🚀 우주·항공 (UFO, ARKX)</span>
+      <span class="flow-positive">▲▲ 강한 유입 (SpaceX IPO 주간)</span>
+    </div>
+    <div class="flow-row">
+      <span>🤖 피지컬 AI (BOTZ, ROBT)</span>
+      <span class="flow-positive">▲ 유입 (Figure·BMW 양산 + NVIDIA GR00T)</span>
+    </div>
+    <div class="flow-row">
+      <span>⚛️ 원자력·SMR (NLR, URA)</span>
+      <span class="flow-positive">▲ 유입 (Oklo HALEU + Meta 6.6GW)</span>
+    </div>
+    <div class="flow-row">
+      <span>🔮 양자 (QTUM)</span>
+      <span class="flow-negative">▽ 차익실현 (6월 급등분 일부 반납)</span>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="thermo-insight">
+        <strong>이번 주 자금 흐름이 말해주는 것 —</strong><br><br>
+        <strong>우주가 이번 주의 주인공</strong>입니다. 사상 최대 규모(약 $1.75~2조)의 SpaceX 상장(SPCX)이
+        같은 주에 가격이 매겨지고 데뷔하면서, 우주 ETF 전반으로 자금이 몰리고 있습니다.
+        상장 그 자체가 <strong>"우주 경제는 투자 가능한 자산군"</strong>이라는 공인 도장이기 때문입니다.<br><br>
+        반면 양자는 6월 초 DARPA·정부 투자로 급등한 뒤 <strong>차익실현 매물</strong>이 나오는 중입니다.
+        우리 보유 종목 IonQ도 $61 → $51로 눌렸죠. <strong>하지만 펀더멘털(SkyWater 인수·256큐비트·네트워킹)은
+        그대로</strong>입니다. 주가가 빠진 게 회사가 나빠져서가 아니라 단기 과열을 식히는 과정이라면,
+        <strong>오히려 분할 추가의 기회</strong>일 수 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 피지컬 AI ════════════ -->
+  <div class="sector-card sector-ai">
+    <div class="sector-header">
+      <div class="sector-title">🤖 피지컬 AI</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 40%)</div>
+      <div class="thesis-text">
+        "2028년까지 휴머노이드 로봇 양산 시대가 열린다.
+        지금은 완성품 회사보다 <strong>부품·인프라 기업</strong>이 먼저 돈을 번다.
+        골드러시 때 곡괭이 판 사람이 부자가 된 것처럼."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">86</div>
+        <div class="thesis-score-detail">
+          직전 리포트(W25) 84점 → 86점 <span class="safe">(+2)</span><br>
+          Figure-BMW 실제 양산 라인 확장 + NVIDIA Isaac GR00T 휴머노이드 레퍼런스 공개
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:86%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#64b5f6; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">실증 데이터 (테제 핵심)</span>
+      <div class="signal-source">출처: Figure AI / BMW 공급망 · KraneShares 산업 리포트 (2026.06)</div>
+      <div class="signal-title">Figure 02, BMW 스파턴버그서 X3 3만 대 생산 참여 → Figure 03으로 라이프치히 공장 확장</div>
+      <div class="signal-explain">
+        휴머노이드 업계에서 <strong>가장 '진짜'인 시그널</strong>이 나왔습니다.
+        Figure AI의 로봇이 BMW 미국 스파턴버그 공장에서 <strong>10개월간 X3 차량 3만 대 이상 생산에 실제 투입</strong>됐고,
+        BMW가 이를 <strong>독일 라이프치히 공장으로 확장(차세대 Figure 03 투입)</strong>하기로 했습니다.<br><br>
+        <strong>왜 이게 중요하냐면 —</strong> 지금까지 휴머노이드는 대부분 '시연 영상'이었습니다.
+        그런데 이건 <strong>돈을 내는 고객(BMW)이 실제 생산 라인에서 쓰고, 만족해서 확장 주문을 낸</strong> 사례입니다.
+        Figure의 자체 공장 BotQ는 이미 <strong>시간당 로봇 1대</strong> 생산 페이스에 도달했습니다.<br><br>
+        업계 표현으로 <strong>"파일럿(시범)에서 플랫폼(양산)으로"</strong> 넘어가는 변곡점입니다.
+        Figure는 비상장사라 직접 살 수 없지만, 이 흐름은 <strong>로봇 부품·감속기·에지 AI칩 공급사 전체에 순풍</strong>입니다.
+      </div>
+    </div>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge pre-news">컨퍼런스 발표</span>
+      <div class="signal-source">출처: NVIDIA Computex / GTC Taipei 2026 (2026.06)</div>
+      <div class="signal-title">NVIDIA, 휴머노이드 레퍼런스 디자인 'Isaac GR00T' 공개 + 신규 피지컬 AI 모델 배포</div>
+      <div class="signal-explain">
+        젠슨 황이 6월 대만 행사에서 <strong>약 6피트(180cm) 높이의 휴머노이드 레퍼런스 디자인 'Isaac GR00T'</strong>를 공개했습니다.
+        Unitree H2 섀시에 Sharpa의 5손가락 정밀 손을 얹은 형태로, <strong>로봇 제조사들이 가져다 쓸 수 있는 '표준 설계도'</strong>입니다.<br><br>
+        <strong>왜 이게 중요하냐면 —</strong> NVIDIA가 노리는 건 로봇을 직접 파는 게 아니라
+        <strong>모든 로봇 안에 자사 칩·소프트웨어(Isaac·Jetson Thor)를 까는 것</strong>입니다.
+        안드로이드가 폰을 안 만들면서 모든 폰을 장악했듯이요.
+        레퍼런스 디자인을 뿌린다는 건 <strong>"우리 생태계로 들어와라"</strong>는 선언이고,
+        1월 CES에서 황이 외친 <strong>"피지컬 AI의 ChatGPT 순간이 왔다"</strong>가 6개월 만에 제품으로 구체화된 것입니다.<br><br>
+        <strong>균형(주의):</strong> 같은 행사에서 Tesla Optimus는 양산 시작을 <strong>7월 말~8월로 또 미뤘습니다</strong>.
+        완성품 일정은 계속 지연되는 만큼, 우리 테제대로 <strong>완성품보다 '깔리는 인프라'</strong>에 무게를 두는 게 맞습니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>📅 다가오는 카탈리스트</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">7월말~8월</span>
+        <span class="catalyst-desc"><strong>Tesla Optimus Gen 3 저속 양산 개시(프리몬트)</strong> — 또 미뤄질지, 실제 라인이 돌지가 양산 신뢰도의 가늠자.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8/?</span>
+        <span class="catalyst-desc"><strong>NVIDIA Q2(FY27) 실적</strong> — 데이터센터+로보틱스(Isaac/GR00T) 매출 언급 강도 체크.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">상시</span>
+        <span class="catalyst-desc"><strong>Figure / 1X / Boston Dynamics 신규 고객사 발표</strong> — BMW에 이은 두 번째 대형 레퍼런스가 나오면 섹터 재평가.</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge mid">41</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도: 41/100</strong> (Google Trends 추정)<br>
+        BMW·NVIDIA 뉴스로 관심이 작년보다 올라왔지만 아직 '대중 광풍'은 아닙니다.
+        <strong>"실제 공장에서 일하는 로봇"</strong>이라는 구체적 스토리가 일반인에게 퍼지기 시작하는 초입 구간입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 우주 ════════════ -->
+  <div class="sector-card sector-space">
+    <div class="sector-header">
+      <div class="sector-title">🚀 우주</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 30%)</div>
+      <div class="thesis-text">
+        "우주 경제는 2030년까지 $1조 규모로 성장한다.
+        핵심은 발사체가 아니라 <strong>위성 서비스·방산</strong> — 발사 비용이 떨어질수록
+        위성으로 돈 버는 회사가 진짜 캐시카우가 된다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">92</div>
+        <div class="thesis-score-detail">
+          직전 리포트(W25) 89점 → 92점 <span class="safe">(+3)</span><br>
+          SpaceX 사상 최대 IPO(SPCX) 데뷔 주간 + Rocket Lab 나스닥-100 편입
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:92%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#81c784; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">섹터 분수령 이벤트</span>
+      <div class="signal-source">출처: 24/7 Wall St. · Globe and Mail · Nasdaq Private Market (2026.06)</div>
+      <div class="signal-title">SpaceX, 이번 주 상장(티커 SPCX) — 밸류 $1.75~2조, 역사상 최대급 IPO</div>
+      <div class="signal-explain">
+        4월 1일 비공개 신청했던 SpaceX의 상장이 <strong>바로 이번 주(6/29 주간) 가격 결정·데뷔</strong> 예정입니다.
+        밸류에이션은 <strong>약 $1.75조~$2조</strong>로, 역사상 최대 규모 IPO 중 하나입니다.<br><br>
+        <strong>왜 이게 우주 섹터 전체에 호재냐면 —</strong> 그동안 우주의 '왕'인 SpaceX는 비상장이라
+        개인이 살 수 없었습니다. 이제 상장되면 ① <strong>막대한 패시브 자금(지수 추종)이 우주 섹터로 유입</strong>되고,
+        ② 시장이 매기는 SpaceX의 가격이 <strong>Rocket Lab 등 동종 상장사의 밸류에이션 기준점(앵커)</strong>이 됩니다.
+        $2조짜리 비교 대상이 생기면, 그 옆의 회사들이 상대적으로 싸 보이게 되죠.<br><br>
+        <strong>균형(주의):</strong> 신규 IPO는 초반 변동성이 극심합니다. 데뷔 첫날 급등 후 되밀릴 수 있어
+        <strong>상장 직후 추격매수는 자제</strong>하고, 직접 베팅보다 <strong>이미 정부 계약·매출이 있는 검증된 우주주(아래 RKLB)</strong>로
+        간접 노출을 잡는 것이 안전합니다.
+      </div>
+    </div>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">지수 편입 + 확정 매출</span>
+      <div class="signal-source">출처: Rocket Lab IR · CNBC · Air & Space Forces (2026.06)</div>
+      <div class="signal-title">Rocket Lab(RKLB), 나스닥-100 편입(6/22) — 백로그 $2.2B + $805M 우주군 미사일추적 계약 보유</div>
+      <div class="signal-explain">
+        Rocket Lab이 <strong>6월 22일자로 나스닥-100 지수에 편입</strong>됐습니다.
+        나스닥-100은 나스닥 최대 비금융 100개사로, 편입되면 <strong>QQQ 등 초대형 ETF가 의무적으로 RKLB를 사야</strong> 합니다 — 자동 매수 수요.<br><br>
+        펀더멘털도 받쳐줍니다. Q1 매출 <strong>$344.1M</strong>, 수주 잔고(백로그) <strong>$2.2B</strong>,
+        그리고 작년 말 따낸 <strong>우주군 SDA 미사일추적 위성 프라임 계약 약 $805M</strong>을 손에 쥐고 있습니다.
+        이건 '전망'이 아니라 <strong>이미 확정된 정부 매출</strong>입니다.<br><br>
+        여기에 회사 측이 <strong>"SpaceX가 Starlink·Starship·우주 데이터센터에 집중할수록,
+        일반 발사 시장에 RKLB가 들어갈 '아주 좋은 자리(nice spot)'가 생긴다"</strong>고 언급했습니다.
+        차세대 중형 로켓 <strong>Neutron은 4분기 첫 발사</strong> 목표(연 4기 양산)로, 성공 시 재평가 트리거입니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>📅 다가오는 카탈리스트</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">6/29 주</span>
+        <span class="catalyst-desc"><strong>SpaceX(SPCX) 데뷔</strong> — 가격·첫날 흐름이 우주 섹터 전반의 단기 방향을 좌우.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8월 초</span>
+        <span class="catalyst-desc"><strong>Rocket Lab Q2 실적</strong> — Neutron 개발 진척 + 백로그 추이가 핵심.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">4분기</span>
+        <span class="catalyst-desc"><strong>Neutron 첫 발사</strong> — 성공 시 RKLB를 '소형'에서 '중형 발사 플레이어'로 재평가.</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge mid">48</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도: 48/100</strong><br>
+        SpaceX IPO 덕에 이번 주만큼은 우주 관심이 급등했습니다. 다만 이 관심은 <strong>SpaceX 한 종목에 쏠려</strong> 있어,
+        RKLB 같은 '진짜 매출 있는 우주주'는 여전히 상대적으로 저평가 영역에 남아 있습니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ SMR (소형 원자로) ════════════ -->
+  <div class="sector-card sector-smr">
+    <div class="sector-header">
+      <div class="sector-title">⚛️ 소형 원자로 (SMR)</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10%)</div>
+      <div class="thesis-text">
+        "AI 혁명의 최대 병목은 전력이다. AI 데이터센터 전력 수요가 폭증하는데
+        태양광·풍력만으론 불가능하다. <strong>소형 원자로(SMR)가 AI의 전력 인프라</strong>가 된다.
+        빅테크가 이미 SMR 전력계약(PPA)을 체결하고 있다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">84</div>
+        <div class="thesis-score-detail">
+          직전 리포트(W25) 82점 → 84점 <span class="safe">(+2)</span><br>
+          Oklo-Centrus HALEU 연료 공급 LOI + Meta 6.6GW 원전 PPA 확인
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:84%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#ff9f43; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">공급망 잠금 (8-K 공시)</span>
+      <div class="signal-source">출처: Centrus Energy 8-K (SEC) · 2026.06.18</div>
+      <div class="signal-title">Oklo–Centrus, HALEU(고순도 저농축우라늄) 공급 LOI 체결 — Aurora 발전소 5기분 연료 확보</div>
+      <div class="signal-explain">
+        6월 18일, Oklo와 Centrus Energy가 <strong>HALEU 연료 공급 의향서(LOI)</strong>를 맺었습니다.
+        오하이오 남부 Aurora Powerhouse용으로, <strong>Aurora 발전소 최대 5기·수년치 노심(원자로 연료)</strong>을 커버합니다 (1.2GW 클린에너지 캠퍼스).<br><br>
+        <strong>왜 이게 중요하냐면 —</strong> SMR 투자에서 사람들이 놓치는 약점이 <strong>"연료를 어디서 구하나?"</strong>입니다.
+        차세대 SMR은 일반 원전 연료가 아닌 <strong>HALEU라는 특수 농축 우라늄</strong>이 필요한데, 이걸 만드는 곳이 세계적으로 손에 꼽습니다.
+        이번 LOI는 <strong>"우리는 연료 공급망까지 확보했다"</strong>는 선언 — 가장 큰 리스크 하나가 지워진 겁니다.<br><br>
+        이건 미국 최초 수준의 <strong>상업용 대규모 HALEU 공급 계약</strong>이라, SMR 테제가 '슬라이드'에서 '실행'으로 넘어가는 증거입니다.
+        수혜는 Oklo(SMR)뿐 아니라 <strong>Centrus(농축)·Cameco(우라늄 채굴)·URA(우라늄 ETF)</strong>까지 번집니다.
+      </div>
+    </div>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">하이퍼스케일러 확정 수요</span>
+      <div class="signal-source">출처: Meta 원전 PPA · SMR 산업 인텔리전스 (2026)</div>
+      <div class="signal-title">Meta, 최대 6.6GW 원자력 확보 — TerraPower(2.8GW) + Oklo(1.2GW) 등</div>
+      <div class="signal-explain">
+        Meta가 <strong>최대 6.6GW 규모의 원자력 전력</strong>을 확보 중입니다.
+        빌 게이츠의 <strong>TerraPower(Natrium 8기·2.8GW)</strong>와 <strong>Oklo(Aurora 캠퍼스·1.2GW)</strong> 등을 통해서죠.<br><br>
+        6.6GW가 얼마나 큰 숫자냐면 — <strong>대형 원전 6~7기, 또는 한 도시 전체 전력</strong> 수준입니다.
+        AI 회사가 이걸 <strong>데이터센터 하나 돌리려고</strong> 확보한다는 게 핵심입니다.
+        Microsoft·Google에 이어 Meta까지 가세하면서, <strong>"빅테크가 원전을 사재기한다"</strong>는 우리 테제가 또 한 번 확인됐습니다.<br><br>
+        <strong>균형(주의):</strong> SMR 상업 가동은 대부분 <strong>2028~2030년</strong> 일이라, 지금 주가는 '미래 기대'를 당겨 반영한 상태입니다.
+        변동성이 크므로 비중 10% 안에서 <strong>NuScale(유일 NRC 인증)·Oklo·우라늄(URA)</strong>으로 나눠 분할 접근이 안전합니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>📅 다가오는 카탈리스트</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">하반기</span>
+        <span class="catalyst-desc"><strong>Oklo 첫 Aurora 건설 인허가 진척</strong> — LOI에서 본계약(확정 공급)으로 전환되는지.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">상시</span>
+        <span class="catalyst-desc"><strong>추가 하이퍼스케일러 SMR PPA</strong> — Amazon·Oracle 등 신규 계약 시 섹터 모멘텀.</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge low">28</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도: 28/100</strong><br>
+        "원전 = 위험" 편견이 여전히 큽니다. 하지만 SMR은 전원이 꺼져도 자연 냉각되는 다른 기술입니다.
+        <strong>편견이 클수록 저평가 기회도 큽니다.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 제약바이오 ════════════ -->
+  <div class="sector-card sector-bio">
+    <div class="sector-header">
+      <div class="sector-title">💊 제약바이오</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10%)</div>
+      <div class="thesis-text">
+        "AI가 신약 개발 비용·기간을 대폭 줄인다. 소형 바이오텍이 빅파마를 위협하는 시대가 온다.
+        단, 2026년은 <strong>'말'이 아니라 '임상 결과'로 증명되는 해</strong>다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">74</div>
+        <div class="thesis-score-detail">
+          직전 리포트(W25) 73점 → 74점 <span class="safe">(+1)</span><br>
+          FDA 'AI 가속 경로' 파일럿 10개사 선정(규제 순풍) · 단 아직 승인 0건
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill mid" style="width:74%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#ce93d8; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">규제 순풍</span>
+      <div class="signal-source">출처: FDA · IntuitionLabs / Axis Intelligence (2026)</div>
+      <div class="signal-title">FDA, 'AI 가속 경로(Accelerated AI Pathway)' 파일럿 — AI 신약 10개사 선정</div>
+      <div class="signal-explain">
+        FDA가 <strong>AI로 발굴·설계한 신약</strong>을 신속 심사하는 파일럿 프로그램에 <strong>10개 회사</strong>를 선정했습니다.
+        명단에 <strong>Recursion, Schrödinger/Nimbus, Relay, Insilico, BenevolentAI, Iambic, Atomwise</strong> 등 대표주가 대거 포함됐습니다.<br><br>
+        <strong>왜 이게 중요하냐면 —</strong> 신약 투자에서 가장 무서운 리스크는 <strong>"규제 당국이 안 받아주는 것"</strong>입니다.
+        그런데 FDA가 <strong>"AI로 만든 약은 빠른 트랙으로 봐주겠다"</strong>고 직접 길을 터준 것이라,
+        AI 바이오 전체의 <strong>제도적 불확실성이 줄었습니다.</strong> 현재 임상 단계 AI 신약은 <strong>173개+</strong>,
+        올해 15~20개가 최종 임상(P3)에 진입할 전망입니다.<br><br>
+        <strong>균형(중요):</strong> 단, <strong>2026년 6월 현재까지 FDA 승인을 받은 AI 신약은 아직 0건</strong>입니다.
+        Recursion은 작년 주력 후보(REC-994)를 효능 미달로 중단한 전력도 있죠.
+        그래서 바이오는 <strong>비중 10%로 작게, '증명되면 베팅'하는 자세</strong>가 맞습니다 — 미리 올인 금지.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>📅 카탈리스트</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2026 중</span>
+        <span class="catalyst-desc"><strong>Schrödinger 자소시티닙(TAK-279) P3 결과</strong> — '물리 기반 AI 설계'의 첫 대규모 임상 증명대.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">상시</span>
+        <span class="catalyst-desc"><strong>AI 신약 첫 FDA 승인</strong> — 누가 1호가 되든 섹터 전체 재평가 트리거.</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge low">30</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도: 30/100</strong><br>
+        AI 바이오는 기대와 실망이 반복되며 대중이 피로해진 구간입니다.
+        그래서 <strong>'첫 승인'이라는 명확한 신호가 나오기 전까지는 조용히 관찰</strong>하는 게 유리합니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 양자컴퓨팅 ════════════ -->
+  <div class="sector-card sector-quantum">
+    <div class="sector-header">
+      <div class="sector-title">🔮 양자컴퓨팅</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10%) · 보유: IonQ</div>
+      <div class="thesis-text">
+        "양자컴퓨팅은 AI 다음의 컴퓨팅 패러다임 전환이다.
+        <strong>오류 정정·네트워킹 기술이 빠르게 발전</strong>하며 상용화 시계가 당겨지고 있다.
+        우리는 이온트랩 선두 IonQ로 이 흐름에 올라타 있다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">68</div>
+        <div class="thesis-score-detail">
+          직전 리포트(W25) 67점 → 68점 <span class="safe">(+1)</span><br>
+          Duke–IonQ 3노드 양자 네트워크 얽힘 실증(모듈형 리더십) · 단 주가는 차익실현 조정
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill mid" style="width:68%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#a78bfa; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">기술 실증 (보유종목 직결)</span>
+      <div class="signal-source">출처: Duke University × IonQ 연구 발표 (2026.06)</div>
+      <div class="signal-title">Duke–IonQ, 3노드 양자 네트워크서 '분산 3자 얽힘' 실증 — 모듈형 양자컴퓨팅 입증</div>
+      <div class="signal-explain">
+        Duke 대학과 IonQ가 <strong>원격 원자 큐비트로 3개 노드를 연결해 '분산 삼자 얽힘(tripartite entanglement)'</strong>을 실증했습니다.
+        광자(빛) 인터커넥트로 떨어진 양자 프로세서들을 하나로 묶은 것입니다.<br><br>
+        <strong>왜 이게 IonQ에 직접 호재냐면 —</strong> 양자컴퓨터를 키우는 방법은 두 가지입니다.
+        ① 칩 하나에 큐비트를 무작정 많이 욱여넣기(어렵고 한계 있음), ② <strong>작은 모듈 여러 개를 네트워크로 연결해 키우기(모듈형)</strong>.
+        IonQ가 베팅하는 건 ②번이고, 이번 실증은 <strong>"모듈형이 실제로 된다"</strong>는 증거입니다.
+        6월 초 DARPA가 IonQ를 'HARQ(이종 양자 아키텍처)' 프로그램에 뽑은 것도 같은 맥락 — 국방이 IonQ의 네트워킹 리더십을 인정한 거죠.<br><br>
+        여기에 IBM Nighthawk 검증, Google Willow '임계값 이하' 오류정정 등 <strong>업계 전반의 오류정정 진척</strong>이 더해져
+        상용화 시계가 빨라지고 있습니다.
+      </div>
+    </div>
+
+    <div class="signal-block neutral">
+      <span class="signal-badge confirmed">보유종목 상태 (균형 시각)</span>
+      <div class="signal-source">출처: Yahoo Finance / 분석가 컨센서스 · IonQ (2026.06.29)</div>
+      <div class="signal-title">IonQ, $51 부근으로 조정 — SkyWater $1.8B 인수는 Q2~Q3 클로징 예정</div>
+      <div class="signal-explain">
+        보유 종목 IonQ를 균형 있게 봅니다. <strong>주가는 6/29 $51.25</strong>(전일 종가 $49.31, 장중 $49.65~$53.29)로,
+        <strong>W25(6/16) $61에서 약 -16% 조정</strong>됐습니다. 6월 초 DARPA 급등분을 일부 반납한 것이죠.
+        52주 범위는 $25.89~$84.64, 분석가 평균 목표가는 <strong>$68.79</strong>(고 $100, 저 $44.78)입니다.<br><br>
+        <strong>펀더멘털은 그대로 강합니다 —</strong> ① <strong>SkyWater $1.8B 인수($35/주 = 현금 $15 + 주식 $20)</strong>가 Q2~Q3 클로징 예정으로,
+        성사 시 <strong>설계+칩 제조를 모두 가진 '풀스택 수직계열화'</strong> 양자기업이 됩니다.
+        ② 5세대 Tempo는 AWS·Azure·Google Cloud에서 가동 중, <strong>6세대 256큐비트는 테스트 중(2027 출시 목표)</strong>.<br><br>
+        <strong>판단:</strong> 주가 조정은 회사 악재가 아니라 단기 과열 해소입니다. 고변동 종목인 만큼
+        <strong>$55 위 추격매수는 자제</strong>하고, <strong>$50 이하 조정 구간에서 분할 추가</strong> 원칙을 유지합니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>📅 다가오는 카탈리스트</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">Q2~Q3</span>
+        <span class="catalyst-desc"><strong>IonQ–SkyWater $1.8B 인수 클로징</strong> — 규제 승인이 관건. 성사 시 수직계열화 재평가.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8월 초</span>
+        <span class="catalyst-desc"><strong>IonQ Q2 실적</strong> — 매출 가이던스 유지·신규 계약 여부가 추가매수/보유 분기점.</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2027</span>
+        <span class="catalyst-desc"><strong>256큐비트 Tempo 상용 출시</strong> — 스케일링 증명. 장기 재평가 트리거.</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge low">26</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도: 26/100</strong><br>
+        6월 급등으로 관심이 잠깐 올랐다가 조정과 함께 식는 중입니다.
+        <strong>관심이 식을 때가 오히려 좋은 종목을 차분히 모으기 좋은 시점</strong>입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 워치리스트 ════════════ -->
+  <div class="watchlist">
+    <h2>📌 워치리스트 · 보유 종목 상태</h2>
+    <div class="watchlist-subtitle">이번 주 움직임이 있는 종목만 표시합니다</div>
+
+    <div class="watch-change" style="border-color: rgba(167,139,250,0.2); background: rgba(167,139,250,0.06);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">IONQ (IonQ)</span>
+        <span class="watch-arrow" style="color:#a78bfa;">🟣 보유 중 (약 7주차) · 조정 중</span>
+      </div>
+      <div class="watch-reason">
+        보유 유지. 주가는 <strong>$51.25(6/29)</strong>로 W25 $61 대비 <strong>약 -16% 눌렸습니다</strong> — 6월 초 DARPA 급등분 차익실현입니다.
+        하지만 <strong>SkyWater $1.8B 인수(Q2~Q3 클로징)·256큐비트 테스트·Duke 3노드 얽힘 실증</strong> 등 펀더멘털은 오히려 강해졌습니다.
+        분석가 평균 목표 $68.79.<br><br>
+        <strong>전략:</strong> 현 보유량 유지. $55 위 추격매수 자제, <strong>$50 이하 조정 시 분할 추가</strong>. 다음 분수령은 <strong>SkyWater 클로징 + 8월 Q2 실적</strong>.
+      </div>
+    </div>
+
+    <div class="watch-change">
+      <div class="watch-change-header">
+        <span class="watch-ticker">RKLB (Rocket Lab)</span>
+        <span class="watch-arrow">🟢 관찰 강화 — 나스닥-100 편입 + SpaceX IPO 수혜</span>
+      </div>
+      <div class="watch-reason">
+        <strong>6/22 나스닥-100 편입</strong>으로 QQQ 등 패시브 자금의 자동 매수 수요가 생겼고,
+        같은 주 <strong>SpaceX IPO가 우주주 전반의 밸류에이션 앵커</strong>를 높입니다.
+        백로그 $2.2B + 우주군 $805M 확정 계약이라 '매출 없는 테마주'와 다릅니다.
+        다만 <strong>지수 편입·IPO 흥분으로 단기 과열 가능성</strong>이 있어, 추격보다 <strong>Q2 실적 후 조정 시 분할 진입</strong>을 권합니다.
+      </div>
+    </div>
+
+    <div class="watch-nochange">나머지 워치리스트 종목: 유의미한 변동 없음</div>
+  </div>
+
+  <!-- ════════════ 전문가 레퍼런스 ════════════ -->
+  <div class="expert-section">
+    <h2>🎙️ 전문가 · 유명인 레퍼런스</h2>
+    <div class="expert-subtitle">이번 주 시그널과 관련된 전문가들의 발언을 모았습니다. 시그널의 맥락이 선명해집니다.</div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🟢</div>
+        <div>
+          <div class="expert-name">Jensen Huang (젠슨 황)</div>
+          <div class="expert-title">NVIDIA CEO · GPU → 피지컬 AI로 영토 확장</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "피지컬 AI의 ChatGPT 순간이 왔다 — 기계가 현실 세계를 이해하고, 추론하고, 행동하기 시작한다."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-ai">피지컬 AI</span>
+        1월 CES 2026에서 이 표현을 던진 뒤, 6월 대만 행사에서 <strong>휴머노이드 레퍼런스 'Isaac GR00T'와 신규 피지컬 AI 모델</strong>로
+        이를 제품화했습니다. 자율주행 모델 Alpamayo, 6칩 Rubin 플랫폼도 함께 공개됐죠.
+        말이 R&D·제품으로 뒷받침된다는 건 <strong>NVIDIA가 로봇 생태계의 '안드로이드'가 되려 한다</strong>는 신호입니다.
+        Figure-BMW의 실제 양산 사례와 합치면, 피지컬 AI는 확실히 '시연'에서 '돈'으로 넘어가고 있습니다.
+      </div>
+      <div class="expert-source">📎 CES 2026 키노트(2026.01) · Computex/GTC Taipei 2026(2026.06)</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🔶</div>
+        <div>
+          <div class="expert-name">Sam Altman (샘 알트만)</div>
+          <div class="expert-title">OpenAI CEO · Oklo 이사회 의장</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "AI의 미래는 에너지 문제를 푸는 데 달려 있다. 핵에너지 없이는 AGI에 도달할 수 없다."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag" style="background:rgba(255,159,67,0.15); color:#ff9f43;">SMR</span>
+        ChatGPT를 만든 사람이 왜 원전 회사 의장일까요? <strong>AI 전력 소비가 기하급수적으로 늘기 때문</strong>입니다.
+        그가 의장인 Oklo가 이번 주 <strong>Centrus와 HALEU 연료 공급 LOI</strong>를 맺고, Meta가 Oklo·TerraPower로 6.6GW를 확보한 건
+        알트만의 이 말이 <strong>계약으로 실현되고 있다</strong>는 증거입니다. AI와 원전은 이제 한 묶음입니다.
+      </div>
+      <div class="expert-source">📎 Oklo–Centrus 8-K(2026.06.18) · Meta 원전 PPA(2026)</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">⚪</div>
+        <div>
+          <div class="expert-name">Peter Thiel (피터 틸)</div>
+          <div class="expert-title">Founders Fund · SpaceX 초기 투자자</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "우주 산업은 인터넷 다음의 진짜 인프라 혁명이다. 대부분의 투자자들은 아직 이해하지 못하고 있다."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-space">우주</span>
+        틸의 Founders Fund는 SpaceX 초기 투자자입니다. 그가 일찍 본 그 SpaceX가 이번 주 <strong>$1.75~2조 밸류로 상장(SPCX)</strong>합니다.
+        "대부분이 아직 이해 못 한다"는 그의 말은, 우주가 이제 막 <strong>대중의 레이더에 잡히기 시작</strong>했다는 뜻 —
+        즉 <strong>이미 매출 있는 우주주(RKLB 등)는 여전히 저평가</strong>일 수 있다는 역발상 힌트입니다.
+      </div>
+      <div class="expert-source">📎 SpaceX IPO 보도(2026.06) · Founders Fund 서한</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🟣</div>
+        <div>
+          <div class="expert-name">Peter Chapman (피터 채프먼)</div>
+          <div class="expert-title">IonQ CEO · 트랩이온 양자컴퓨팅 선두</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "양자의 미래는 한 칩에 큐비트를 무한정 넣는 게 아니라, 모듈을 네트워크로 연결해 키우는 것이다."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">양자컴퓨팅</span>
+        IonQ가 줄곧 강조한 <strong>'모듈형·네트워킹' 전략</strong>이 이번 주 <strong>Duke–IonQ의 3노드 분산 얽힘 실증</strong>으로 외부 입증됐습니다.
+        DARPA HARQ 선정도 같은 맥락이죠. 주가는 단기 조정 중이지만, <strong>기술 로드맵은 계약·실험으로 뒷받침</strong>되는 드문 양자주입니다.
+        SkyWater 인수까지 더해지면 '설계+제조'를 다 가진 회사가 됩니다.
+      </div>
+      <div class="expert-source">📎 Duke–IonQ 3노드 얽힘 실증(2026.06) · IonQ DARPA HARQ 선정(2026.06)</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🟤</div>
+        <div>
+          <div class="expert-name">Warren Buffett (워런 버핏)</div>
+          <div class="expert-title">Berkshire Hathaway · 가치투자의 대가</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "남들이 두려워할 때 탐욕스러워져라. 남들이 탐욕스러워질 때 두려워하라."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-macro">거시 환경</span>
+        이번 주 <strong>공포탐욕지수 25(공포)</strong>와 직접 연결됩니다. 시장은 '매파 연준' 경계로 위축돼 있지만,
+        VIX는 18로 잔잔합니다. 패닉이 아닌 '관망형 공포'라는 뜻이죠. 버핏의 원칙대로라면 바로 이런 때가
+        <strong>좋은 종목을 분할로 모아갈 기회</strong>입니다. 단, 한 방이 아니라 7월 FOMC 전까지 현금 여력을 남기는 균형이 필요합니다.
+      </div>
+      <div class="expert-source">📎 Berkshire 주주 서한 · 2008 NYT "Buy American. I Am."</div>
+    </div>
+  </div>
+
+  <!-- ════════════ 용어 사전 ════════════ -->
+  <div class="glossary-section">
+    <h2>📖 이번 주 용어 사전</h2>
+    <div class="glossary-subtitle">이번 주 리포트를 100% 이해하기 위한 핵심 용어들입니다.</div>
+
+    <div class="glossary-card">
+      <div class="g-term">나스닥-100 지수 편입</div>
+      <div class="g-term-en">Nasdaq-100 Index Inclusion</div>
+      <div class="g-explain">
+        나스닥-100은 나스닥에 상장된 <strong>비금융 대기업 100곳</strong>을 모은 지수입니다.
+        애플·엔비디아·테슬라 같은 이름들이 들어 있죠.<br><br>
+        여기에 <strong>새로 편입되면 왜 호재냐면</strong> — 이 지수를 그대로 따라 사는
+        <strong>초대형 ETF(QQQ 등)와 펀드들이 '의무적으로' 그 종목을 매수</strong>해야 하기 때문입니다.
+        내 종목을 사주는 큰손이 강제로 생기는 셈입니다. 보통 편입 발표~실제 편입일 사이에 주가가 미리 반응합니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> Rocket Lab(RKLB)이 6/22 나스닥-100에 편입됐습니다. 패시브 자금 유입 + SpaceX IPO 앵커 효과가 겹칩니다.
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">IPO (기업공개)</div>
+      <div class="g-term-en">Initial Public Offering · 비상장사가 증시에 데뷔</div>
+      <div class="g-explain">
+        비상장 회사가 처음으로 주식을 일반 투자자에게 파는 것입니다. 이때부터 누구나 그 회사 주식을 살 수 있게 됩니다.<br><br>
+        <strong>왜 섹터 전체에 영향을 주냐면</strong> — 거대 IPO는 ① 막대한 자금을 그 산업으로 끌어오고,
+        ② 시장이 매긴 가격이 <strong>같은 업종 다른 회사들의 '기준 가격(앵커)'</strong>이 됩니다.
+        $2조짜리 비교 대상이 생기면 그 옆 회사가 상대적으로 싸 보이게 되죠.<br><br>
+        <strong>주의:</strong> 신규 상장주는 초반 변동성이 극심합니다. 첫날 급등 후 되밀리는 경우가 많아 추격매수는 위험합니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주:</strong> SpaceX가 티커 SPCX로 $1.75~2조 밸류 상장 — 역사상 최대급. 우주 섹터 전반에 자금·관심이 몰립니다.
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">HALEU (고순도 저농축 우라늄)</div>
+      <div class="g-term-en">High-Assay Low-Enriched Uranium · 차세대 SMR 연료</div>
+      <div class="g-explain">
+        대부분의 차세대 소형 원자로(SMR)는 일반 원전 연료보다 <strong>조금 더 농축된 특수 우라늄(HALEU)</strong>이 필요합니다.
+        문제는 이걸 <strong>상업적으로 만들 수 있는 곳이 세계적으로 극소수</strong>라는 점입니다.<br><br>
+        그래서 SMR 투자에서 <strong>"원자로는 다 만드는데 연료를 못 구하면?"</strong>이 숨은 리스크였습니다.
+        HALEU 공급 계약이 체결된다는 건 그 리스크가 해소된다는 뜻입니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주:</strong> Oklo–Centrus가 HALEU 공급 LOI를 맺어 Aurora 발전소 5기분 연료를 확보. SMR 테제의 '연료 병목'이 풀렸습니다.
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">'임계값 이하' 오류 정정 / 모듈형 양자</div>
+      <div class="g-term-en">Below-Threshold QEC · Modular Quantum</div>
+      <div class="g-explain">
+        양자컴퓨터의 최대 약점은 <strong>계산 중 오류가 너무 많이 난다</strong>는 것입니다.
+        '임계값 이하'란 — <strong>큐비트를 더 넣을수록 오히려 오류가 줄어드는</strong> 마법의 분기점을 넘었다는 뜻입니다 (Google Willow가 달성).<br><br>
+        <strong>모듈형 양자</strong>는 칩 하나에 큐비트를 무한정 넣는 대신, <strong>작은 양자 모듈 여러 개를 빛(광자)으로 연결</strong>해 키우는 방식입니다.
+        IonQ가 베팅하는 길이고, 큰 시스템을 현실적으로 만드는 핵심 기술입니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주:</strong> Duke–IonQ가 3개 노드를 연결한 '분산 얽힘'을 실증 — 우리 보유 종목 IonQ의 모듈형 전략이 실제로 작동함을 보였습니다.
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">매파(Hawkish) 연준</div>
+      <div class="g-term-en">Hawkish Fed · 금리를 높게/오래 유지하려는 태도</div>
+      <div class="g-explain">
+        '매파'는 인플레이션을 잡기 위해 <strong>금리를 높게, 오래 유지하려는</strong> 태도를 말합니다 (반대는 '비둘기파', 금리 인하 선호).<br><br>
+        <strong>왜 성장주에 역풍이냐면</strong> — 금리가 높으면 "안전한 예금으로도 잘 버는데 굳이 위험한 성장주를?"
+        심리가 커져 우리 5섹터 같은 미래 성장주의 가치가 할인됩니다. 또 달러를 강하게 만들어 외국인 매수도 둔화시킵니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주:</strong> 10년물 금리는 7주 최저(4.37%)로 우호적인데, 시장은 여전히 12월 인상 가능성을 80%로 봅니다.
+        '금리는 내렸지만 연준은 매파'라는 엇갈림이 이번 주 공포(25)의 진짜 원인입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ Footer ════════════ -->
+  <div class="footer">
+    본 리포트는 공개된 데이터와 전문가 분석을 종합한 정보 제공 목적이며,<br>
+    최종 투자 판단과 책임은 본인에게 있습니다.<br><br>
+    MK 전담 애널리스트 리포트 · 매주 화·금 발행 · W27 수동 캐치업(2026.06.29)
+  </div>
+
+</div>
+</body>
+</html>
