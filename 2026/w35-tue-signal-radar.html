@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK 시그널 레이더 — 2026.08.25 (W35)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #0a0e17;
+    color: #e0e6ed;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(135deg, #0f1923 0%, #1a1a2e 50%, #16213e 100%);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .header-icon { font-size: 40px; margin-bottom: 12px; }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header .date {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-top: 6px;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #4ecdc4;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  /* ── 시장 체온계 ── */
+  .thermometer {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .thermometer h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thermo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .thermo-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .thermo-label {
+    font-size: 11px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .thermo-value {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 4px 0;
+  }
+  .thermo-value.fear { color: #ff6b6b; }
+  .thermo-value.neutral { color: #ffd93d; }
+  .thermo-value.greed { color: #6bcb77; }
+  .thermo-sub {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .thermo-sub.fear { color: #ff6b6b; }
+  .thermo-sub.greed { color: #6bcb77; }
+  .thermo-insight {
+    background: rgba(78, 205, 196, 0.08);
+    border-left: 3px solid #4ecdc4;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.7;
+  }
+  .thermo-insight strong { color: #4ecdc4; }
+  .flow-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+  }
+  .flow-row:last-child { border-bottom: none; }
+  .flow-positive { color: #6bcb77; font-weight: 700; }
+  .flow-negative { color: #ff6b6b; font-weight: 700; }
+
+  /* ── 섹터 카드 ── */
+  .sector-card {
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .sector-ai { background: linear-gradient(135deg, #1a1a2e, #1e3a5f); }
+  .sector-space { background: linear-gradient(135deg, #1a1a2e, #1b3a2d); }
+  .sector-smr { background: linear-gradient(135deg, #1a1a2e, #3a2a1e); }
+  .sector-bio { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); }
+  .sector-quantum { background: linear-gradient(135deg, #1a1a2e, #1e2a3f); }
+
+  .sector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .sector-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sector-ai .sector-title { color: #64b5f6; }
+  .sector-space .sector-title { color: #81c784; }
+  .sector-smr .sector-title { color: #ff9f43; }
+  .sector-bio .sector-title { color: #ce93d8; }
+  .sector-quantum .sector-title { color: #a78bfa; }
+
+  /* ── 테제 박스 ── */
+  .thesis-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+  .thesis-label {
+    font-size: 11px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .thesis-text {
+    font-size: 14px;
+    color: #e0e6ed;
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .thesis-score-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .thesis-score {
+    font-size: 32px;
+    font-weight: 900;
+    color: #4ecdc4;
+  }
+  .thesis-score-detail {
+    font-size: 12px;
+    color: #7a8ba3;
+    line-height: 1.5;
+  }
+  .score-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s;
+  }
+  .score-bar-fill.high { background: linear-gradient(90deg, #4ecdc4, #44bd8e); }
+  .score-bar-fill.mid { background: linear-gradient(90deg, #ffd93d, #f0a500); }
+  .score-bar-fill.low { background: linear-gradient(90deg, #ff6b6b, #c0392b); }
+
+  /* ── 시그널 ── */
+  .signal-block {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 3px solid;
+  }
+  .signal-block.bullish { border-left-color: #6bcb77; }
+  .signal-block.bearish { border-left-color: #ff6b6b; }
+  .signal-block.neutral { border-left-color: #ffd93d; }
+
+  .signal-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .signal-badge.pre-news { background: #4ecdc4; color: #0a0e17; }
+  .signal-badge.confirmed { background: #ffd93d; color: #0a0e17; }
+
+  .signal-source {
+    font-size: 11px;
+    color: #7a8ba3;
+    margin-bottom: 6px;
+  }
+  .signal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .signal-explain {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .signal-explain strong { color: #e0e6ed; }
+
+  /* ── 카탈리스트 캘린더 ── */
+  .catalyst-section {
+    margin-top: 20px;
+  }
+  .catalyst-section h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .catalyst-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .catalyst-date {
+    background: rgba(78, 205, 196, 0.15);
+    color: #4ecdc4;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .catalyst-desc {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.6;
+  }
+
+  /* ── 센티먼트 ── */
+  .sentiment-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.15);
+    border-radius: 8px;
+  }
+  .sentiment-gauge {
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .sentiment-gauge.low { color: #6bcb77; }
+  .sentiment-gauge.mid { color: #ffd93d; }
+  .sentiment-gauge.high { color: #ff6b6b; }
+  .sentiment-label {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.6;
+  }
+
+  /* ── 워치리스트 ── */
+  .watchlist {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .watchlist h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .watchlist-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 16px;
+  }
+  .watch-change {
+    background: rgba(107, 203, 119, 0.1);
+    border: 1px solid rgba(107, 203, 119, 0.2);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .watch-change-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .watch-ticker {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .watch-arrow {
+    font-size: 13px;
+    color: #6bcb77;
+    font-weight: 700;
+  }
+  .watch-reason {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.7;
+  }
+  .watch-nochange {
+    font-size: 13px;
+    color: #556677;
+    font-style: italic;
+  }
+
+  /* ── 용어 사전 ── */
+  .glossary-section {
+    background: linear-gradient(135deg, #1e2d3d, #1a2a3a);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(78, 205, 196, 0.15);
+  }
+  .glossary-section h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #4ecdc4;
+    margin-bottom: 6px;
+  }
+  .glossary-section .glossary-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+  }
+  .glossary-card {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    border-left: 3px solid #4ecdc4;
+  }
+  .glossary-card:last-child { margin-bottom: 0; }
+  .glossary-card .g-term {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .glossary-card .g-term-en {
+    font-size: 12px;
+    color: #4ecdc4;
+    margin-bottom: 10px;
+  }
+  .glossary-card .g-explain {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.9;
+  }
+  .glossary-card .g-explain strong { color: #e0e6ed; }
+  .glossary-card .g-example {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(78,205,196,0.06);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #8ab4b0;
+    line-height: 1.7;
+  }
+  .glossary-card .g-example strong { color: #4ecdc4; }
+
+  /* ── 전문가 레퍼런스 ── */
+  .expert-section {
+    background: linear-gradient(135deg, #1a1a2e, #2a1a1e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,159,67,0.15);
+  }
+  .expert-section h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #ff9f43;
+    margin-bottom: 6px;
+  }
+  .expert-section .expert-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+  }
+  .expert-card {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .expert-card:last-child { margin-bottom: 0; }
+  .expert-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .expert-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,159,67,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .expert-name {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .expert-title {
+    font-size: 11px;
+    color: #7a8ba3;
+    line-height: 1.4;
+  }
+  .expert-quote {
+    font-size: 14px;
+    color: #e0c8a0;
+    line-height: 1.9;
+    padding: 14px 18px;
+    background: rgba(255,159,67,0.06);
+    border-left: 3px solid #ff9f43;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+  .expert-context {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .expert-context strong { color: #e0e6ed; }
+  .expert-source {
+    font-size: 11px;
+    color: #556677;
+    margin-top: 8px;
+  }
+  .expert-sector-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+  .tag-ai { background: rgba(100,181,246,0.15); color: #64b5f6; }
+  .tag-bio { background: rgba(206,147,216,0.15); color: #ce93d8; }
+  .tag-space { background: rgba(129,199,132,0.15); color: #81c784; }
+  .tag-macro { background: rgba(255,215,61,0.15); color: #ffd93d; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #445566;
+    line-height: 1.6;
+  }
+  .footer a { color: #4ecdc4; text-decoration: none; }
+
+  /* ── Utility ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    margin: 8px 0;
+  }
+  .highlight { color: #4ecdc4; font-weight: 700; }
+  .danger { color: #ff6b6b; font-weight: 700; }
+  .warn { color: #ffd93d; font-weight: 700; }
+  .safe { color: #6bcb77; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+
+  <!-- ════════════ HEADER ════════════ -->
+  <div class="header">
+    <div class="header-icon">📡</div>
+    <h1>MK 시그널 레이더</h1>
+    <div class="date">2026년 8월 25일 (화) · W35</div>
+    <div class="subtitle">뉴스에 나오기 전, 업계 시그널을 먼저 잡는다</div>
+  </div>
+
+  <!-- 이번 주 한눈에 -->
+  <div style="background:rgba(78,205,196,0.06); border:1px solid rgba(78,205,196,0.18); border-radius:12px; padding:16px 18px; margin-bottom:24px; font-size:13px; color:#b8c9d9; line-height:1.8;">
+    <strong style="color:#4ecdc4;">📌 이번 주 핵심</strong> — 이번 주는 <strong style="color:#e0e6ed;">'AI 붐의 청구서가 부품값으로 도착한 주간'</strong>입니다.
+    그리고 우리는 지금 <strong style="color:#ffd93d;">1년 중 가장 위험한 3일</strong> 앞에 서 있습니다 —
+    수요일 엔비디아 실적, 금요일 워시 의장의 첫 잭슨홀 기조연설과 7월 PCE가 <strong style="color:#e0e6ed;">같은 날</strong> 나옵니다.<br><br>
+
+    ① <strong style="color:#64b5f6;">엔비디아가 고객사에 서버 가격 15% 인상을 통보했습니다.</strong>
+    블룸버그 보도 기준, 2027년 초 출하분부터 <strong style="color:#64b5f6;">Vera Rubin·Grace Blackwell 서버가 15% 이상(일부 추정 17%)</strong> 오릅니다.
+    이유가 중요합니다 — 수요가 아니라 <strong style="color:#ff6b6b;">메모리 원가</strong>입니다.
+    모건스탠리 추산으로 Vera Rubin 랙 원가에서 메모리가 차지하는 비중이 <strong style="color:#64b5f6;">5~10%에서 25~30%(약 $200만)</strong>로 뛰었습니다.
+    <strong style="color:#e0e6ed;">"완성품보다 부품이 먼저 돈을 번다"는 우리 40% 테제가, 이번엔 엔비디아의 원가표에서 확증됐습니다.</strong><br><br>
+
+    ② <strong style="color:#64b5f6;">휴머노이드에 드디어 '공개시장 가격표'가 생겼습니다.</strong>
+    8월 19일 중국 <strong style="color:#64b5f6;">유니트리(Unitree)가 상하이 STAR 마켓에 상장</strong>해 장중 +629%, 종가 <strong style="color:#64b5f6;">+460%</strong>로 마감했습니다.
+    공모로 약 <strong style="color:#64b5f6;">61억 위안($9억)</strong>을 조달했고 시가총액은 <strong style="color:#64b5f6;">약 $660억</strong>이 됐습니다.
+    지금까지 휴머노이드 순수 기업은 대부분 비상장이라 <strong style="color:#e0e6ed;">밸류에이션 기준점이 없었는데</strong>, 이제 생겼습니다.
+    같은 날 홍콩 상장 경쟁사 <strong style="color:#ff6b6b;">UBTech는 -10% 넘게 빠졌습니다</strong> — 섹터 자금이 늘어난 게 아니라 <strong style="color:#ffd93d;">자리를 바꿔 앉았다</strong>는 뜻입니다.<br><br>
+
+    ③ <strong style="color:#a78bfa;">양자에서는 처음으로 '내부자 데이터'가 경고를 냈습니다.</strong>
+    최근 3년 누적으로 <strong style="color:#ff6b6b;">IonQ 내부자 순매도 $4.572억 · D-Wave $3.313억 · Rigetti $0.74억, 합계 약 $8.63억</strong>인데
+    같은 기간 <strong style="color:#ff6b6b;">내부자 매수는 IonQ $332만, Rigetti $0, D-Wave $1,795</strong>가 전부입니다.
+    <strong style="color:#a78bfa;">보유 종목 IonQ는 8/24 -8.47%로 $41.06</strong>까지 밀렸습니다(8/14 $46.26 대비 약 -11%).
+    양자 3인방은 <strong style="color:#ff6b6b;">한 달 새 -30%</strong>입니다.<br><br>
+
+    ④ <strong style="color:#ce93d8;">바이오는 조용히 '승인의 달'을 통과 중입니다.</strong>
+    8월 19일 하루에 <strong style="color:#ce93d8;">GENGLYCOS(글리코겐축적병 1a형 유전자치료제, 8세 이상 최초)</strong>와
+    <strong style="color:#ce93d8;">Pasatru(진행성 골화성 섬유이형성증)</strong> 승인, 그리고 <strong style="color:#ce93d8;">최초의 로봇 채혈기기</strong> 허가가 함께 나왔습니다.
+    8월 한 달 PDUFA만 <strong style="color:#ce93d8;">12건(NDA 4·BLA 8)</strong>으로 올해 가장 붐비는 규제 창구입니다.<br><br>
+
+    ⑤ <strong style="color:#ff6b6b;">거시는 '전쟁 + 새 의장'이라는 낯선 조합입니다.</strong>
+    베선트 재무장관이 FT 기고에서 <strong style="color:#ff6b6b;">"동틀 녘에 경제적 D-데이가 시작된다"</strong>고 예고한 대로
+    8월 24일 대이란 <strong style="color:#ff6b6b;">'Operation Economic Outcast'</strong> 제재가 발동됐습니다. 그런데 <strong style="color:#ffd93d;">유가는 오히려 -2.5%</strong>로 빠졌습니다.
+    그 사이 10년물은 <strong style="color:#ffd93d;">4.704%</strong>, VIX는 <strong style="color:#ffd93d;">15.85</strong>로 올해 저점(8/17)에서 반등했고,
+    <strong style="color:#ff6b6b;">9월 '인상' 확률이 약 33%</strong>입니다.<br><br>
+
+    <span style="font-size:12px; color:#7a8ba3;">※ 테제 점수 비교는 직전 시그널 레이더 W34(8/18) 대비이며, 그 사이 W34 딥다이브(8/21) 내용은 본문에 반영했습니다.
+    주가·지수는 <strong>8월 24일(월) 미국 종가</strong> 기준입니다.</span>
+  </div>
+
+  <!-- ════════════ 시장 체온계 ════════════ -->
+  <div class="thermometer">
+    <h2>🌡️ 시장 체온계</h2>
+    <p style="font-size:14px; color:#b8c9d9; margin-bottom:20px; line-height:1.8;">
+      종목을 보기 전에 <strong style="color:#fff;">"지금 시장 전체의 체온이 몇 도인지"</strong>부터 봅니다.
+      이번 주 진단은 한 문장으로 <strong style="color:#ffd93d;">"시장이 3일 뒤에 답이 나올 세 개의 질문 앞에서 숨을 참고 있다"</strong>입니다.
+      8월 24일 <strong style="color:#fff;">나스닥 25,980(-0.76%) · S&amp;P500 7,653(-0.28%) · 다우 53,417(+0.26%)</strong> —
+      기술주만 빠지고 방어주가 오른 <strong style="color:#e0e6ed;">전형적인 '이벤트 앞 리스크 축소'</strong> 패턴입니다.
+    </p>
+
+    <!-- ① 공포 & 탐욕 지수 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ffd93d;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">① 공포 &amp; 탐욕 지수</div>
+          <div style="font-size:11px; color:#556677;">CNN · 8/24 기준</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#ffd93d;">55</div>
+          <div class="thermo-sub" style="color:#ffd93d;">탐욕 · 전일과 동일</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 투자자들이 지금 <strong style="color:#e0e6ed;">겁에 질려 있는지, 욕심에 눈이 먼 상태인지</strong>를 0~100 한 숫자로 보여줍니다.
+        주가 모멘텀·옵션 거래·안전자산 수요 등 7가지를 종합합니다.<br><br>
+        <strong style="color:#fff;">지금 상태:</strong> 8월 24일 <strong style="color:#ffd93d;">55(탐욕)</strong>, 전일 종가와 <strong style="color:#e0e6ed;">변동 없음</strong>입니다.
+        W34 딥다이브(8/21) 때도 55였습니다. <strong style="color:#e0e6ed;">사흘째 미동도 하지 않았다</strong>는 게 이번 주 가장 정확한 심리 묘사입니다.<br><br>
+        <strong style="color:#fff;">왜 중요하냐면:</strong> 지수가 안 움직이는 건 <strong style="color:#e0e6ed;">낙관과 비관이 균형을 이뤄서</strong>가 아니라,
+        <strong style="color:#ffd93d;">양쪽 다 "수요일 엔비디아 보고 결정하자"며 손을 놓고 있어서</strong>입니다.
+        이런 정지 상태는 이벤트 직후 <strong style="color:#ff6b6b;">한 방향으로 몰리는 폭이 커집니다</strong>.
+        55는 중립(50)보다 위, 즉 <strong style="color:#e0e6ed;">"좋게 나올 것"에 살짝 기울어 있는 상태</strong>라는 점도 기억해 두십시오.
+      </div>
+    </div>
+
+    <!-- ② VIX -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ffd93d;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">② 변동성 지수 (VIX)</div>
+          <div style="font-size:11px; color:#556677;">S&amp;P500 옵션에서 산출 · "공포 지수" · 8/24 기준</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#ffd93d;">15.85</div>
+          <div class="thermo-sub" style="color:#ffd93d;">반등 (전일 15.13)</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 앞으로 30일간 시장이 얼마나 출렁일지에 대한 <strong style="color:#e0e6ed;">투자자들의 베팅</strong>입니다.
+        보통 20 아래면 평온, 30 위면 공황입니다.<br><br>
+        <strong style="color:#fff;">궤적을 보십시오:</strong> 8/14 <strong>14.25</strong> → 8/17 <strong style="color:#6bcb77;">2026년 최저치</strong> → 8/21 <strong>14.89</strong> → 8/24 <strong style="color:#ffd93d;">15.85</strong>.
+        <strong style="color:#e0e6ed;">일주일 만에 바닥을 찍고 방향을 틀었습니다.</strong>
+        절대 수치는 여전히 낮지만, <strong style="color:#fff;">중요한 건 레벨이 아니라 방향</strong>입니다 —
+        보험료가 싸질 때가 아니라 <strong style="color:#ffd93d;">비싸지기 시작할 때</strong>가 시장이 뭔가를 눈치챈 시점입니다.<br><br>
+        <strong style="color:#fff;">MK에게 실전적으로:</strong> VIX 15.85는 S&amp;P500의 향후 30일 예상 변동폭이
+        <strong style="color:#e0e6ed;">연율 약 16%, 하루로 환산하면 ±1% 남짓</strong>이라는 뜻입니다.
+        그런데 엔비디아는 <strong style="color:#ff6b6b;">시가총액 $5.05조로 전 세계 최대 기업</strong>이고, S&amp;P500·나스닥 양쪽에서 단일 최대 비중입니다.
+        <strong style="color:#e0e6ed;">이 한 종목이 실적 후 크게 움직이면 지수 전체가 끌려갑니다.</strong>
+        <strong style="color:#fff;">즉, 지금 VIX는 엔비디아 리스크를 충분히 반영하지 않고 있습니다.</strong>
+        이번 주 신규 진입을 미루라는 신호가 여기서 나옵니다.
+      </div>
+    </div>
+
+    <!-- ③ 미국 10년물 금리 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ffd93d;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">③ 미국 10년물 국채 금리</div>
+          <div style="font-size:11px; color:#556677;">CNBC · 8/24 장중 기준</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#ffd93d;">4.704%</div>
+          <div class="thermo-sub" style="color:#6bcb77;">-3bp (8/22 4.734%)</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">이게 뭐냐면:</strong> 세상에서 가장 안전한 자산(미국 정부에 10년 빌려주기)의 이자율입니다.
+        <strong style="color:#e0e6ed;">이 숫자가 우리 5개 섹터의 할인율</strong>입니다 — 우리가 담는 회사들은 대부분
+        <strong style="color:#e0e6ed;">'지금은 적자, 몇 년 뒤 큰 이익'</strong> 구조라, 미래 이익을 현재 가치로 환산할 때 이 금리가 분모에 들어갑니다.<br><br>
+        <strong style="color:#fff;">궤적:</strong> 7/28 4.65% → 8/17 4.69% → 8/21 <strong>4.71%(20개월 고점 5bp 앞)</strong> → 8/22 <strong>4.734%</strong> → 8/24 <strong style="color:#6bcb77;">4.704%</strong>.
+        <strong style="color:#e0e6ed;">6주째 4.6~4.7%대에 고착</strong>돼 있고, 8/24의 소폭 하락은 경기 둔화 때문이 아니라
+        <strong style="color:#ffd93d;">"재무부가 일반계정(TGA) 자금으로 국채 바이백을 할 수 있다"는 CNBC 보도</strong> 때문이었습니다.
+        <strong style="color:#fff;">펀더멘털이 아니라 수급 뉴스로 내린 3bp는 되돌아갈 수 있는 3bp입니다.</strong><br><br>
+        <strong style="color:#fff;">가장 중요한 한 줄 —</strong> 시장은 <strong style="color:#ff6b6b;">9월 '인상' 확률을 약 33%(3분의 1)</strong>로 보고 있습니다.
+        여기에 <strong style="color:#ff6b6b;">금요일 워시 신임 의장의 첫 기조연설과 7월 PCE가 같은 날</strong> 나옵니다.
+        BofA 펀드매니저 서베이에서 <strong style="color:#ffd93d;">69%가 "중립적 톤"을 예상</strong>하는데,
+        <strong style="color:#e0e6ed;">시장이 한쪽으로 69% 쏠려 있다는 것 자체가 반대 방향 서프라이즈의 파괴력을 키웁니다.</strong>
+      </div>
+    </div>
+
+    <!-- ④ 달러 · 지정학 · 유가 -->
+    <div style="background:rgba(0,0,0,0.2); border-radius:10px; padding:18px 20px; margin-bottom:14px; border-left:3px solid #ff6b6b;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div>
+          <div class="thermo-label">④ 달러 · 지정학 · 유가</div>
+          <div style="font-size:11px; color:#556677;">DXY · WTI/브렌트 · 대이란 제재 (8/24)</div>
+        </div>
+        <div style="text-align:center;">
+          <div class="thermo-value" style="color:#ffd93d; font-size:22px;">98.99</div>
+          <div class="thermo-sub" style="color:#ffd93d;">DXY +0.19% · 유가 -2.5%</div>
+        </div>
+      </div>
+      <div style="font-size:14px; color:#b8c9d9; line-height:1.9;">
+        <strong style="color:#fff;">무슨 일이 있었나:</strong> 베선트 재무장관이 8/23 파이낸셜타임스 기고에서
+        <strong style="color:#ff6b6b;">"동틀 녘에 경제적 D-데이가 시작된다(at dawn begins an economic D-Day)"</strong>고 썼고,
+        8/24 실제로 <strong style="color:#ff6b6b;">'Operation Economic Outcast'</strong>라는 이름의 대이란 제재 패키지가 발동됐습니다.
+        미국 측 표현으로는 <strong style="color:#e0e6ed;">"역사상 최대 규모의 금융 공세"</strong>입니다.
+        이란은 <strong style="color:#ff6b6b;">호르무즈 해협에서의 선박 나포</strong>로 맞대응하겠다고 경고했습니다.<br><br>
+        <strong style="color:#fff;">그런데 유가가 빠졌습니다:</strong> WTI <strong style="color:#6bcb77;">$84.89(-2.5%)</strong>, 브렌트 <strong style="color:#6bcb77;">$92.06(-2.5%)</strong>.
+        <strong style="color:#e0e6ed;">"최대 제재인데 왜 유가가 빠지지?"</strong> — 이게 이번 주 가장 중요한 시장 독해입니다.
+        답은 <strong style="color:#ffd93d;">"제재 내용이 이미 예고된 수준이었고, 원유 공급 자체를 끊는 조치는 빠졌다"</strong>는 안도입니다.
+        <strong style="color:#fff;">시장은 헤드라인이 아니라 '예상 대비'로 움직입니다.</strong><br><br>
+        <strong style="color:#fff;">다만 이 숫자는 기억하십시오:</strong> 미국 전국 평균 휘발유가가 <strong style="color:#ff6b6b;">갤런당 $4.09</strong>,
+        <strong style="color:#ff6b6b;">개전 전 대비 약 +37.5%</strong>입니다. 유가 선물은 진정됐는데 <strong style="color:#e0e6ed;">소비자가 실제로 내는 가격은 안 내려왔습니다.</strong>
+        이게 금요일 PCE에 반영되면 <strong style="color:#ff6b6b;">"인플레는 안 잡혔다"</strong>는 결론이 나오고, 그 순간 10년물이 다시 4.75%를 시험합니다.
+        <strong style="color:#fff;">우리 포트폴리오 전체가 그 시나리오에 가장 취약합니다.</strong>
+      </div>
+    </div>
+
+    <div class="thermo-insight">
+      <strong>🧭 4개 지표 종합 —</strong> F&amp;G 55 정지 · VIX 저점에서 반등 · 10년물 4.7% 고착 · 제재에도 유가 하락.
+      네 지표가 공통으로 말하는 건 하나입니다 — <strong>"시장이 아직 판단을 안 내렸다."</strong><br><br>
+      이번 주는 <strong>포지션을 잡는 주가 아니라 포지션을 지키는 주</strong>입니다. 구체적으로:
+      <strong>① 8/26 엔비디아 · 8/28 워시+PCE 이전 신규 대형 진입 전면 보류</strong>,
+      <strong>② 보유 종목 중 '서명된 계약·승인된 제품'이 없는 것부터 비중 점검</strong>(→ 이번 주는 양자가 여기 걸립니다),
+      <strong>③ 현금 비중을 늘리지도, 줄이지도 않고 그대로</strong>.
+      3일 뒤면 훨씬 더 나은 정보를 가지고 같은 결정을 내릴 수 있습니다. <strong>기다리는 것도 포지션입니다.</strong>
+    </div>
+  </div>
+
+  <!-- ════════════ 피지컬 AI ════════════ -->
+  <div class="sector-card sector-ai">
+    <div class="sector-header">
+      <div class="sector-title">🤖 피지컬 AI</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 40%)</div>
+      <div class="thesis-text">
+        "2028년까지 휴머노이드 로봇 양산 시대가 열린다.
+        지금은 완성품 회사보다 <strong>부품·인프라 기업</strong>이 먼저 돈을 번다.
+        골드러시 때 곡괭이 판 사람이 부자가 된 것처럼."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">90</div>
+        <div class="thesis-score-detail">
+          W34 88점 → 90점 <span class="safe">(+2)</span><br>
+          <strong>엔비디아 원가표에서 테제가 확증됐습니다.</strong> 랙 원가 중 메모리 비중 5~10%→25~30%(모건스탠리) —
+          <strong>가격 결정권이 완성품에서 부품으로 넘어간 것을 숫자로 확인</strong>. 여기에 유니트리 상장으로 <strong>휴머노이드 밸류에이션 기준점</strong>까지 생겼습니다
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:90%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#64b5f6; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge pre-news">공급망 원가 (테제 직접 확증)</span>
+      <div class="signal-source">출처: 블룸버그 단독(2026.08.22~23) · 모건스탠리 원가 분석 · Tom's Hardware / Benzinga / Reuters 인용 (8/23~24)</div>
+      <div class="signal-title">엔비디아, 주요 고객사에 "2027년 초 출하분부터 AI 서버 15% 이상 인상" 통보</div>
+      <div class="signal-explain">
+        <strong>무슨 일이냐면:</strong> 엔비디아가 <strong>마이크로소프트·구글·오라클</strong>의 서버 제조사들에게
+        <strong>Vera Rubin·Grace Blackwell 탑재 서버 가격을 15% 이상 올리겠다</strong>고 개별 통보했습니다.
+        일부 보도는 최대 <strong>17%</strong>까지 봅니다. 적용 시점은 <strong>2027년 초 출하분</strong>부터이고,
+        인상폭은 <strong>칩 세대와 메모리 구성</strong>에 따라 달라집니다.<br><br>
+
+        <strong>이게 왜 '선행 시그널'이냐면:</strong> 이건 아직 <strong>공식 발표가 아닙니다</strong>.
+        엔비디아는 코멘트를 거부했고 로이터는 <strong>독립 검증에 실패</strong>했다고 명시했습니다.
+        즉 <strong>공시·실적발표에 나오기 전 단계의 공급망 정보</strong>입니다 — 우리가 찾는 정확히 그 종류의 정보입니다.
+        <strong>다만 미확인 보도라는 점은 분명히 짚어둡니다.</strong> 확정은 <strong>8/26 실적 콜</strong>에서 납니다.<br><br>
+
+        <strong>가장 중요한 대목 — 왜 올리는가:</strong> 수요가 아니라 <strong>원가</strong>입니다.
+        모건스탠리 추산으로 <strong>Vera Rubin 랙 원가에서 메모리가 차지하는 비중이 5~10%에서 25~30%(금액으로 약 $200만)</strong>로 뛰었습니다.
+        트렌드포스는 일반 DRAM 계약가가 <strong>분기 대비 +13~18%</strong>, 낸드 <strong>+10~15%</strong> 오를 것으로 보고 있고,
+        엔비디아용 <strong>HBM4는 GB당 $31~32로 HBM3e($17~18)의 거의 2배</strong>입니다.
+        커스텀 ASIC용은 <strong>GB당 $35~36</strong>까지 갑니다.<br><br>
+
+        <strong>MK에게 무슨 뜻이냐면 — 세 가지입니다.</strong><br>
+        <strong>① 우리 40% 테제가 가장 강력한 형태로 확증됐습니다.</strong>
+        "부품이 먼저 돈을 번다"를 지금까지는 <strong>로봇 감속기·액추에이터</strong>로 설명했는데,
+        이번엔 <strong>AI 인프라의 왕(엔비디아)조차 부품값 때문에 가격을 올려야 하는 상황</strong>이 됐습니다.
+        <strong>가치가 위(완성품)가 아니라 아래(부품)로 흐르고 있다는 가장 명확한 증거</strong>입니다.<br>
+        <strong>② 동시에 이건 경고이기도 합니다.</strong> 서버가 15% 비싸지면 <strong>같은 예산으로 살 수 있는 GPU가 줄어듭니다.</strong>
+        하이퍼스케일러의 capex 금액은 유지되는데 <strong>실제 확보 물량은 감소</strong> — 이게 2027년 AI 인프라 성장률을 <strong>숫자로는 유지, 실질로는 둔화</strong>시킵니다.<br>
+        <strong>③ 진짜 수혜자는 메모리입니다.</strong> 삼성전자는 3분기 HBM4 매출이 <strong>전분기 대비 3배 이상</strong>,
+        하반기 HBM4가 전체 HBM 매출의 <strong>60% 이상</strong>을 차지할 것으로 봤습니다.
+        <strong>삼성전자·SK하이닉스는 삼성증권에서 국내 주식으로 즉시 거래 가능</strong>합니다 —
+        미국 휴머노이드 부품사 대부분이 비상장인 것과 대조적인, MK에게 실행 가능한 유일한 '곡괭이'입니다.
+        <strong>다만 이번 주 매수 권고는 아닙니다. 금요일 딥다이브에서 밸류에이션을 검증한 뒤 판단합니다.</strong>
+      </div>
+    </div>
+
+    <div class="signal-block neutral">
+      <span class="signal-badge pre-news">공개시장 가격 발견 (신규)</span>
+      <div class="signal-source">출처: CNN Business · Fortune · NBC News · BNN Bloomberg (2026.08.18~19) · Omdia 출하량 데이터</div>
+      <div class="signal-title">유니트리(Unitree) 상하이 STAR 상장 — 종가 +460%, 시총 약 $660억. 휴머노이드 최초의 공개시장 밸류에이션</div>
+      <div class="signal-explain">
+        <strong>무슨 일이냐면:</strong> 8월 19일(수) 중국 항저우의 휴머노이드 제조사 <strong>유니트리</strong>가
+        상하이거래소 STAR 마켓(중국판 나스닥)에 상장했습니다. 장중 <strong>+629%</strong>까지 치솟았고 <strong>종가 +460%</strong>,
+        공모 조달액 <strong>약 61억 위안($9.04억)</strong>, 상장 후 기업가치 <strong>약 $660억</strong>입니다.
+        <strong>중국 본토에 상장한 최초의 휴머노이드 로봇 기업</strong>입니다.
+        상장 이틀 전(8/17)에는 <strong>2m 점프 · 초속 12.66m 주행</strong>이 가능하다는 신형 '슈퍼맨'을 공개했습니다.<br><br>
+
+        <strong>왜 중요하냐면 — 이게 '가격표'이기 때문입니다.</strong> 지금까지 휴머노이드 순수 기업은
+        <strong>Figure AI(2025년 9월 $390억 밸류), 유니트리, AGIBOT 모두 비상장</strong>이라
+        <strong>"이 산업이 얼마짜리인지" 시장가로 확인할 방법이 없었습니다.</strong>
+        이제 생겼습니다. 그리고 그 숫자가 <strong>$660억</strong>입니다.<br><br>
+
+        <strong>냉정하게 볼 대목 (여기가 핵심입니다):</strong>
+        Omdia 집계로 작년 전 세계 휴머노이드 출하량은 <strong>약 15,000대</strong>이고,
+        유니트리와 AGIBOT이 <strong>각각 5,000대 이상</strong>으로 미국 경쟁사들을 크게 앞섭니다.
+        즉 <strong>업계 1위가 연 5,000대를 파는 산업에 $660억이 붙었습니다.</strong>
+        <strong>대당 $1,300만의 가치를 미래 성장에 미리 지불한 셈</strong>입니다.
+        이건 산업의 승리이면서 동시에 <strong>거품 신호</strong>입니다.<br><br>
+
+        <strong>가장 실전적인 관찰 — 같은 날 UBTech가 -10% 넘게 빠졌습니다.</strong>
+        홍콩 상장 경쟁사인 UBTech는 유니트리 상장일에 <strong>급락</strong>했습니다.
+        <strong>섹터로 새 돈이 들어온 게 아니라, 기존 돈이 자리를 옮겨 앉은 것</strong>입니다.
+        이건 <strong>테마 초기가 아니라 중기</strong>에 나타나는 패턴입니다.<br><br>
+
+        <strong>MK의 행동:</strong> <strong>중국 A주는 삼성증권 일반 계좌에서 거래 불가</strong>이고(후강퉁·선강퉁 별도 신청 필요, 유니트리는 STAR 마켓이라 접근 더 제한적),
+        <strong>애초에 우리 기준(저평가 발굴)에 맞지 않습니다.</strong> <strong>매수 대상이 아닙니다.</strong>
+        대신 <strong>섹터 온도계</strong>로 씁니다 — 유니트리 주가가 상장 첫날 고점 대비 어디까지 되돌리는지가
+        <strong>휴머노이드 테마의 실제 체력을 보여주는 가장 정직한 지표</strong>가 됩니다. 매주 추적하겠습니다.
+        <strong>간접 노출은 KOID(휴머노이드 ETF)·KSTR(STAR 마켓 ETF)로 가능하나, 이 역시 이번 주 권고는 아닙니다.</strong>
+      </div>
+    </div>
+
+    <div class="signal-block bearish">
+      <span class="signal-badge confirmed">실적 확인 · 반대 증거</span>
+      <div class="signal-source">출처: 24/7 Wall St. (2026.08.18) · Symbotic FQ4 가이던스 · Serve Robotics 8/6 실적</div>
+      <div class="signal-title">"응용 단계는 아직 돈을 못 번다" — 심보틱 EPS 29% 미스, 서브로보틱스 연간 가이던스 $2,600만→$900~1,000만</div>
+      <div class="signal-explain">
+        <strong>균형을 위해 반드시 적습니다.</strong> 위의 두 시그널이 강세라고 해서 섹터 전체가 좋은 게 아닙니다.
+        <strong>로봇을 실제로 '쓰는' 쪽(응용·서비스)의 숫자는 계속 나빠지고 있습니다.</strong><br><br>
+
+        <strong>심보틱(SYM):</strong> 8월 중순 <strong>EPS 컨센서스 29% 미달</strong>로 하루 -5%.
+        FY26 4분기 가이던스는 매출 <strong>$7.60~7.80억</strong>, 조정 EBITDA <strong>$1.00~1.05억</strong>입니다.
+        매출은 크지만 <strong>수익성이 따라오지 않는 구조</strong>(W31 딥다이브에서 확인한 순이익률 1.3%)가 그대로입니다.<br><br>
+
+        <strong>서브로보틱스(SERV):</strong> 2026년 매출 가이던스를 <strong>$2,600만에서 $900~1,000만으로 삭감</strong>했습니다.
+        <strong>3분의 1 토막</strong>입니다. 우버이츠 물량 부진이 원인이고, 주가는 <strong>연초 대비 -56%</strong>입니다.
+        같은 기간 <strong>도어대시의 Serve 로봇 배송 채널은 분기 만에 약 +50% 성장</strong>했고 우버는 Serve 지분을 팔았습니다 —
+        <strong>같은 로봇인데 어느 플랫폼에 올라타느냐로 결과가 갈렸습니다.</strong><br><br>
+
+        <strong>이 두 건이 우리 테제에 주는 의미:</strong> <strong>테제를 훼손하지 않고 오히려 강화합니다.</strong>
+        "완성품·응용 회사는 아직 이르다, 부품·인프라가 먼저다" — 정확히 그 말입니다.
+        <strong>MK의 규율: 피지컬 AI 40% 안에서 응용·서비스 로봇 종목은 담지 않습니다.</strong>
+        곡괭이(부품·반도체·메모리·감속기)와 지도(엔비디아 플랫폼)만 봅니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>다가오는 확인 지점</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8/26 (수)</span>
+        <span class="catalyst-desc"><strong>엔비디아 FY27 2분기 실적</strong> — 이번 주 최대 이벤트. 확인할 것: ① <strong>서버 15% 인상 보도의 사실 여부와 마진 가이던스</strong>, ② <strong>메모리 원가 상승이 총이익률에 미친 영향</strong>, ③ <strong>로보틱스(Jetson Thor·Isaac GR00T) 매출의 별도 언급</strong>. 같은 날 세일즈포스·시놉시스·크라우드스트라이크도 발표</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8/27 (목)</span>
+        <span class="catalyst-desc"><strong>마벨(Marvell) 실적</strong> — 커스텀 ASIC 수요의 바로미터. 엔비디아 대안 칩 시장이 실제로 크는지 확인</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2026년 말</span>
+        <span class="catalyst-desc"><strong>엔비디아 Isaac GR00T 레퍼런스 휴머노이드, 유니트리를 통해 출시 예정</strong> — Unitree H2 Plus 섀시 + Sharpa Wave 촉각 5지 핸드 + Jetson AGX Thor T5000. 상장사 유니트리가 엔비디아 레퍼런스 기기의 제조를 맡는 구조라, 이 일정이 유니트리 주가의 다음 촉매입니다</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2027년 4월</span>
+        <span class="catalyst-desc"><strong>삼현 AXLON 액추에이터 라인 완공 목표</strong>(7/8 발표, 400억원 투자, 연 50만 대 규모) — 한국 액추에이터 밸류체인의 실물 검증 시점</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge high">높음</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도:</strong> 유니트리 +460% 상장이 전 세계 주요 매체 1면에 걸렸습니다.
+        <strong>휴머노이드는 이제 '아는 사람만 아는 테마'가 아닙니다.</strong>
+        이럴 때 우리가 할 일은 <strong>같은 테마 안에서 아직 안 알려진 층(부품·소재·장비)으로 내려가는 것</strong>입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 우주 ════════════ -->
+  <div class="sector-card sector-space">
+    <div class="sector-header">
+      <div class="sector-title">🚀 우주</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 30%)</div>
+      <div class="thesis-text">
+        "우주는 '탐사'에서 <strong>'국방 인프라'</strong>로 성격이 바뀌었다.
+        발사 비용이 떨어지면서 위성이 소모품이 됐고, 정부 예산이 민간 기업의 <strong>확정 매출</strong>로 흘러든다.
+        로켓보다 <strong>위성·데이터·부품</strong>이 먼저 이익을 낸다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">95</div>
+        <div class="thesis-score-detail">
+          W34 95점 → 95점 <span class="warn">(0)</span><br>
+          <strong>변동 없음이 정답인 주간.</strong> 새 대형 계약은 없었지만 <strong>동맹국 위성에 미 우주군 센서를 얹는 모델</strong>(일본 QZS-7)과
+          <strong>팰컨9 연 101회 발사</strong>라는 실행 데이터가 테제를 조용히 굳혔습니다. 95점은 사실상 상한선이라 더 올리지 않습니다
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:95%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#81c784; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge pre-news">동맹 아키텍처 (구조 변화)</span>
+      <div class="signal-source">출처: KeepTrack Space Brief (2026.08.15, 08.18) · MIT Lincoln Laboratory</div>
+      <div class="signal-title">일본 QZS-7 발사로 '미 우주군 센서 탑재 동맹국 위성망' 완성 — 미국이 남의 위성에 눈을 얹는 시대</div>
+      <div class="signal-explain">
+        <strong>무슨 일이냐면:</strong> 일본이 H3 로켓으로 <strong>준천정위성 7호(QZS-7)</strong>를 정지궤도에 올려
+        <strong>일본판 GPS 7기 체제를 완성</strong>했습니다. 여기서 중요한 건 일본의 GPS가 아니라,
+        이 위성에 <strong>MIT 링컨연구소가 만든 미 우주군 센서</strong>가 탑재됐다는 사실입니다.
+        <strong>일본 위성에 얹힌 두 번째 미 우주군 센서</strong>이고, 이로써 <strong>일본 호스팅 정지궤도 센서망이 완성</strong>됐습니다.<br><br>
+
+        <strong>왜 '선행 시그널'이냐면:</strong> 이건 계약 뉴스가 아니라 <strong>조달 구조의 변화</strong>입니다.
+        미국이 우주 감시 능력을 확보하는 방법이 <strong>"우리 위성을 직접 쏜다"에서 "동맹국 위성에 우리 센서를 얹는다"</strong>로 이동하고 있습니다.
+        <strong>이 방식은 예산이 훨씬 덜 들고 정치적으로도 빠릅니다.</strong><br><br>
+
+        <strong>MK에게 무슨 뜻이냐면:</strong> 수혜 구조가 바뀝니다.
+        <strong>① 발사체 회사</strong>보다 <strong>② 호스티드 페이로드(남의 위성에 얹는 센서·통신 모듈) 제조사</strong>와
+        <strong>③ 궤도 간 데이터 중계</strong> 쪽이 더 안정적인 매출을 갖게 됩니다.
+        우리 워치리스트에서 이 구조에 정확히 맞는 회사는 <strong>RKLB(위성 부품·광학·Flatellite)</strong>와
+        <strong>IonQ 자회사 Skyloom(광통신 단말, 현재 궤도상 84기 설치)</strong>입니다.
+        <strong>흥미롭게도 우리가 '양자'로 들고 있는 IonQ가 이 우주 구조의 수혜자이기도 합니다</strong> — 뒤의 양자 섹션에서 다시 다룹니다.<br><br>
+
+        <strong>같은 주 추가 확인:</strong> 미 공군연구소(AFRL)가 <strong>Moog에 멀티모드 추진 시스템</strong> 개발 계약을 줬습니다.
+        '기동하는 우주 작전(dynamic space operations)'용입니다 — <strong>위성이 궤도를 바꿔가며 회피·추적하는 시대</strong>를 전제한 예산입니다.
+        <strong>추진·연료·부품 밸류체인이 다음 사이클의 병목</strong>이 됩니다.
+      </div>
+    </div>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">실행 데이터 (누적)</span>
+      <div class="signal-source">출처: Spaceflight Now · KeepTrack (2026.08.22~25)</div>
+      <div class="signal-title">팰컨9, 8/22에 연 100회 발사 돌파 — 8/25 스타링크 10-49가 올해 101번째. 스타링크 궤도상 11,000기 초과</div>
+      <div class="signal-explain">
+        <strong>숫자만 보십시오:</strong> 팰컨9은 <strong>8월 22일 2026년 100번째 발사</strong>를 통과했고,
+        <strong>8월 25일 스타링크 10-49(위성 29기)</strong>가 올해 <strong>101번째</strong>입니다.
+        스타링크 군집은 이제 <strong>궤도상 11,000기 이상</strong>입니다.
+        8월 초에는 우주군이 <strong>팰컨9 18회 발사에 $16억</strong>의 태스크 오더 2건을 줬고,
+        전량 <strong>2027년 말까지 반덴버그</strong>에서 소화합니다.<br><br>
+
+        <strong>이게 왜 중요하냐면:</strong> 우리 테제의 전제는 <strong>"발사 비용이 떨어져서 위성이 소모품이 된다"</strong>입니다.
+        연 100회 이상의 발사 케이던스는 그 전제가 <strong>이론이 아니라 이미 작동 중인 현실</strong>임을 증명합니다.
+        <strong>발사가 싸고 흔해질수록, 돈은 발사체가 아니라 '무엇을 실어 올릴 것인가'로 이동합니다.</strong>
+        우리가 30% 비중 안에서 <strong>발사체 단일 베팅을 피하고 위성·부품·데이터를 섞는 이유</strong>가 이것입니다.<br><br>
+
+        <strong>지정학 각주:</strong> 8월 24일 중국의 <strong>창어 7호가 달 남극으로 출발</strong>했습니다.
+        달 남극 = 물(얼음) 자원 = 향후 우주 경제의 급유소입니다.
+        <strong>중국의 진척은 미국 우주 예산의 정치적 방어막</strong>이 됩니다 — 우리 섹터에는 구조적 순풍입니다.
+      </div>
+    </div>
+
+    <div class="signal-block bearish">
+      <span class="signal-badge confirmed">가격 조정 · 보유 종목</span>
+      <div class="signal-source">출처: 종가 데이터 (2026.08.24) · Rocket Lab IR</div>
+      <div class="signal-title">RKLB 8/24 -5.91%, $68.28 — 8/17 $82.19 대비 -17%. 계약은 그대로, 가격만 빠졌습니다</div>
+      <div class="signal-explain">
+        <strong>사실관계부터:</strong> RKLB는 <strong>8/24 종가 $68.28(-5.91%)</strong>, 시가총액 <strong>$408.6억</strong>입니다.
+        불과 일주일 전 <strong>8/17 $82.19</strong>였으니 <strong>약 -17%</strong>입니다. 52주 범위는 <strong>$37.57~$151.00</strong>.
+        TTM 매출 <strong>$7.69억(+52.5%)</strong>, 순손실 <strong>-$1.65억</strong> — <strong>PSR 약 53배</strong>입니다.<br><br>
+
+        <strong>회사에 나쁜 뉴스가 나왔나? 아닙니다.</strong> 계약은 그대로입니다 —
+        <strong>7월 말 $2.66억 미사일방어 계약</strong>, <strong>8/4 $3.97억 SB-AMTI(Flatellite 개발·발사·운용)</strong>,
+        <strong>8/13 우주 데이터 네트워크 $1,200만</strong>, 2분기 매출 <strong>$2.34억(+62%)</strong>, 백로그 <strong>$23.6억</strong>.
+        이번 하락은 <strong>고밸류 성장주 전반의 되돌림</strong>이고, 같은 날 나스닥 -0.76%보다 훨씬 큰 낙폭이었습니다.
+        <strong>PSR 53배짜리 주식은 시장이 흔들릴 때 가장 먼저 흔들립니다.</strong> 그게 전부입니다.<br><br>
+
+        <strong>바뀌지 않은 리스크 한 줄:</strong> <strong>$3.97억 계약의 발사체로 지정된 Neutron이 아직 한 번도 안 날았습니다.</strong>
+        경영진은 <strong>"올해 안 첫 발사"</strong>를 유지하지만 이미 여러 차례 지연됐고, 계약상 <strong>2028년 전 운용</strong> 시한이 걸려 있습니다.<br><br>
+
+        <strong>MK의 판단 — 여기서 사야 하나?</strong> <strong>아직 아닙니다.</strong> 이유는 세 가지입니다.
+        ① <strong>-17%는 PSR 53배를 44배로 만들 뿐, 저평가로 만들지 않습니다.</strong>
+        ② <strong>진짜 재평가 트리거는 Neutron 첫 비행</strong>이고 그건 아직 앞에 있습니다.
+        ③ <strong>이번 주는 8/26·8/28 이벤트 전 관망 구간</strong>입니다.
+        <strong>기다리는 대신 기준을 정해 두십시오</strong> — Neutron 발사일이 공식 확정되면 그때가 <strong>분할 진입 1차 시점</strong>입니다.
+        <strong>삼성증권 미국주식 일반 거래 가능.</strong>
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>다가오는 확인 지점</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2026 4Q</span>
+        <span class="catalyst-desc"><strong>Neutron 첫 비행</strong> — RKLB 재평가의 유일한 트리거. 성공 시 SB-AMTI $3.97억이 '수주'에서 '실행 가능'으로 바뀝니다</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2027 말</span>
+        <span class="catalyst-desc"><strong>우주군 $16억 팰컨9 18회 발사 완료 시한</strong> — 발사 케이던스가 정부 수요를 감당하는지의 실증</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2028</span>
+        <span class="catalyst-desc"><strong>골든돔 AMDT3 위성 36기 발사 준비 완료 목표</strong>(L3Harris 18기 최대 $9.55억 · Sierra Space 18기 최대 $7.98억, 총 $17.5억) — 우주 국방 예산의 규모를 보여주는 기준선</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge mid">중간</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도:</strong> SpaceX 상장 직후의 열기는 식었고, 이번 주 우주 뉴스는 대부분 <strong>업계 전문지에만</strong> 실렸습니다.
+        <strong>테제는 강한데 관심은 식은 상태</strong> — 우리 같은 사람에게는 가장 좋은 조합입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ SMR (소형 원자로) ════════════ -->
+  <div class="sector-card sector-smr">
+    <div class="sector-header">
+      <div class="sector-title">⚛️ SMR (소형 원자로)</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10%)</div>
+      <div class="thesis-text">
+        "AI 데이터센터가 전기를 감당 못 한다. 24시간 무탄소 전력은 원자력뿐이다.
+        다만 원자로 회사는 <strong>2030년 전에 돈을 못 번다</strong> —
+        지금 돈을 버는 건 <strong>연료(우라늄)와 기존 설비</strong>다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">86</div>
+        <div class="thesis-score-detail">
+          W34 85점 → 86점 <span class="safe">(+1)</span><br>
+          <strong>4개월 박스권이 위로 깨졌습니다.</strong> 우라늄 스팟 $86.5(8/14)→$88.29(8/21)→<strong>$88.87(8/23)</strong>.
+          스팟이 텀 가격($94)을 향해 올라가는 <strong>정상 수렴 방향</strong>입니다. 다만 <strong>연료 우위 · 원자로 회사 열위</strong> 구도는 그대로
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill high" style="width:86%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#ff9f43; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge pre-news">원자재 가격 (박스권 이탈)</span>
+      <div class="signal-source">출처: 우라늄 스팟 시세 (2026.08.23) · Cameco 시장 자료 · ANS Nuclear Newswire</div>
+      <div class="signal-title">우라늄 스팟 $88.87 — 4개월 $86대 박스권을 위로 이탈. 텀 가격 $94와의 갭이 좁혀지는 중</div>
+      <div class="signal-explain">
+        <strong>숫자의 궤적부터:</strong> 8/14 <strong>$86.48~86.50</strong> → 8/21 <strong>$88.29</strong> → 8/23 <strong>$88.87</strong>.
+        <strong>4개월 가까이 $86대에 눌려 있던 스팟이 열흘 만에 약 +2.8%</strong> 올라왔습니다.
+        같은 기간 장기계약(텀) 가격은 <strong>$94</strong> 수준이고, 1분기 말 기준 장기계약가는 <strong>$90</strong>이었습니다.<br><br>
+
+        <strong>왜 이게 선행 시그널이냐면 — 스팟과 텀의 관계를 이해하셔야 합니다.</strong><br>
+        <strong>텀 가격</strong>은 전력회사가 <strong>몇 년 뒤 인도받을 물량</strong>을 지금 계약하는 가격이고,
+        <strong>스팟</strong>은 <strong>지금 당장</strong> 사는 가격입니다.
+        정상적인 시장에서는 두 가격이 붙어 있습니다. 그런데 <strong>지난 몇 달간 텀이 스팟보다 $7~8 높은 기현상</strong>이 이어졌습니다.<br>
+        <strong>이게 뜻하는 것:</strong> <strong>"실수요자(전력회사)는 미래 물량이 부족할 것을 확신하고 비싸게 선점 중인데, 단기 트레이더는 아직 안 믿는다."</strong>
+        <strong>그리고 이번 주, 스팟이 텀을 따라 올라가기 시작했습니다.</strong>
+        <strong>실수요가 옳았다는 쪽으로 시장이 항복하는 초기 국면</strong>일 가능성이 있습니다.<br><br>
+
+        <strong>다만 냉정하게 — 2주 데이터로 4개월 박스권 이탈을 확정할 수 없습니다.</strong>
+        <strong>확인 기준을 정해 둡니다: 스팟이 2주 연속 $90 위에서 마감하면 그때 '이탈 확정'으로 보고 테제 점수를 올립니다.</strong>
+        그 전까지는 <strong>관찰</strong>입니다.
+      </div>
+    </div>
+
+    <div class="signal-block neutral">
+      <span class="signal-badge pre-news">수요 계약 (실물)</span>
+      <div class="signal-source">출처: Data Center Dynamics (2026.08) · Blue Energy / GE Vernova Hitachi 공동 발표</div>
+      <div class="signal-title">텍사스 빅토리아에 2.5GW '가스+SMR' 하이브리드 발전소 — 최대 1.5GW 데이터센터 전용</div>
+      <div class="signal-explain">
+        <strong>무슨 일이냐면:</strong> 미국 <strong>Blue Energy</strong>와 <strong>GE 베르노바 히타치 원자력(GVH)</strong>이
+        텍사스 빅토리아에 <strong>2.5GW급 가스+원자력 복합 발전소</strong>를 짓는 협약을 맺었습니다.
+        <strong>GE 베르노바 7HA.02 가스터빈 + GVH의 BWRX-300 SMR</strong> 조합이고,
+        인근 데이터센터에 <strong>최대 1.5GW</strong>를 공급합니다.<br><br>
+
+        <strong>여기서 놓치면 안 되는 디테일 — 왜 '가스+원자력'이냐:</strong>
+        SMR만으로는 <strong>2030년 전에 전기가 안 나옵니다.</strong> 그래서 <strong>가스로 먼저 켜고, SMR을 나중에 붙이는</strong> 구조입니다.
+        <strong>이게 SMR 산업의 현실을 가장 정직하게 보여주는 계약</strong>입니다 —
+        <strong>수요는 진짜인데, SMR은 아직 그 수요를 받을 준비가 안 됐습니다.</strong>
+        <strong>우리 테제의 후반부("원자로 회사는 2030년 전에 돈을 못 번다")가 다시 확인됐습니다.</strong><br><br>
+
+        <strong>맥락 숫자:</strong> 2026년 5월 기준 미국 하이퍼스케일러가 서명한 원자력 계약은 <strong>13건 · 총 9.8GW 초과</strong>입니다.
+        메타는 <strong>Vistra·TerraPower·Oklo</strong>와 계약해 오하이오 뉴올버니의 <strong>Prometheus 슈퍼클러스터</strong>에 전력을 댑니다.
+        <strong>계약은 쌓이는데 전기는 아직 안 나옵니다.</strong> 이 시차가 우리의 기회이자 함정입니다.<br><br>
+
+        <strong>MK의 배분 규율 (변경 없음):</strong> SMR 10% 안에서 <strong>연료·기존설비(CCJ·URA) 중심</strong>,
+        <strong>원자로 개발사(OKLO·SMR)는 소액 관찰</strong>. 이번 주도 그대로입니다.
+      </div>
+    </div>
+
+    <div class="signal-block neutral">
+      <span class="signal-badge confirmed">규제 지위 (정리)</span>
+      <div class="signal-source">출처: NuScale Power · 미 에너지부 · SMR NRC 승인 트래커 (2026)</div>
+      <div class="signal-title">규제 서열 정리 — NuScale만 완전 설계인증(77MWe US460, 2025년 5월), Oklo는 아직 '설계 기준' 단계</div>
+      <div class="signal-explain">
+        <strong>왜 이걸 정리하냐면:</strong> SMR 종목을 볼 때 <strong>"어디까지 승인받았나"가 사실상 유일한 객관 지표</strong>이기 때문입니다.
+        나머지는 다 계획입니다.<br><br>
+        <strong>NuScale:</strong> NRC Part 52 체계에서 <strong>서로 다른 두 개의 원자로 설계를 승인받은 유일한 회사</strong>이고,
+        2026년 5월 기준 <strong>완전한 설계인증(design certification)을 보유한 유일한 SMR</strong>입니다(77MWe US460, 2025년 5월 SDA).<br>
+        <strong>Oklo:</strong> Aurora 발전소 설계와 연계된 <strong>주요 설계 기준(Principal Design Criteria) 토픽 리포트 승인</strong>을 받았고,
+        상업 배치를 위한 <strong>결합운영허가(COLA)를 추진 중</strong>입니다. <strong>NuScale보다 몇 단계 뒤</strong>입니다.<br><br>
+        <strong>그런데 왜 우리는 NuScale을 안 사냐면:</strong> W32 딥다이브에서 확인한 대로
+        <strong>NuScale의 분기 매출이 $75,000</strong>였고 <strong>$7.5억 ATM 증자</strong>가 걸려 있습니다.
+        <strong>규제 우위와 사업 실체는 다른 문제</strong>입니다.
+        <strong>규제 서열 1위 = 투자 서열 1위가 아닙니다.</strong> 이 구분이 이 섹터에서 가장 많이들 틀리는 지점입니다.
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>다가오는 확인 지점</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2주 내</span>
+        <span class="catalyst-desc"><strong>우라늄 스팟 $90 돌파 여부</strong> — 2주 연속 $90 위 마감 시 박스권 이탈 확정, 테제 점수 상향</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">3Q 실적</span>
+        <span class="catalyst-desc"><strong>Cameco 실현 판매단가</strong> — $62.11에서 $85~89로 계단식 상승하는 구조라, 스팟이 횡보해도 실적은 개선됩니다. 이 계단이 실제로 올라오는지 확인</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2029~2030</span>
+        <span class="catalyst-desc"><strong>SMR 실제 전력 공급 개시 목표</strong> — 그 전까지 원자로 개발사 매출은 사실상 0. 이 사실을 잊는 순간 손실이 납니다</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge mid">중간</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도:</strong> "AI 전력난" 서사는 널리 퍼졌지만 <strong>우라늄 가격 자체를 보는 사람은 적습니다.</strong>
+        스팟 $88.87이라는 숫자는 아직 뉴스가 아닙니다 — <strong>선행 지표로서 유효한 상태</strong>입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 제약바이오 ════════════ -->
+  <div class="sector-card sector-bio">
+    <div class="sector-header">
+      <div class="sector-title">💊 제약바이오</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10%)</div>
+      <div class="thesis-text">
+        "AI가 신약 개발 기간을 절반으로 줄인다. 다만 <strong>플랫폼을 파는 회사</strong>보다
+        <strong>승인을 실제로 받아내는 회사</strong>가 먼저 돈을 번다.
+        희귀질환·유전자치료는 <strong>규제 우대(가속승인·바우처)</strong>가 붙어 시간이 더 짧다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">80</div>
+        <div class="thesis-score-detail">
+          W34 79점 → 80점 <span class="safe">(+1)</span><br>
+          <strong>8/19 하루에 승인 2건 + 최초 로봇 채혈기기 허가.</strong> 희귀질환·유전자치료 테제는 확증.
+          다만 <strong>'AI 발굴 신약의 FDA 완전승인은 여전히 0건'</strong>이라는 반대 사실이 상향폭을 1점으로 묶었습니다
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill mid" style="width:80%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#ce93d8; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bullish">
+      <span class="signal-badge confirmed">규제 승인 (확정)</span>
+      <div class="signal-source">출처: FDA 승인서한(2026.08.19) · BioPharma Dive · FDA 보도자료</div>
+      <div class="signal-title">8월 19일 하루에 세 건 — GENGLYCOS(유전자치료제) 승인, Pasatru(FOP) 승인, 최초의 로봇 채혈기기 허가</div>
+      <div class="signal-explain">
+        <strong>세 건을 하나씩:</strong><br><br>
+        <strong>① GENGLYCOS</strong> — <strong>글리코겐축적병 1a형(GSD Ia)</strong>에 대한 <strong>8세 이상 최초의 치료제</strong>이자
+        Ultragenyx의 <strong>첫 유전자치료제 승인</strong>입니다. 이 회사는 과거 여러 차례 규제 좌절을 겪었던 곳이라,
+        <strong>"희귀질환 유전자치료가 결국 승인선을 넘는다"</strong>는 우리 테제 후반부의 실증 사례입니다.<br><br>
+        <strong>② Pasatru(garetosmab-grts)</strong> — <strong>진행성 골화성 섬유이형성증(FOP)</strong>,
+        근육이 뼈로 변하는 초희귀질환에 대한 승인입니다.<br><br>
+        <strong>③ 최초의 로봇 채혈기기 허가</strong> — 같은 날 FDA가 <strong>세계 최초의 로봇 채혈 장치</strong>를 허가했습니다.
+        <strong>이건 바이오 뉴스이면서 동시에 피지컬 AI 뉴스입니다.</strong>
+        <strong>규제 당국이 '로봇이 사람 몸에 바늘을 꽂는 것'을 허가했다</strong>는 건,
+        의료 현장의 물리적 자동화에 대한 <strong>규제 문턱이 실제로 낮아졌다</strong>는 뜻입니다.
+        <strong>우리 5개 섹터 중 두 개가 교차하는 지점</strong>이라 별도로 추적하겠습니다.<br><br>
+
+        <strong>규모 감각:</strong> 8월 한 달 공표된 <strong>PDUFA 결정만 12건(NDA 4건 · BLA 8건)</strong>이고,
+        <strong>8월 초~9월 말이 2026년 가장 붐비는 규제 창구</strong>입니다 —
+        종양·혈액·희귀 신경질환·유전자치료·진단영상이 몰려 있습니다.
+        <strong>즉 이 섹터는 앞으로 5주간 거의 매주 이벤트가 있습니다.</strong>
+      </div>
+    </div>
+
+    <div class="signal-block bearish">
+      <span class="signal-badge confirmed">반대 증거 (테제 절반 미확증)</span>
+      <div class="signal-source">출처: Clinical Trial Vanguard (2026.08) · FDA/EMA 공동 원칙(2026.01.14)</div>
+      <div class="signal-title">"AI가 발굴한 신약 중 FDA 완전승인을 받은 것은 아직 0건" — 3년 연속 예상 시점이 밀리는 중</div>
+      <div class="signal-explain">
+        <strong>이 사실을 반드시 적어야 합니다.</strong> 2026년 8월 현재
+        <strong>AI로 발굴된 신약 가운데 FDA 완전승인을 보유한 것은 단 하나도 없습니다.</strong>
+        첫 승인 예상 시점은 <strong>2026년 또는 2027년</strong>으로 남아 있는데,
+        <strong>이 예상 시점이 3년 연속 조용히 뒤로 밀려왔습니다.</strong>
+        업계에 투입된 자금은 <strong>약 $89억</strong>입니다.<br><br>
+
+        <strong>이게 우리 10% 배분에 주는 의미:</strong> 우리 테제는 두 부분입니다 —
+        <strong>(A) AI가 개발 기간을 줄인다</strong>, <strong>(B) 승인을 받아내는 회사가 먼저 번다</strong>.
+        <strong>(B)는 이번 주 확증됐고, (A)는 3년째 미확증입니다.</strong><br>
+        <strong>따라서 배분 규율:</strong> 바이오 10% 안에서
+        <strong>'AI 신약 플랫폼 회사'(RXRX·SDGR·ABSI 등) 비중을 늘리지 않습니다.</strong>
+        이 종목들은 <strong>서사로 오르고 서사로 빠집니다.</strong>
+        대신 <strong>PDUFA 날짜가 확정된 희귀질환·유전자치료 회사</strong>를 봅니다 —
+        <strong>날짜가 있는 것은 검증 가능하고, 날짜가 없는 것은 검증 불가능합니다.</strong><br><br>
+
+        <strong>공정하게 덧붙이면:</strong> 진척이 없는 건 아닙니다.
+        인실리코 메디슨은 특발성 폐섬유증 신규 표적을 찾아 <strong>18개월 · $15만</strong>에 전임상까지 갔습니다(통상 4~6년 · 수천만 달러).
+        리커전은 <strong>가족성 선종성 용종증 2상 유효성 데이터</strong>와 난소암 1상 반응을 내고 있고,
+        AI 설계 PI3Kα 억제제 <strong>REC-7735</strong>가 IND 승인을 받아 <strong>2026년 하반기 1/2상</strong> 진입 예정입니다.
+        <strong>파이프라인은 실재합니다. 다만 '승인'이라는 결승선을 아직 아무도 안 넘었습니다.</strong>
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>다가오는 확인 지점</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">9/19</span>
+        <span class="catalyst-desc"><strong>UX111(rebisufligene etisparvovec) PDUFA</strong> — 산필리포 증후군 A형 AAV9 유전자치료제. 과거 한 차례 거절 후 재제출된 건이라, <strong>승인 시 '재도전 성공' 사례</strong>로 섹터 전체 밸류에이션에 영향</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">9~10월</span>
+        <span class="catalyst-desc"><strong>GTX-102(apazunersen) 엔젤만증후군 데이터</strong> — 희귀 신경질환 안티센스 치료제</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">2026 하반기</span>
+        <span class="catalyst-desc"><strong>리커전 REC-7735 1/2상 개시</strong> · <strong>Isomorphic Labs 첫 AI 설계 후보물질 1상 진입</strong>(하사비스 연내 공언) — (A) 테제의 첫 검증 기회</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">8월 말~9월 말</span>
+        <span class="catalyst-desc"><strong>2026년 최대 규제 러시 구간</strong> — 종양·혈액·희귀신경·유전자치료·진단영상 목표 결정일 집중</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge low">낮음</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도:</strong> 8/19의 승인 세 건은 <strong>일반 투자자 레이더에 거의 안 잡혔습니다.</strong>
+        엔비디아·잭슨홀에 시선이 쏠린 주간이라 더 그렇습니다.
+        <strong>관심이 낮은데 이벤트 밀도는 가장 높은 섹터</strong> — 금요일 딥다이브의 우선 후보입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 양자컴퓨팅 ════════════ -->
+  <div class="sector-card sector-quantum">
+    <div class="sector-header">
+      <div class="sector-title">🔮 양자컴퓨팅</div>
+    </div>
+
+    <div class="thesis-box">
+      <div class="thesis-label">우리의 투자 테제 (비중 10% · 보유 종목 있음)</div>
+      <div class="thesis-text">
+        "양자는 2030년대 기술이지만, <strong>정부·방산 계약</strong>이 그 전에 매출을 만든다.
+        상업화보다 <strong>수주잔고(RPO)</strong>를 본다. 비중 10% 상한은 어떤 이유로도 넘지 않는다."
+      </div>
+      <div class="thesis-score-row">
+        <div class="thesis-score">69</div>
+        <div class="thesis-score-detail">
+          W34 73점 → 69점 <span class="danger">(-4)</span><br>
+          <strong>테제가 깨진 게 아니라 가격 전제가 깨졌습니다.</strong> 3년 누적 내부자 순매도 <strong>$8.63억 vs 매수 사실상 0</strong>,
+          IonQ PSR 59~66배. <strong>"저평가 발굴"이라는 우리 기준에 이 섹터는 더 이상 맞지 않습니다</strong>
+        </div>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill mid" style="width:69%;"></div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px; font-weight:700; color:#a78bfa; margin-bottom:14px;">
+      이번 주 포착한 선행 시그널
+    </h3>
+
+    <div class="signal-block bearish">
+      <span class="signal-badge pre-news">내부자 거래 (SEC Form 4 누적)</span>
+      <div class="signal-source">출처: The Motley Fool 집계(2026.08.24) · SEC Form 4 3년 누적 기준</div>
+      <div class="signal-title">3년 누적 내부자 순매도 $8.63억 — 같은 기간 내부자 매수는 IonQ $332만, Rigetti $0, D-Wave $1,795</div>
+      <div class="signal-explain">
+        <strong>숫자를 그대로 놓습니다:</strong><br>
+        · <strong>IonQ</strong> — 순매도 <strong>$4.572억</strong> / 매수 <strong>$332만</strong>(대부분 사외이사 매수)<br>
+        · <strong>D-Wave</strong> — 순매도 <strong>$3.313억</strong> / 매수 <strong>$1,795</strong><br>
+        · <strong>Rigetti</strong> — 순매도 <strong>$0.74억</strong> / 매수 <strong>$0</strong><br>
+        · <strong>합계 순매도 약 $8.63억</strong><br><br>
+
+        <strong>이걸 어떻게 읽어야 하는가 — 먼저 공정하게:</strong>
+        내부자 매도에는 <strong>정당한 이유가 많습니다.</strong> 세금 납부, 스톡옵션 만기, 자산 분산, 사전 약정 매도계획(10b5-1) 등.
+        <strong>매도 자체는 신호가 약합니다.</strong> 그리고 <strong>이건 이번 주에 새로 생긴 사건이 아니라 3년 누적치</strong>입니다 —
+        <strong>새 정보가 아니라, 시장이 갑자기 주목하기 시작한 오래된 정보</strong>입니다. 그 점을 분명히 해둡니다.<br><br>
+
+        <strong>그런데 매수가 0인 것은 다릅니다.</strong>
+        <strong>주식을 살 이유는 하나뿐입니다 — 앞으로 오를 거라고 믿는 것.</strong>
+        3년간 세 회사 통틀어 실질적인 내부자 매수가 <strong>IonQ 사외이사 몇 건($332만)</strong>이 전부라는 건,
+        <strong>회사를 가장 잘 아는 사람들이 현재 가격에서 자기 돈을 걸지 않았다</strong>는 뜻입니다.
+        <strong>매도는 노이즈지만, 매수의 부재는 신호입니다.</strong><br><br>
+
+        <strong>여기에 밸류에이션을 겹치면:</strong>
+        PSR이 <strong>IonQ 59배 · Rigetti 398배 · D-Wave 542배</strong>입니다.
+        (참고로 IonQ는 8/24 종가 기준으로 계산하면 시총 $163.1억 / TTM 매출 $2.465억 = <strong>약 66배</strong>입니다.)
+        해당 분석의 지적은 <strong>"게임체인저 기술의 최전선에 있던 어떤 회사도 PSR 30배를 장기간 유지한 적이 없다"</strong>는 것입니다.<br><br>
+
+        <strong>MK에게 무슨 뜻이냐면:</strong> <strong>양자 테제(정부·방산 계약이 상업화보다 먼저 매출을 만든다)는 그대로 유효합니다.</strong>
+        IonQ의 RPO $4.85억, 매출 +287%는 여전히 사실입니다.
+        <strong>깨진 것은 테제가 아니라 "이 가격에 사도 되는가"라는 전제</strong>입니다.
+        그래서 점수를 <strong>-4</strong> 내렸습니다. <strong>매도 신호가 아니라, 추가 매수 금지를 넘어 '이익 실현 구간 설정'으로 한 단계 올린다는 뜻</strong>입니다.
+        구체적 실행은 아래 워치리스트에 적었습니다.
+      </div>
+    </div>
+
+    <div class="signal-block bearish">
+      <span class="signal-badge confirmed">가격 · 섹터 로테이션</span>
+      <div class="signal-source">출처: 종가 데이터 및 24/7 Wall St. (2026.08.18~24) · Foreign Policy Journal(8/21)</div>
+      <div class="signal-title">8/24 IonQ -8.47%($41.06) · Rigetti -8.10% · D-Wave -6.97% — 한 달 새 -30%, 개별 악재는 없음</div>
+      <div class="signal-explain">
+        <strong>사실관계:</strong> 8월 24일 <strong>IonQ -8.47%로 $41.06</strong>(장중 기준 -7.36% 보도도 있음),
+        Rigetti <strong>-8.10%</strong>, D-Wave <strong>-6.97%</strong>. 8/18에도 나란히 -5~6%였고, 8/20에도 같은 패턴이었습니다.
+        <strong>양자 3인방은 한 달 새 약 -30%</strong>입니다.
+        IonQ는 <strong>8/14 $46.26 → 8/24 $41.06으로 약 -11%</strong>, 52주 범위 <strong>$25.89~$84.64</strong>.<br><br>
+
+        <strong>왜 빠졌나 — 여기가 중요합니다.</strong>
+        <strong>개별 회사의 악재는 없었습니다.</strong> 실적 수정도, 가이던스 하향도, 애널리스트 강등도, 계약 취소도 없었습니다.
+        네 회사 모두 이달 초 2분기 실적을 이미 발표했고, 그 이후로는 <strong>순수하게 거시 신호에만 반응</strong>하고 있습니다.
+        원인은 <strong>장기금리 상승에 따른 투기적 기술주 이탈(로테이션)</strong>입니다.<br><br>
+
+        <strong>이게 무섭다고 말하는 이유:</strong> <strong>회사가 잘못해서 빠지는 건 고칠 수 있지만, 카테고리째로 재평가되는 건 개별 회사가 못 고칩니다.</strong>
+        <strong>"실적이 좋으면 결국 오른다"는 논리는 카테고리 디레이팅 구간에서는 통하지 않습니다.</strong>
+        IonQ는 매출 +287%를 냈는데도 그 이후로 계속 빠지고 있습니다 — <strong>이미 답이 나와 있습니다.</strong><br><br>
+
+        <strong>반대 방향의 사실도 적습니다 (균형):</strong>
+        IonQ에는 이번 분기 <strong>모건스탠리 지분 5.6% 공시</strong>, <strong>DARPA 원자시계 생산 $2,800만 계약 연장</strong>,
+        자회사 <strong>Skyloom의 궤도상 광통신 단말 84기 설치</strong>, <strong>CMC Microsystems와 캐나다 클라우드 양자 접근 확대</strong> 같은
+        <strong>실질적 진척</strong>이 있었습니다. 애널리스트 12개월 목표가 평균은 <strong>$67.68(현재가 대비 +64.8%)</strong>, 11명이 매수 의견입니다.
+        <strong>회사는 나쁘지 않습니다. 가격이 앞서 있는 것입니다.</strong>
+      </div>
+    </div>
+
+    <div class="catalyst-section">
+      <h3>다가오는 확인 지점</h3>
+      <div class="catalyst-item">
+        <span class="catalyst-date">3Q 실적</span>
+        <span class="catalyst-desc"><strong>IonQ 현금 소진 속도</strong> — SkyWater 팹 인수(7/31 완료)로 고정비 구조가 바뀌었습니다. TTM 순손실 <strong>-$13.6억</strong>의 내역과 현금 런웨이가 이번 사이클 최대 확인 항목</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">상시</span>
+        <span class="catalyst-desc"><strong>Quantinuum S-1 제출 여부</strong> — 이온트랩 직접 경쟁사. 시타델이 2분기에 신규 편입했습니다. 상장 시 IonQ의 밸류에이션 기준점이 재설정됩니다</span>
+      </div>
+      <div class="catalyst-item">
+        <span class="catalyst-date">상시</span>
+        <span class="catalyst-desc"><strong>IonQ 내부자 Form 4</strong> — 이번 하락 구간에서 <strong>내부자가 처음으로 '매수'로 돌아서는지</strong>. 그 한 건이 나오면 위의 우려 대부분이 해소됩니다</span>
+      </div>
+    </div>
+
+    <div class="sentiment-row">
+      <div class="sentiment-gauge mid">중간 (하락 중)</div>
+      <div class="sentiment-label">
+        <strong>대중 관심도:</strong> 7~8월의 열광이 빠르게 식는 중입니다.
+        <strong>관심이 식는 것 자체는 나쁘지 않습니다</strong> — 다만 <strong>밸류에이션이 관심보다 훨씬 느리게 내려온다</strong>는 게 문제입니다.
+        PSR 59배는 관심이 다 식은 뒤에야 정상화됩니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ 워치리스트 ════════════ -->
+  <div class="watchlist">
+    <h2>📌 워치리스트 · 보유 종목 상태</h2>
+    <div class="watchlist-subtitle">이번 주 움직임이 있는 종목만 표시합니다 · 주가는 2026.08.24 미국 종가</div>
+
+    <div class="watch-change" style="border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">IONQ (IonQ)</span>
+        <span class="watch-arrow" style="color:#ff6b6b;">🟣 보유 중 (약 15주차) · 8/24 종가 $41.06 (-8.47%)</span>
+      </div>
+      <div class="watch-reason">
+        <strong>결론부터: 보유 유지하되, 이번 주부터 '이익 실현 규칙'을 문서로 정합니다. 추가 매수는 여전히 금지입니다.</strong><br><br>
+
+        <strong>지금 위치:</strong> 7월 말 $32 저점 → 8/14 $46.26 → <strong>8/24 $41.06</strong>.
+        시총 <strong>$163.1억</strong>, TTM 매출 <strong>$2.465억(+370.6%)</strong>, TTM 순손실 <strong>-$13.6억</strong>, 발행주식 <strong>3.973억 주</strong>.
+        <strong>PSR 약 66배</strong>입니다.<br><br>
+
+        <strong>바뀐 것 / 안 바뀐 것을 나눠 보십시오.</strong><br>
+        <strong>안 바뀐 것(좋은 쪽):</strong> 2분기 매출 <strong>$80.05M(+287%)</strong>, FY26 가이던스 <strong>$2.8~2.9억</strong> 상향,
+        <strong>RPO $4.85억(4배)</strong>, DARPA 원자시계 <strong>$2,800만</strong> 연장, 모건스탠리 <strong>5.6% 지분</strong>,
+        Skyloom 광통신 단말 <strong>궤도상 84기</strong>. <strong>사업은 계획대로 갑니다.</strong><br>
+        <strong>바뀐 것(나쁜 쪽):</strong> ① <strong>3년 누적 내부자 순매도 $4.572억 vs 매수 $332만</strong>이 시장의 주목을 받기 시작했고,
+        ② <strong>카테고리 전체가 금리 때문에 디레이팅</strong> 중이며, ③ <strong>PSR 66배는 실적으로 방어되지 않습니다.</strong><br><br>
+
+        <strong>MK를 위한 실행 규칙 (이번 주 신설):</strong><br>
+        <strong>① 추가 매수 금지</strong> — 지난주와 동일, 이유만 바뀌었습니다(지난주는 "너무 올라서", 이번 주는 "카테고리가 재평가 중이라").<br>
+        <strong>② 손절선을 정하십시오.</strong> 매입 단가를 제가 모르므로 금액이 아니라 <strong>기준</strong>으로 드립니다 —
+        <strong>52주 저점 $25.89를 훼손하거나, 3분기 실적에서 현금 런웨이가 12개월 미만으로 확인되면 전량 정리</strong>입니다.<br>
+        <strong>③ 이익 실현 규칙:</strong> <strong>$55 이상 회복 시 보유분의 1/3 매도</strong>를 미리 정해 두십시오.
+        7~8월에 $46까지 갔다가 $41로 돌아온 걸 이미 한 번 겪었습니다. <strong>규칙 없이 들고 있으면 같은 일이 반복됩니다.</strong><br>
+        <strong>④ 양자 비중 10% 상한 고수</strong> — 빠졌다고 물타기 하지 않습니다. <strong>이게 이번 주 가장 중요한 규율입니다.</strong><br>
+        <strong>⑤ 감시 항목:</strong> 내부자 Form 4에서 <strong>'매수'가 처음 찍히는 순간</strong> · <strong>Quantinuum S-1</strong> · <strong>3분기 현금 소진</strong>.<br>
+        <strong>⑥ 삼성증권 미국주식 일반 거래 가능</strong>(NYSE 상장).
+      </div>
+    </div>
+
+    <div class="watch-change" style="border-color: rgba(100,181,246,0.3); background: rgba(100,181,246,0.08);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">NVDA (NVIDIA)</span>
+        <span class="watch-arrow" style="color:#64b5f6;">🔵 8/26 실적 D-1 · $208.48 (-2.91%) · 시총 $5.05조</span>
+      </div>
+      <div class="watch-reason">
+        <strong>8/24 종가 $208.48(-2.91%)</strong>, 실적 발표를 앞두고 <strong>기관들이 리스크를 줄이는 전형적 흐름</strong>입니다.
+        TTM 매출 <strong>$2,534.9억(+70.7%)</strong>, 순이익 <strong>$1,596.1억(+107.9%)</strong>,
+        <strong>PER 31.9배 · 선행 PER 20.8배</strong>. <strong>14분기 연속 컨센서스 상회</strong> 중입니다.<br><br>
+
+        <strong>선행 PER 20.8배 — 이 숫자를 잠깐 보십시오.</strong> 시장 전체(S&amp;P500)와 크게 다르지 않은 수준입니다.
+        <strong>"엔비디아는 비싸다"는 통념과 달리, 이익 기준으로는 이미 비싸지 않습니다.</strong>
+        문제는 <strong>그 이익 전망이 유지되느냐</strong>이고, 수요일에 그 답이 나옵니다.<br><br>
+
+        <strong>수요일에 볼 세 가지 (우선순위 순):</strong><br>
+        <strong>① 총이익률과 메모리 원가.</strong> 서버 15% 인상 보도가 사실이라면 <strong>엔비디아는 원가 상승을 고객에게 전가할 힘이 있다</strong>는 뜻이고,
+        이건 강력한 강세 신호입니다. 반대로 <strong>마진 가이던스가 내려가면</strong> "전가 못 한다"는 뜻이라 <strong>AI 인프라 전체의 수익성 서사가 흔들립니다.</strong>
+        <strong>이번 실적의 진짜 승부처는 매출이 아니라 마진입니다.</strong><br>
+        <strong>② OpenAI 파이낸싱 보증의 회계 처리와 매출채권 증가 속도</strong> — 7월 말 제기된 '순환 파이낸싱' 의심을 숫자로 반박할 유일한 자리입니다. <strong>아직 답이 안 나왔습니다.</strong><br>
+        <strong>③ 로보틱스(Jetson Thor·Isaac GR00T) 매출의 별도 언급</strong> — 우리 40% 테제가 엔비디아 손익계산서에 나타나는 첫 지점입니다.
+        연말 유니트리를 통한 <strong>GR00T 레퍼런스 휴머노이드 출시</strong>가 예정돼 있어, 이번 콜에서 언급 여부가 중요합니다.<br><br>
+
+        <strong>전략:</strong> <strong>보유 중이면 유지, 신규 진입은 실적 이후.</strong>
+        VIX 15.85는 엔비디아발 변동성을 충분히 반영하지 않은 수준이라, <strong>실망 시 낙폭이 평소보다 큽니다.</strong>
+        <strong>삼성증권 미국주식 일반 거래 가능.</strong>
+      </div>
+    </div>
+
+    <div class="watch-change" style="border-color: rgba(129,199,132,0.3); background: rgba(129,199,132,0.08);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">RKLB (Rocket Lab)</span>
+        <span class="watch-arrow" style="color:#81c784;">🟢 관찰 유지 — $68.28 (-5.91%) · 일주일 만에 -17%</span>
+      </div>
+      <div class="watch-reason">
+        <strong>8/17 $82.19 → 8/24 $68.28</strong>. 회사 악재는 없고 <strong>고밸류 성장주 되돌림</strong>입니다.
+        계약(<strong>$2.66억 + $3.97억 + $1,200만</strong>)과 백로그 <strong>$23.6억</strong>은 그대로,
+        2분기 매출 <strong>$2.34억(+62%)</strong>도 그대로입니다. <strong>PSR 약 53배 → 약 44배</strong>로 내려왔을 뿐입니다.<br><br>
+        <strong>지금 사면 안 되는 이유:</strong> ① 44배도 싸지 않습니다.
+        ② <strong>Neutron이 아직 안 날았습니다</strong> — $3.97억 계약의 지정 발사체이고, 계약상 2028년 전 운용 시한이 있습니다.
+        ③ <strong>$30억 ATM 증자에 따른 희석</strong>이 미해결 항목입니다.<br>
+        <strong>진입 기준(변경 없음):</strong> <strong>Neutron 첫 발사일이 공식 확정되는 시점</strong>이 분할 진입 1차입니다.
+        성공이든 지연이든 <strong>어느 쪽으로도 지금보다 정보가 많은 가격</strong>이 나옵니다. <strong>삼성증권 미국주식 일반 거래 가능.</strong>
+      </div>
+    </div>
+
+    <div class="watch-change" style="border-color: rgba(255,159,67,0.25); background: rgba(255,159,67,0.07);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">CCJ (Cameco)</span>
+        <span class="watch-arrow" style="color:#ff9f43;">🟠 $102.27 (-0.23%) — 시장이 다 빠진 날 홀로 버텼습니다</span>
+      </div>
+      <div class="watch-reason">
+        <strong>8/24 종가 $102.27(-0.23%)</strong>. 나스닥 -0.76%, RKLB -5.9%, IONQ -8.5%인 날에 <strong>거의 안 빠졌습니다.</strong>
+        <strong>이게 이번 주 CCJ에 관한 가장 유용한 정보입니다</strong> — 우리 5개 섹터 중 <strong>유일하게 실물 현금흐름과 원자재에 묶인 종목</strong>이라
+        금리발 로테이션의 타격을 덜 받습니다. <strong>포트폴리오의 완충재 역할을 하고 있습니다.</strong><br><br>
+        <strong>숫자:</strong> 시총 <strong>$446.6억</strong>, TTM 매출 <strong>$24.5억</strong>, 순이익 <strong>$2.499억</strong>, EPS <strong>$0.57</strong>,
+        <strong>PER 179배</strong>, 52주 <strong>$73.20~$135.24</strong>, 목표주가 <strong>$130.75</strong>.<br>
+        <strong>PER 179배를 어떻게 봐야 하냐면:</strong> 이건 <strong>비싸다는 뜻이 아니라 '이익이 아직 안 나왔다'는 뜻</strong>입니다.
+        캐머코는 실현 판매단가가 <strong>$62.11에서 $85~89로 계단식 상승</strong>하는 구조라
+        <strong>과거 계약가로 파는 물량이 소진될수록 이익이 뒤늦게 튀어나옵니다.</strong>
+        <strong>우라늄 스팟 $88.87 · 텀 $94</strong>가 유지되면 이 계단은 예정대로 올라옵니다.<br>
+        <strong>전략:</strong> SMR 10% 안에서 <strong>연료 중심(CCJ·URA) 유지</strong>. 추격 매수는 아니지만
+        <strong>이번 주처럼 시장이 흔들릴 때 상대적 강도를 보여준 것은 보유 근거를 강화합니다. 삼성증권 미국주식 일반 거래 가능.</strong>
+      </div>
+    </div>
+
+    <div class="watch-change" style="border-color: rgba(129,199,132,0.2); background: rgba(129,199,132,0.05);">
+      <div class="watch-change-header">
+        <span class="watch-ticker">신규 관찰 대상 (매수 아님)</span>
+        <span class="watch-arrow">🆕 메모리 밸류체인 · 유니트리(온도계) · OKLO/NuScale(제외 유지)</span>
+      </div>
+      <div class="watch-reason">
+        <strong>① 메모리 밸류체인 (삼성전자 · SK하이닉스) — 이번 주 신규 등재.</strong>
+        엔비디아 서버 15% 인상의 <strong>원인 제공자이자 최대 수혜자</strong>입니다.
+        HBM4가 GB당 <strong>$31~32</strong>로 HBM3e의 2배, 삼성은 3분기 HBM4 매출 <strong>전분기 대비 3배 이상</strong>을 전망합니다.
+        <strong>국내 주식이라 삼성증권에서 즉시 거래 가능</strong>하다는 게 결정적 장점입니다.
+        <strong>다만 이미 많이 올랐을 가능성이 크고, 밸류에이션을 아직 검증하지 않았습니다 — 금요일 딥다이브 1순위 과제로 넘깁니다. 이번 주 매수 권고 아님.</strong><br><br>
+        <strong>② 유니트리(688xxx, 상하이 STAR) — 매수 대상 아님, 온도계로만.</strong>
+        시총 $660억에 연 출하 5,000대 수준. <strong>우리 저평가 기준에 전혀 맞지 않습니다.</strong>
+        <strong>삼성증권 일반 계좌로는 접근 불가</strong>(중국 A주 별도 절차, STAR 마켓은 더 제한적).
+        <strong>상장 첫날 고점 대비 되돌림 폭</strong>을 휴머노이드 테마 체력의 지표로 매주 추적합니다.<br><br>
+        <strong>③ OKLO · NuScale — 제외 유지.</strong> NuScale은 <strong>규제 서열 1위지만 분기 매출 $75,000 · ATM $7.5억</strong>,
+        OKLO는 <strong>손실 2배 확대 · ATM $19억 희석</strong>. <strong>규제 진척과 투자 매력은 별개입니다.</strong>
+      </div>
+    </div>
+
+    <div class="watch-nochange">나머지 워치리스트 종목: 유의미한 변동 없음</div>
+  </div>
+
+  <!-- ════════════ 포트폴리오 ════════════ -->
+  <div class="thermometer">
+    <h2>🧭 포트폴리오 대시보드</h2>
+    <p style="font-size:14px; color:#b8c9d9; margin-bottom:18px; line-height:1.8;">
+      이번 주 <strong style="color:#fff;">목표 비중 변경은 없습니다.</strong>
+      3일 뒤에 세 개의 큰 답(엔비디아 실적 · 워시 연설 · PCE)이 나오는데,
+      <strong style="color:#fff;">그 전에 비중을 바꾸는 것은 동전을 던지는 것과 같습니다.</strong>
+      대신 <strong style="color:#fff;">보유 종목마다 '무슨 일이 생기면 무엇을 한다'는 규칙을 문서로 확정</strong>했습니다. 그게 이번 주의 성과입니다.
+    </p>
+    <div class="flow-row"><span>🤖 피지컬 AI</span><span class="flow-positive">40% 유지 · 테제 90 (+2)</span></div>
+    <div class="flow-row"><span>🚀 우주</span><span style="color:#ffd93d; font-weight:700;">30% 유지 · 테제 95 (0)</span></div>
+    <div class="flow-row"><span>⚛️ SMR</span><span class="flow-positive">10% 유지 · 테제 86 (+1)</span></div>
+    <div class="flow-row"><span>💊 제약바이오</span><span class="flow-positive">10% 유지 · 테제 80 (+1)</span></div>
+    <div class="flow-row"><span>🔮 양자 (IONQ 보유)</span><span class="flow-negative">10% 상한 고수 · 테제 69 (-4)</span></div>
+    <div class="thermo-insight" style="margin-top:16px;">
+      <strong>이번 주 행동 요약 (순서대로) —</strong><br>
+      <strong>① 8/26 엔비디아 · 8/28 워시+PCE 이전 신규 진입 전면 보류.</strong> 예외 없습니다.<br>
+      <strong>② IONQ — 보유 유지 · 추가 매수 금지 · 이익 실현 규칙 신설</strong>($55 회복 시 1/3 매도, 52주 저점 $25.89 훼손 시 전량 정리).<br>
+      <strong>③ RKLB — Neutron 첫 발사일 공식 확정을 진입 트리거로 확정.</strong> -17% 하락은 진입 사유가 아닙니다.<br>
+      <strong>④ CCJ — 유지.</strong> 이번 주 하락장에서 유일하게 버틴 종목이고, 그 이유(실물 자산·원자재 연동)가 구조적입니다.<br>
+      <strong>⑤ 금요일 딥다이브 과제 두 가지:</strong>
+      <strong>(1) 메모리 밸류체인(삼성전자·SK하이닉스) 밸류에이션 검증</strong> — 엔비디아 실적 직후라 최적의 타이밍입니다.
+      <strong>(2) 8월 말~9월 말 PDUFA 러시에서 날짜가 확정된 희귀질환 종목 선별</strong> — 9/19 UX111이 첫 관문입니다.
+    </div>
+  </div>
+
+  <!-- ════════════ 전문가 레퍼런스 ════════════ -->
+  <div class="expert-section">
+    <h2>🎙️ 전문가 · 기관 레퍼런스</h2>
+    <div class="expert-subtitle">이번 주 시그널의 맥락을 만든 발언·전망을 모았습니다. 직접 인용이 확인된 것만 따옴표로 표기하고, 나머지는 요지로 정리했습니다.</div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🏛️</div>
+        <div>
+          <div class="expert-name">Scott Bessent (스콧 베선트)</div>
+          <div class="expert-title">미국 재무장관 · 파이낸셜타임스 기고 (2026.08.23)</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "동틀 녘에 경제적 D-데이가 시작된다 — 테헤란이 홀로 설 때까지 그 정권을 지탱하는 모든 경제적 생명줄을 끊는 것이 목표다."
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-macro">거시</span>
+        <strong>왜 중요한가:</strong> 다음 날인 8/24 실제로 <strong>'Operation Economic Outcast'</strong>가 발동됐습니다.
+        그런데 <strong>유가는 -2.5%로 하락</strong>했습니다.
+        <strong>시장은 "제재 내용이 예고 수준을 넘지 않았고 원유 공급 차단은 빠졌다"로 읽었습니다.</strong>
+        <strong>MK가 기억할 원칙:</strong> 지정학 헤드라인은 <strong>강도가 아니라 '예상 대비'로 가격에 반영됩니다.</strong>
+        다만 이란이 <strong>호르무즈 선박 나포</strong>를 경고한 상태라, 이 균형은 언제든 깨질 수 있습니다.
+      </div>
+      <div class="expert-source">출처: Financial Times 기고(2026.08.23) · CNN 라이브(8/23) · CNBC(8/24) · UPI(8/24)</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">📊</div>
+        <div>
+          <div class="expert-name">Morgan Stanley (모건스탠리)</div>
+          <div class="expert-title">Vera Rubin 랙 원가 구조 분석 (2026.08)</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        Vera Rubin 랙 원가에서 메모리가 차지하는 비중이 종전 5~10%에서 25~30%(금액 약 $200만)로 상승했다.
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-ai">피지컬 AI</span>
+        <strong>이번 주 가장 중요한 한 줄입니다.</strong> 엔비디아가 서버값을 15% 올리는 이유가
+        <strong>수요 초과가 아니라 부품 원가</strong>임을 증명하는 숫자입니다.
+        <strong>AI 인프라의 부가가치가 완성품(GPU 시스템)에서 부품(메모리)으로 이전되고 있다</strong>는 뜻이고,
+        <strong>우리 피지컬 AI 40% 테제의 핵심 문장을 그대로 뒷받침합니다.</strong>
+        같은 맥락에서 트렌드포스는 일반 DRAM 계약가 <strong>QoQ +13~18%</strong>, 낸드 <strong>+10~15%</strong>,
+        엔비디아용 <strong>HBM4 GB당 $31~32</strong>(HBM3e $17~18의 약 2배)를 제시했습니다.
+      </div>
+      <div class="expert-source">출처: Bloomberg 단독(2026.08.22~23) 인용 · TrendForce(2026.08.13) · Tom's Hardware / Benzinga(8/23~24) · <strong>엔비디아 공식 확인 없음, 로이터 독립 검증 실패</strong></div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🤖</div>
+        <div>
+          <div class="expert-name">Omdia (옴디아)</div>
+          <div class="expert-title">글로벌 휴머노이드 출하량 집계</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        작년 전 세계 휴머노이드 출하량은 약 15,000대이며, 유니트리와 AGIBOT이 각각 5,000대 이상으로 미국 경쟁사들을 크게 앞선다.
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-ai">피지컬 AI</span>
+        <strong>유니트리 $660억 시총을 판단하는 유일한 객관 기준</strong>입니다.
+        연 5,000대 출하에 $660억이면 <strong>대당 약 $1,300만의 가치를 미래에 미리 지불</strong>한 것입니다.
+        <strong>산업이 진짜라는 증거이면서 동시에 가격이 앞서 있다는 증거</strong>입니다.
+        <strong>MK의 결론: 휴머노이드 완성품은 사지 않고, 그들이 사야만 하는 부품을 봅니다.</strong>
+      </div>
+      <div class="expert-source">출처: Omdia 집계, CNN Business·NBC News 인용 (2026.08.18~19)</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🏦</div>
+        <div>
+          <div class="expert-name">BofA Fund Manager Survey (BofA 펀드매니저 서베이)</div>
+          <div class="expert-title">잭슨홀 사전 서베이 (2026.08)</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        응답 펀드매니저의 69%가 워시 신임 의장의 잭슨홀 기조연설이 '중립적 톤'일 것으로 예상한다.
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-macro">거시</span>
+        <strong>이 숫자를 반대로 읽으십시오.</strong> 시장 참여자의 <strong>69%가 같은 방향으로 포지션을 잡고 있다</strong>는 뜻입니다.
+        <strong>컨센서스가 두터울수록, 어긋났을 때의 가격 반응이 큽니다.</strong>
+        워시 의장은 <strong>매파 성향으로 알려진 인물</strong>이고 이번이 <strong>첫 잭슨홀 데뷔(8/28)</strong>입니다.
+        같은 날 <strong>7월 PCE</strong>가 함께 나옵니다.
+        올해 잭슨홀 주제는 <strong>"금융 혁신: 지급결제와 정책에 대한 함의"</strong>입니다.
+        <strong>MK의 대비: 금요일 이전에 신규 진입을 하지 않는 것으로 충분합니다.</strong>
+      </div>
+      <div class="expert-source">출처: BofA Fund Manager Survey, TalkMarkets·TechTimes·Capital Street FX 인용 (2026.08.21~24) · CME FedWatch 9월 인상 확률 약 33%</div>
+    </div>
+
+    <div class="expert-card">
+      <div class="expert-header">
+        <div class="expert-avatar">🔮</div>
+        <div>
+          <div class="expert-name">The Motley Fool — 내부자 거래 집계</div>
+          <div class="expert-title">양자 3사 SEC Form 4 3년 누적 분석 (2026.08.24)</div>
+        </div>
+      </div>
+      <div class="expert-quote">
+        "주식을 살 이유는 단 하나뿐이다 — 앞으로 오를 것이라는 믿음." 3년간 IonQ·Rigetti·D-Wave 내부자는 약 $8.63억을 순매도했고, 매수는 사실상 없었다.
+      </div>
+      <div class="expert-context">
+        <span class="expert-sector-tag tag-macro">양자</span>
+        <strong>공정하게 볼 점:</strong> 이건 <strong>이번 주 새로 생긴 사건이 아니라 3년 누적치</strong>이고,
+        내부자 매도에는 세금·분산·10b5-1 같은 정당한 사유가 많습니다.
+        <strong>그럼에도 우리가 이걸 -4점의 근거로 삼는 이유</strong>는
+        <strong>'매도'가 아니라 '매수의 부재'</strong> 때문입니다 —
+        Rigetti $0, D-Wave $1,795는 <strong>회사를 가장 잘 아는 사람들이 이 가격에 자기 돈을 걸지 않았다</strong>는 뜻입니다.
+        <strong>PSR 59~542배와 겹쳐 놓으면 무시하기 어렵습니다.</strong>
+      </div>
+      <div class="expert-source">출처: The Motley Fool(2026.08.24), SEC Form 4 데이터 기반 · IonQ PSR은 8/24 종가 기준 재계산 시 약 66배</div>
+    </div>
+  </div>
+
+  <!-- ════════════ 용어 사전 ════════════ -->
+  <div class="glossary-section">
+    <h2>📖 이번 주 용어 사전</h2>
+    <div class="glossary-subtitle">이번 리포트에 나온 개념 중 실전에서 계속 쓰게 될 것만 골랐습니다.</div>
+
+    <div class="glossary-card">
+      <div class="g-term">PSR (주가매출비율)</div>
+      <div class="g-term-en">Price-to-Sales Ratio</div>
+      <div class="g-explain">
+        <strong>시가총액 ÷ 연간 매출</strong>입니다. PER(주가수익비율)은 <strong>이익</strong>으로 나누는데,
+        우리가 보는 회사들은 <strong>아직 적자</strong>라 이익으로 나눌 수가 없습니다. 그래서 매출로 나눕니다.<br><br>
+        <strong>감각 기준:</strong> 성숙한 제조업은 <strong>1~3배</strong>, 좋은 소프트웨어 회사가 <strong>10~15배</strong>,
+        <strong>30배를 넘으면 "매출이 앞으로 몇 배로 늘어날 것"이 이미 가격에 들어간 상태</strong>입니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> IonQ <strong>약 66배</strong>($163.1억 ÷ $2.465억), RKLB <strong>약 44배</strong>, Rigetti <strong>398배</strong>, D-Wave <strong>542배</strong>.
+        <strong>"PSR 30배 이상을 오래 유지한 회사는 역사상 없다"</strong>는 지적이 이번 주 양자 섹터 하락의 논리적 배경입니다.
+        <strong>MK의 실전 규칙: PSR 40배가 넘는 종목은 '보유는 가능, 신규 진입은 금지'로 다룹니다.</strong>
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">스팟 가격 vs 텀 가격</div>
+      <div class="g-term-en">Spot Price vs Term (Long-term Contract) Price</div>
+      <div class="g-explain">
+        원자재에는 <strong>두 개의 가격</strong>이 있습니다.
+        <strong>스팟</strong>은 "지금 당장 사면 얼마"이고, <strong>텀</strong>은 "몇 년 뒤 인도받을 물량을 지금 계약하면 얼마"입니다.<br><br>
+        <strong>왜 두 개를 다 봐야 하냐면:</strong> 스팟은 <strong>단기 트레이더의 심리</strong>를 반영하고,
+        텀은 <strong>실제로 그 원자재를 써야 하는 사람(전력회사·제조사)의 판단</strong>을 반영합니다.
+        <strong>텀이 스팟보다 높으면, 실수요자가 미래 부족을 확신하고 있다는 뜻입니다.</strong>
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> 우라늄 스팟 <strong>$88.87</strong>(8/23), 텀 <strong>$94</strong>.
+        4개월간 스팟이 $86대에 묶여 있는 동안에도 텀은 $94를 유지했습니다 — <strong>실수요자는 계속 사고 있었다</strong>는 뜻입니다.
+        <strong>그리고 이번 주 스팟이 텀을 향해 올라가기 시작했습니다.</strong>
+        <strong>MK의 확인 기준: 스팟이 2주 연속 $90 위에서 마감하면 박스권 이탈 확정.</strong>
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">카테고리 디레이팅</div>
+      <div class="g-term-en">Category De-rating</div>
+      <div class="g-explain">
+        <strong>개별 회사가 잘못한 게 없는데, 그 회사가 속한 '분류' 전체의 밸류에이션 배수가 낮아지는 현상</strong>입니다.
+        보통 <strong>금리 상승기</strong>에 나타납니다 — 먼 미래의 이익을 할인하는 분모가 커지면서
+        <strong>'꿈으로 오른 주식'이 일제히 재평가</strong>됩니다.<br><br>
+        <strong>가장 위험한 점:</strong> <strong>회사가 잘하면 고칠 수 있는 문제가 아닙니다.</strong>
+        실적이 좋아도, 계약을 따와도 안 오릅니다. <strong>배수 자체가 내려가고 있기 때문입니다.</strong>
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> 8/24 IonQ -8.47%, Rigetti -8.10%, D-Wave -6.97%.
+        <strong>실적 수정도, 가이던스 하향도, 계약 취소도 없었습니다.</strong>
+        네 회사 모두 이달 초 실적을 이미 냈고 그 이후로는 <strong>거시 신호에만 반응</strong>하고 있습니다.
+        <strong>MK의 대응: 이런 구간에서는 "좋은 뉴스를 기다리며 버티기"가 통하지 않습니다.
+        미리 정한 규칙(이익 실현선·손절선)대로 기계적으로 움직이는 것만이 유효합니다.</strong>
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">호스티드 페이로드</div>
+      <div class="g-term-en">Hosted Payload</div>
+      <div class="g-explain">
+        <strong>남의 위성에 내 장비를 얹어 보내는 방식</strong>입니다.
+        위성 하나를 통째로 만들어 쏘려면 수억 달러가 들지만, <strong>이미 발사될 위성의 남는 공간과 전력을 빌리면</strong>
+        비용이 수십분의 일로 떨어집니다.
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> 일본 <strong>QZS-7</strong>에 MIT 링컨연구소가 만든 <strong>미 우주군 센서</strong>가 실려
+        일본 호스팅 정지궤도 센서망이 완성됐습니다.
+        <strong>미국이 우주 감시 능력을 확보하는 방식이 "직접 쏜다"에서 "동맹국 위성에 얹는다"로 이동 중</strong>입니다.<br>
+        <strong>MK의 투자 함의:</strong> 발사체 회사보다 <strong>센서·광통신 단말·추진 모듈</strong> 제조사가
+        더 안정적인 정부 매출을 갖게 됩니다. 우리 워치리스트에서는 <strong>RKLB</strong>와
+        <strong>IonQ 자회사 Skyloom(궤도상 84기)</strong>이 여기 해당합니다.
+      </div>
+    </div>
+
+    <div class="glossary-card">
+      <div class="g-term">PDUFA 날짜</div>
+      <div class="g-term-en">Prescription Drug User Fee Act Date</div>
+      <div class="g-explain">
+        FDA가 <strong>"이 신약에 대해 언제까지 승인 여부를 결정하겠다"고 약속한 날짜</strong>입니다.
+        제약사가 심사 수수료를 내는 대신 <strong>FDA가 기한을 지키기로 한 제도</strong>입니다.<br><br>
+        <strong>투자자에게 왜 중요하냐면:</strong> <strong>날짜가 미리 정해진 이벤트</strong>이기 때문입니다.
+        대부분의 투자 이벤트는 언제 올지 모르는데, <strong>PDUFA는 달력에 적을 수 있습니다.</strong>
+      </div>
+      <div class="g-example">
+        <strong>이번 주 적용:</strong> 8월 한 달 PDUFA <strong>12건</strong>(NDA 4·BLA 8),
+        8/19에는 <strong>GENGLYCOS·Pasatru</strong> 두 건이 동시 승인됐습니다.
+        다음 관문은 <strong>9/19 UX111</strong>(산필리포 A형 유전자치료제, 과거 거절 후 재제출).<br>
+        <strong>MK의 실전 규칙: 바이오 10% 안에서는 "날짜가 확정된 회사"만 봅니다.
+        날짜가 없는 AI 신약 플랫폼 회사는 검증할 방법이 없어 제외합니다</strong>
+        (AI 발굴 신약의 FDA 완전승인은 2026년 8월 현재 <strong>여전히 0건</strong>).
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ Footer ════════════ -->
+  <div class="footer">
+    본 리포트는 공개된 데이터와 전문가 분석을 종합한 정보 제공 목적이며,<br>
+    최종 투자 판단과 책임은 본인에게 있습니다.<br>
+    주가·지수·원자재 가격은 <strong>2026.08.23~08.24 기준</strong>이며, 출처가 엇갈리거나 확인되지 않은 값은 <strong>수치를 적지 않고 방향만</strong> 표기했습니다.<br>
+    엔비디아 서버 가격 인상은 <strong>블룸버그 단독 보도로, 엔비디아 공식 확인 및 로이터 독립 검증이 없는 사안</strong>입니다.<br>
+    대중 관심도와 테제 점수는 <strong>본 리포트의 자체 추정</strong>입니다.<br><br>
+    MK 전담 애널리스트 리포트 · 매주 화·금 발행 · W35 시그널 레이더(2026.08.25 발행)
+  </div>
+
+</div>
+</body>
+</html>
