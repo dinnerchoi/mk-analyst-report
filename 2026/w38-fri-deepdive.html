@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK 애널리스트 딥다이브 — 2026.09.18 (W38)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: #0a0e17;
+    color: #e0e6ed;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: linear-gradient(135deg, #0f1923 0%, #1a1a2e 50%, #16213e 100%);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .header-icon { font-size: 40px; margin-bottom: 12px; }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .header .date {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-top: 6px;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #ff9f43;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  /* ── 시장 체온계 ── */
+  .thermometer {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .thermometer h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .thermo-intro {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.9;
+    margin-bottom: 18px;
+  }
+  .thermo-intro strong { color: #e0e6ed; }
+  .thermo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .thermo-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .thermo-label {
+    font-size: 11px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .thermo-value {
+    font-size: 24px;
+    font-weight: 900;
+    margin: 4px 0;
+  }
+  .thermo-value.fear { color: #ff6b6b; }
+  .thermo-value.neutral { color: #ffd93d; }
+  .thermo-value.greed { color: #6bcb77; }
+  .thermo-sub {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .thermo-sub.fear { color: #ff6b6b; }
+  .thermo-sub.greed { color: #6bcb77; }
+  .thermo-desc {
+    font-size: 12px;
+    color: #7a8ba3;
+    line-height: 1.6;
+    margin-top: 8px;
+    text-align: left;
+  }
+  .thermo-insight {
+    background: rgba(78, 205, 196, 0.08);
+    border-left: 3px solid #4ecdc4;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .thermo-insight strong { color: #4ecdc4; }
+
+  /* ── Common ── */
+  .sector-card {
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .sector-ai { background: linear-gradient(135deg, #1a1a2e, #1e3a5f); }
+  .sector-bio { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); }
+  .sector-space { background: linear-gradient(135deg, #1a1a2e, #1b3a2d); }
+  .sector-smr { background: linear-gradient(135deg, #1a1a2e, #3a2a1e); }
+  .sector-quantum { background: linear-gradient(135deg, #1a1a2e, #1e2a3f); }
+
+  .sector-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .sector-ai .sector-title { color: #64b5f6; }
+  .sector-bio .sector-title { color: #ce93d8; }
+  .sector-space .sector-title { color: #81c784; }
+  .sector-smr .sector-title { color: #ff9f43; }
+  .sector-quantum .sector-title { color: #a78bfa; }
+
+  .sector-issue {
+    font-size: 14px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  /* 테제 바 */
+  .thesis {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .thesis-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    color: #7a8ba3;
+    margin-bottom: 8px;
+  }
+  .thesis-score { font-size: 18px; font-weight: 900; color: #fff; }
+  .thesis-delta { font-size: 12px; font-weight: 700; }
+  .thesis-delta.up { color: #6bcb77; }
+  .thesis-delta.down { color: #ff6b6b; }
+  .thesis-delta.flat { color: #7a8ba3; }
+  .thesis-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .thesis-bar { height: 100%; border-radius: 3px; }
+  .thesis-why { font-size: 13px; color: #b8c9d9; line-height: 1.7; }
+  .thesis-why strong { color: #e0e6ed; }
+
+  /* ── 심층 분석 ── */
+  .analysis {
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+  }
+  .analysis h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .analysis p {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+  .analysis p:last-child { margin-bottom: 0; }
+  .analysis strong { color: #e0e6ed; }
+
+  /* ── 밸류체인 ── */
+  .valuechain {
+    background: rgba(0,0,0,0.15);
+    border-radius: 12px;
+    padding: 22px 20px;
+    margin-bottom: 20px;
+  }
+  .valuechain h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .chain-flow {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .chain-step {
+    flex: 1;
+    min-width: 140px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .chain-step-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7a8ba3;
+    margin-bottom: 6px;
+  }
+  .chain-step-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .chain-step-companies {
+    font-size: 11px;
+    color: #4ecdc4;
+    line-height: 1.5;
+  }
+  .chain-insight {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+    padding: 12px 14px;
+    background: rgba(78,205,196,0.06);
+    border-radius: 8px;
+  }
+  .chain-insight strong { color: #4ecdc4; }
+
+  /* ── 종목 카드 ── */
+  .stock-card {
+    background: rgba(0,0,0,0.3);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .stock-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .stock-name {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .stock-score {
+    font-size: 28px;
+    font-weight: 900;
+    color: #4ecdc4;
+  }
+  .stock-ticker {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .metric-box {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .metric-label {
+    font-size: 10px;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .metric-value {
+    font-size: 17px;
+    font-weight: 900;
+    color: #e0e6ed;
+  }
+  .metric-sub {
+    font-size: 10px;
+    color: #7a8ba3;
+    margin-top: 2px;
+  }
+
+  .score-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .score-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+  }
+  .score-item-label {
+    font-size: 12px;
+    color: #7a8ba3;
+    flex: 1;
+  }
+  .score-item-value {
+    font-size: 15px;
+    font-weight: 900;
+    color: #4ecdc4;
+  }
+  .score-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .fill-high { background: #4ecdc4; }
+  .fill-mid { background: #ffd93d; }
+  .fill-low { background: #ff6b6b; }
+
+  .stock-section { margin-bottom: 20px; }
+  .stock-section h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .stock-section h4.why { color: #64b5f6; }
+  .stock-section h4.pros { color: #6bcb77; }
+  .stock-section h4.cons { color: #ff6b6b; }
+  .stock-section h4.strategy { color: #ffd93d; }
+  .stock-section h4.source { color: #7a8ba3; }
+
+  .stock-section p, .stock-section li {
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.9;
+  }
+  .stock-section p { margin-bottom: 10px; }
+  .stock-section ul {
+    padding-left: 18px;
+    margin-bottom: 8px;
+  }
+  .stock-section li { margin-bottom: 8px; }
+  .stock-section li strong { color: #e0e6ed; }
+  .stock-section p strong { color: #e0e6ed; }
+
+  .entry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .entry-table th {
+    text-align: left;
+    color: #7a8ba3;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .entry-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #e0e6ed;
+    font-size: 13px;
+  }
+  .entry-table .highlight-row { background: rgba(78, 205, 196, 0.06); }
+
+  .kr-related {
+    background: rgba(255,159,67,0.08);
+    border: 1px solid rgba(255,159,67,0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 16px;
+  }
+  .kr-flag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ff9f43;
+    margin-bottom: 6px;
+  }
+  .kr-related p {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+  .kr-related p:last-child { margin-bottom: 0; }
+  .kr-related strong { color: #ff9f43; }
+
+  /* 데이터 경고 박스 */
+  .datawarn {
+    background: rgba(255,107,107,0.08);
+    border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 14px;
+  }
+  .datawarn-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 6px;
+  }
+  .datawarn p {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .datawarn strong { color: #ff6b6b; }
+
+  /* ── 삼성증권 ── */
+  .broker-box {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .broker-box h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: #7a8ba3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .broker-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 13px;
+    gap: 10px;
+  }
+  .broker-row:last-of-type { border-bottom: none; }
+  .broker-ticker { font-weight: 700; color: #e0e6ed; }
+  .broker-market { color: #7a8ba3; font-size: 12px; }
+  .broker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .broker-yes {
+    background: rgba(107,203,119,0.15);
+    color: #6bcb77;
+    border: 1px solid rgba(107,203,119,0.25);
+  }
+  .broker-no {
+    background: rgba(255,107,107,0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(255,107,107,0.25);
+  }
+  .broker-partial {
+    background: rgba(255,215,61,0.15);
+    color: #ffd93d;
+    border: 1px solid rgba(255,215,61,0.25);
+  }
+  .broker-note {
+    font-size: 12px;
+    color: #7a8ba3;
+    line-height: 1.7;
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 6px;
+  }
+  .broker-note strong { color: #b8c9d9; }
+
+  /* ── 포트폴리오 ── */
+  .portfolio {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .portfolio h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .portfolio-subtitle {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .portfolio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .portfolio-table th {
+    text-align: left;
+    color: #7a8ba3;
+    font-weight: 500;
+    padding: 8px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .portfolio-table td {
+    padding: 10px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #e0e6ed;
+    font-size: 12px;
+  }
+  .portfolio-table .positive { color: #6bcb77; font-weight: 700; }
+  .portfolio-table .negative { color: #ff6b6b; font-weight: 700; }
+  .status-hold { color: #6bcb77; }
+  .status-wait { color: #ffd93d; }
+  .status-watch { color: #7a8ba3; }
+
+  .allocation { margin-bottom: 20px; }
+  .alloc-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .alloc-label { width: 92px; color: #7a8ba3; font-size: 12px; }
+  .alloc-bar-bg {
+    flex: 1;
+    height: 10px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .alloc-bar { height: 100%; border-radius: 5px; }
+  .alloc-bar.ai { background: #64b5f6; }
+  .alloc-bar.space { background: #81c784; }
+  .alloc-bar.smr { background: #ff9f43; }
+  .alloc-bar.bio { background: #ce93d8; }
+  .alloc-bar.quantum { background: #a78bfa; }
+  .alloc-pct { width: 40px; text-align: right; font-weight: 700; color: #e0e6ed; }
+
+  .cash-note {
+    background: rgba(255,215,61,0.08);
+    border-left: 3px solid #ffd93d;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #b8c9d9;
+    line-height: 1.8;
+  }
+  .cash-note strong { color: #ffd93d; }
+
+  /* ── 애널리스트 뷰 ── */
+  .analyst-view {
+    background: linear-gradient(135deg, #16213e, #1a1a2e);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(78,205,196,0.15);
+  }
+  .analyst-view h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: #4ecdc4;
+    margin-bottom: 16px;
+  }
+  .analyst-view p {
+    font-size: 15px;
+    color: #c8d8e8;
+    line-height: 2.0;
+    margin-bottom: 14px;
+  }
+  .analyst-view p:last-child { margin-bottom: 0; }
+  .analyst-view strong { color: #fff; }
+
+  /* ── 전문가 레퍼런스 ── */
+  .experts {
+    background: rgba(0,0,0,0.2);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .experts h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .experts .sub {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .expert-item {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .expert-item:last-child { border-bottom: none; }
+  .expert-name { font-size: 14px; font-weight: 700; color: #e0e6ed; }
+  .expert-role { font-size: 12px; color: #7a8ba3; margin-bottom: 8px; }
+  .expert-quote {
+    font-size: 14px;
+    color: #c8d8e8;
+    line-height: 1.8;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .expert-read { font-size: 13px; color: #b8c9d9; line-height: 1.8; }
+  .expert-read strong { color: #e0e6ed; }
+  .expert-src { font-size: 11px; color: #556677; margin-top: 6px; }
+
+  /* ── 용어 사전 ── */
+  .glossary {
+    background: rgba(0,0,0,0.2);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .glossary h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .glossary .sub {
+    font-size: 13px;
+    color: #7a8ba3;
+    margin-bottom: 18px;
+  }
+  .term { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .term:last-child { border-bottom: none; }
+  .term-name { font-size: 15px; font-weight: 700; color: #4ecdc4; }
+  .term-en { font-size: 11px; color: #556677; margin-bottom: 8px; }
+  .term p { font-size: 13px; color: #b8c9d9; line-height: 1.9; margin-bottom: 8px; }
+  .term p:last-child { margin-bottom: 0; }
+  .term strong { color: #e0e6ed; }
+  .term-apply {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.8;
+    padding: 10px 14px;
+    background: rgba(78,205,196,0.06);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .term-apply strong { color: #4ecdc4; }
+
+  /* ── 추천 원문 ── */
+  .readings {
+    background: rgba(0,0,0,0.2);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .readings h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .reading-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .reading-item:last-child { border-bottom: none; }
+  .reading-sector {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .reading-sector.ai { color: #64b5f6; }
+  .reading-sector.bio { color: #ce93d8; }
+  .reading-sector.space { color: #81c784; }
+  .reading-sector.smr { color: #ff9f43; }
+  .reading-sector.quantum { color: #a78bfa; }
+  .reading-sector.macro { color: #4ecdc4; }
+  .reading-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e0e6ed;
+    margin-bottom: 4px;
+  }
+  .reading-source { font-size: 12px; color: #7a8ba3; }
+  .reading-why {
+    font-size: 13px;
+    color: #b8c9d9;
+    line-height: 1.7;
+    margin-top: 6px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: #445566;
+    line-height: 1.8;
+  }
+  .footer strong { color: #667788; }
+
+  .highlight { color: #4ecdc4; font-weight: 700; }
+  .danger { color: #ff6b6b; font-weight: 700; }
+  .warn { color: #ffd93d; font-weight: 700; }
+  .safe { color: #6bcb77; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ══════ HEADER ══════ -->
+  <div class="header">
+    <div class="header-icon">🔬</div>
+    <h1>MK 애널리스트 딥다이브</h1>
+    <div class="date">2026년 9월 18일 (금) · W38</div>
+    <div class="subtitle">예고된 인상보다, 예고 없던 'AI 속도 조절론'이 더 세게 때린 주</div>
+  </div>
+
+  <!-- ══════ 시장 체온계 ══════ -->
+  <div class="thermometer">
+    <h2>🌡️ 시장 체온계</h2>
+    <p class="thermo-intro">
+      지난주 애널리스트 뷰에서 저는 <strong>"9/16에 볼 것은 인상 여부가 아니라 점도표가 연말 두 번을 말하는지"</strong>라고 쓰고 시나리오를 둘로 나눴습니다 —
+      <strong>'한 번 더'면 안도 랠리, '세 번'이면 긴 조정의 앞부분.</strong>
+      결과: 연준은 기준금리를 <strong>0.25%p 올려 3.75~4.00%</strong>로 만들었습니다(2023년 7월 이후 첫 인상, <strong>12대0 만장일치</strong>).
+      점도표 중간값은 올해 말 <strong>4.1%</strong> — 즉 <strong>'올해 한 번 더'</strong>입니다. 18명 중 16명이 추가 인상을 봤고, 그중 4명은 두 번을 봤습니다.
+      다음 날(9/17) S&amp;P 500 <strong>+1.1%</strong>, 나스닥 <strong>+1.7%</strong>. 첫 번째 시나리오대로 흘렀습니다.
+      그런데 점도표에서 더 중요한 숫자는 <strong>2027년</strong>입니다 — 6월 3.6%에서 <strong>9월 4.1%</strong>. 연준은 <strong>"내년에도 내리지 않는다"</strong>고 말한 셈입니다.
+    </p>
+
+    <div class="thermo-grid">
+      <div class="thermo-card">
+        <div class="thermo-label">① 공포 &amp; 탐욕 지수</div>
+        <div class="thermo-value fear">28~29</div>
+        <div class="thermo-sub fear">공포(Fear)</div>
+        <div class="thermo-desc">
+          9/17 기준 <strong>29</strong>(Benzinga 9/18 인용), 9/18 장중 <strong>28</strong>. 지난주 33에서 또 내려왔습니다.
+          주목할 점은 <strong>지수가 +1.1% 오른 9/17에도 29</strong>였다는 것 — 사람들이 <strong>이 반등을 아직 믿지 않는다</strong>는 뜻입니다.
+          9/1 50 → 9/11 33 → 9/17 29. 3주 연속 하락입니다.
+        </div>
+      </div>
+      <div class="thermo-card">
+        <div class="thermo-label">② VIX 변동성 지수</div>
+        <div class="thermo-value neutral">15.44</div>
+        <div class="thermo-sub">9/17 종가 · 9/18 장중 15.42</div>
+        <div class="thermo-desc">
+          FOMC 당일(9/16) <strong>17.71</strong> → 다음 날 <strong>15.44</strong>. 인상이라는 <strong>'확정된 악재'</strong>가 나오자 옵션 보험료는 오히려 내려갔습니다 — 불확실성이 사라지면 VIX는 내려갑니다.
+          <strong>정정:</strong> 지난주 본문의 17.84는 <strong>9/10 종가</strong>였고, 9/11 종가는 15.84였습니다. 주간 기준으론 사실상 제자리입니다.
+          9/18은 옵션 약 <strong>$7조</strong>가 동시에 만기되는 트리플 위칭일입니다(블룸버그, 시타델증권 인용).
+        </div>
+      </div>
+      <div class="thermo-card">
+        <div class="thermo-label">③ 미국 10년물 국채금리</div>
+        <div class="thermo-value fear">5.00%</div>
+        <div class="thermo-sub fear">FOMC 직전 장중 5.04% · 2007년 이후 최고</div>
+        <div class="thermo-desc">
+          9/18 <strong>5.00%</strong>(TradingEconomics), 지난주 4.94%에서 <strong>+6bp</strong>. 30년물 5.34%(보합), 2년물 4.75%.
+          워시 의장은 기자회견에서 금리 상승 이유로 경기 강세·지정학과 함께 <strong>"하이퍼스케일러 차입과의 자본 경쟁"</strong>을 꼽았습니다.
+          <strong>AI 투자 붐 자체가 금리를 끌어올리는 요인</strong>이라는 연준 의장의 공식 진단입니다. 우리 다섯 섹터에 이중으로 걸리는 문장입니다.
+        </div>
+      </div>
+      <div class="thermo-card">
+        <div class="thermo-label">④ 달러 지수 (DXY)</div>
+        <div class="thermo-value neutral">100.3~100.5</div>
+        <div class="thermo-sub">주간 약 +1.3% · 1.5개월 최고</div>
+        <div class="thermo-desc">
+          9/18 <strong>100.29</strong>(TradingEconomics) / <strong>100.51</strong>(Investing.com, 오전 10:08 ET). 차이는 조회 시점 차이입니다.
+          W34부터 저는 <strong>"금리가 오르는데 달러가 안 오른다"</strong>고 적어 왔습니다. <strong>이번 주 처음으로 달러가 금리를 따라왔습니다.</strong>
+          '물가가 안 잡혀서 오르는 금리'에서 <strong>'실제로 돈줄을 조이는 금리'</strong>로 시장의 해석이 옮겨갔다는 신호로 읽습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="thermo-insight">
+      <strong>이번 주 체온계 종합:</strong>
+      8일 사이 <strong>ECB(9/10)·연준(9/16)·일본은행(9/18, 1.25% — 1995년 이후 최고)</strong> 세 곳이 금리를 올렸고, 영란은행은 <strong>6대3으로 겨우 동결</strong>했습니다(3명이 인상 표).
+      경제지표는 연준 편이었습니다 — 8월 소매판매 <strong>+1.2%</strong>(예상 0.7%), 신규 실업수당 청구 <strong>19.6만 건</strong>(7월 이후 최저).
+      CME 페드워치 기준 <strong>10/28 추가 인상 확률은 약 50%</strong>, 연내 1회 이상은 약 87%입니다.
+      유가는 겉과 속이 다릅니다. 브렌트 선물은 $107.63 → <strong>$103.74(-3.6%)</strong>로 내렸지만, 오만산 실물은 <strong>$130 위</strong>, 상하이 원유 선물은 <strong>사상 최고 $138.50</strong>입니다.
+      사우디 얀부 터미널은 후티 드론 공격 이후 <strong>9/11부터 선적이 없고</strong>, 아람코는 유럽 고객에게 다음 달 원유가 없다고 통보했습니다(Kpler·TradingEconomics).
+      <strong>선물 가격만 보면 물가 압력이 풀린 것 같지만 실물은 아닙니다</strong> — 워시가 "물가 위험은 위쪽"이라고 말한 근거입니다.
+    </div>
+  </div>
+
+  <!-- ══════ 이번 주의 사건 ══════ -->
+  <div class="analysis" style="background:linear-gradient(135deg,#1a1a2e,#2a1a2e);border:1px solid rgba(255,107,107,0.15);">
+    <h3>🧨 이번 주의 사건 — 예고된 악재(인상)보다, 예고 없던 질문("AI는 속도를 늦춰야 하나")이 더 셌다</h3>
+    <p>
+      이번 주 충격은 두 번 왔습니다. 하나는 달력에 적혀 있던 <strong>수요일의 금리 인상</strong>, 다른 하나는 아무 달력에도 없던 <strong>월요일의 에세이</strong>입니다.
+      9/12(토) Anthropic의 다리오 아모데이 CEO가 <strong>"프런티어의 속도를 조절해야 한다(We Must Pace the Frontier)"</strong>는 에세이를 게시했고,
+      샘 올트먼과 일론 머스크가 동조했으며, 올트먼은 <strong>OpenAI가 2026년에는 상장하지 않는다</strong>고 밝혔습니다(CNBC·Fortune 9/14).
+    </p>
+    <ul style="padding-left:18px;margin-bottom:12px;">
+      <li style="font-size:14px;color:#b8c9d9;line-height:1.9;margin-bottom:6px;"><strong>9/14(월) — 에세이 후 첫 거래일:</strong> 필라델피아 반도체지수 약 <strong>-6%</strong>, 테라다인 <strong>-13.3%</strong>, GE버노바 <strong>-8.6%</strong>, 버티브 약 -8%, 컨스텔레이션 <strong>-7.1%</strong>, 엔비디아 <strong>-3.4%</strong>. 같은 날 S&amp;P 500은 -0.5%, <strong>하이퍼스케일러 주가는 올랐습니다.</strong> <span style="color:#7a8ba3;">— Fortune·24/7 Wall St.·Motley Fool 9/14</span></li>
+      <li style="font-size:14px;color:#b8c9d9;line-height:1.9;margin-bottom:6px;"><strong>9/16(수) — FOMC 인상:</strong> S&amp;P -0.45%, 나스닥 보합, 다우 -1.21%. 워시 기자회견 도중 하락 전환. <span style="color:#7a8ba3;">— AP 9/16</span></li>
+      <li style="font-size:14px;color:#b8c9d9;line-height:1.9;margin-bottom:6px;"><strong>9/17(목) — 안도 랠리:</strong> S&amp;P +1.1%, 나스닥 +1.7%. 젠슨 황 <strong>"내년에 칩을 두 배로 팔 것으로 예상한다"</strong>(CNBC 9/17), 엔비디아 +2.5%. <span style="color:#7a8ba3;">— AP·CNBC 9/17</span></li>
+    </ul>
+    <p>
+      <strong>숫자로 비교하면 차이가 선명합니다.</strong> 금리 인상이 있던 한 주 동안 S&amp;P 500은 9/11 → 9/17 <strong>-0.3%</strong>에 그쳤습니다(인상은 이미 가격에 있었습니다).
+      반면 에세이 하나에 GE버노바는 <strong>하루 -8.6%</strong>, 컨스텔레이션은 주간 <strong>-10.2%</strong>입니다.
+    </p>
+    <p>
+      <strong>왜 중요한가.</strong> 금리는 주가 공식의 <strong>분모(할인율)</strong>를 바꿉니다. 에세이는 <strong>분자(미래 수요)</strong>를 건드렸습니다.
+      지금까지 AI 설비투자 논쟁은 <strong>"돈을 쓰는 쪽(하이퍼스케일러)이 언제 멈추나"</strong>였습니다. 이번엔 <strong>모델을 만드는 쪽이 스스로 "속도를 늦추자"</strong>고 했습니다.
+      하이퍼스케일러 주가가 오른 이유가 이것입니다 — 속도가 늦어지면 설비투자가 줄고 현금흐름이 늘어납니다.
+      <strong>그 설비투자의 반대편에서 매출을 받는 쪽</strong>이 엔비디아·테라다인·GE버노바·컨스텔레이션이고, 우리 포트폴리오의 <strong>피지컬 AI 40% + SMR 10%</strong>가 정확히 그 자리에 있습니다.
+    </p>
+    <p>
+      <strong>같은 주의 아이러니:</strong> 연준 의장은 "AI 투자를 위한 차입이 금리를 끌어올린다"(너무 많다)고 했고, AI 업계 수장은 "너무 빠르다"고 했습니다.
+      두 발언의 결론은 반대처럼 보이지만, <strong>AI 인프라 주식에는 같은 방향(부담)</strong>입니다.
+    </p>
+    <p>
+      <strong>제 판단:</strong> 에세이는 <strong>주장이지 정책이 아닙니다.</strong> 이번 주 제 검색 범위에서 <strong>설비투자 가이던스를 실제로 낮춘 하이퍼스케일러는 없었고</strong>,
+      데이터는 오히려 반대쪽입니다 — TSMC 8월 매출 <strong>NT$5,148억, 사상 최고(+53.3%)</strong>, 엔비디아는 9/17 종가 $219.34로 9/14 하락분을 사흘 만에 전부 회복했습니다.
+      그래서 테제 점수는 크게 움직이지 않습니다. 대신 <strong>새 점검 항목을 하나 추가합니다 — "하이퍼스케일러 설비투자 가이던스"</strong>. 10월 말 실적 시즌에 이 숫자가 내려오면, 그때가 서사가 데이터로 바뀌는 날입니다.
+      이번 주가 보여준 건 하나입니다 — <strong>AI 인프라 바스켓은 이제 금리보다 '서사'에 더 민감하다.</strong> 서사에 민감한 자산은 <strong>포지션 크기로 관리</strong>하는 수밖에 없습니다.
+    </p>
+    <p style="font-size:12px;color:#7a8ba3;border-top:1px solid rgba(255,255,255,0.06);padding-top:10px;">
+      ※ 이해상충 고지: 이 리포트를 작성하는 AI는 Anthropic의 Claude입니다. 위 내용은 보도된 발언과 시장 반응만 옮겼으며, 에세이의 주장 자체에 대한 평가는 하지 않습니다.
+    </p>
+  </div>
+
+  <!-- ══════════════════ 🤖 피지컬 AI ══════════════════ -->
+  <div class="sector-card sector-ai">
+    <div class="sector-title">🤖 피지컬 AI — 비중 40%</div>
+    <div class="sector-issue">이번 주 이슈: 칩(1차)이 '서사'로 흔들린 날, 휴머노이드 공급망(4차)은 테슬라 실사단을 맞았다</div>
+
+    <div class="thesis">
+      <div class="thesis-head">
+        <span>섹터 테제 점수</span>
+        <span><span class="thesis-score">86</span> <span class="thesis-delta down">▼ 1 (9/11 금 87)</span></span>
+      </div>
+      <div class="thesis-bar-bg"><div class="thesis-bar" style="width:86%;background:#64b5f6;"></div></div>
+      <div class="thesis-why">
+        두 달 동안 저는 <strong>"칩(1차)은 증명됐고 로봇(응용)은 아직"</strong>이라고 썼습니다. 이번 주엔 그 순서가 처음으로 뒤집혀 움직였습니다.
+        <strong>증명됐다던 1차가 서사 하나에 흔들렸고</strong>(9/14 반도체지수 약 -6%), <strong>아직이라던 응용단은 전진했습니다</strong> —
+        테슬라 팀이 9/16 중국 닝보에 도착해 9/17부터 옵티머스 부품 공급사(싼화·조이슨·투오푸)의 <strong>생산 실사</strong>를 시작했고, 2026년 약 5만 대 목표가 보도됐습니다(블룸버그 9/18·SCMP, 테슬라 미확인).
+        유비테크는 9월 중순 UWORLD U1의 <strong>첫 인도</strong>를 시작했습니다(선주문 1.3만 대+).
+        반대 방향 뉴스도 있습니다. 현대차 고위 관계자는 <strong>보스턴다이내믹스 내년 IPO가 사실상 무산</strong>됐다고 했습니다(조선비즈 9/15, 5년 누적 영업손실 약 1.7조 원).
+        <strong>데이터(수요)는 그대로인데 '서사 리스크'라는 새 항목이 생겼기에 -1점</strong>입니다.
+      </div>
+    </div>
+
+    <div class="valuechain">
+      <h3>🔗 밸류체인 맵 — 이번 주 '테스트' 칸을 새로 그렸다</h3>
+      <div class="chain-flow">
+        <div class="chain-step">
+          <div class="chain-step-label">1차 · 매출 확정</div>
+          <div class="chain-step-name">컴퓨트·칩</div>
+          <div class="chain-step-companies">NVIDIA · TSMC(8월 사상 최고)</div>
+        </div>
+        <div class="chain-step">
+          <div class="chain-step-label">2차 · 칩 수에 비례</div>
+          <div class="chain-step-name">테스트·메모리</div>
+          <div class="chain-step-companies">Teradyne · HBM · 마이크론(9/30)</div>
+        </div>
+        <div class="chain-step">
+          <div class="chain-step-label">3차 · 매출 초기</div>
+          <div class="chain-step-name">자동화·협동로봇</div>
+          <div class="chain-step-companies">Universal Robots · Symbotic</div>
+        </div>
+        <div class="chain-step">
+          <div class="chain-step-label">4차 · 공급망 형성 중</div>
+          <div class="chain-step-name">휴머노이드</div>
+          <div class="chain-step-companies">테슬라 공급사 실사 · UBTech 인도 · Unitree</div>
+        </div>
+      </div>
+      <div class="chain-insight">
+        <strong>이번 주의 교훈:</strong> AI 칩이 많이 팔릴수록 <strong>그 칩을 검사하는 장비가 먼저 팔립니다.</strong> 그래서 2차 칸에 '테스트'를 새로 넣었습니다.
+        그리고 9/14 가장 크게 빠진 게 바로 이 칸 — <strong>테라다인 -13.3%</strong>였습니다. <strong>서사 충격은 레버리지가 큰 칸을 가장 세게 때립니다.</strong>
+        칩 판매가 10% 흔들린다는 우려가 나오면, 칩을 검사하는 장비의 주문은 그보다 크게 흔들릴 수 있기 때문입니다. 이번 주 신규 카드가 테라다인인 이유입니다 — <strong>살 이유와 조심할 이유가 같은 곳에 있는 종목</strong>입니다.
+      </div>
+    </div>
+
+    <!-- NVDA 규칙 점검 카드 -->
+    <div class="stock-card">
+      <div class="stock-header">
+        <div class="stock-name">NVIDIA</div>
+        <div class="stock-score">83</div>
+      </div>
+      <div class="stock-ticker">NVDA · 나스닥 · 9/17 종가 $219.34 · 9/18 장중 $219.54 (9/11 $218.29 → 주간 +0.6%) · 84점 → 83점 (▼1)</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">선행 P/E</div>
+          <div class="metric-value">18.2</div>
+          <div class="metric-sub">W37 18.1 · 사실상 동일</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">주간 저점</div>
+          <div class="metric-value" style="color:#ff6b6b;">$210.96</div>
+          <div class="metric-sub">9/14 · 에세이 충격 -3.4%</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">시가총액</div>
+          <div class="metric-value">$5.30조</div>
+          <div class="metric-sub">9/18 장중</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">50일 / 200일선</div>
+          <div class="metric-value">$214 / $204</div>
+          <div class="metric-sub">둘 다 위에서 거래</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">평균 목표가</div>
+          <div class="metric-value">$328.66</div>
+          <div class="metric-sub">범위 $180~515 · 참고치</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">이사 매도 잔여 한도</div>
+          <div class="metric-value" style="color:#ffd93d;">~213만 주</div>
+          <div class="metric-sub">Form 144 기준 · 자체 계산</div>
+        </div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">저평가도</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:77%"></div></div>
+          </div>
+          <div class="score-item-value">23<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">성장성</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:93%"></div></div>
+          </div>
+          <div class="score-item-value">28<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">해자</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:96%"></div></div>
+          </div>
+          <div class="score-item-value">24<span style="font-size:11px;color:#7a8ba3">/25</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">리스크 관리</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:53%"></div></div>
+          </div>
+          <div class="score-item-value">8<span style="font-size:11px;color:#7a8ba3">/15</span></div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 규칙 점검 — 1차 매수 조건은 충족됐다</h4>
+        <p>
+          지난주 진입 전략은 <strong>"9/17 이후 · $210~225 구간 · 계획 비중의 1/3"</strong>이었습니다.
+          9/14 에세이 충격으로 <strong>$210.96</strong>까지 내려 구간 하단을 시험했고, FOMC 다음 날인 9/17 <strong>$219.34(+2.5%)</strong>로 마감했습니다.
+          <strong>조건은 충족됐습니다.</strong> 이 리포트는 MK의 실제 체결 여부를 알 수 없으므로, 포트폴리오 표에는 <strong>"1차 조건 충족 · 실행 여부 확인 필요"</strong>로 적습니다.
+        </p>
+        <p>
+          이번 주 새로 나온 정보는 둘입니다. <strong>좋은 쪽:</strong> 젠슨 황의 <strong>"내년 칩 판매 두 배"</strong> 발언(9/17)과 TSMC 8월 매출 사상 최고.
+          화웨이가 어센드 960DT 출시를 2027년 1분기로 앞당겼다는 보도에도 주가가 올랐는데, <strong>가이던스에 중국 데이터센터 매출이 이미 0으로 들어가 있기 때문</strong>입니다.
+          <strong>나쁜 쪽:</strong> 앞서 본 'AI 속도 조절론'. 이건 가격이 아니라 <strong>수요의 출처(프런티어 모델 회사)</strong>에 대한 질문이라 리스크 항목을 9 → 8로 내렸습니다.
+        </p>
+        <p>
+          한 가지 더 — 지난주 적은 <strong>마크 스티븐스 이사의 $6.46억 매도</strong>는 9/2 제출된 Form 144(매도 예정 통지) <strong>500만 주</strong> 중 약 287만 주입니다.
+          9/4 이후 추가 매도는 확인되지 않았지만, <strong>약 213만 주(현재가 기준 약 $4.7억, 자체 계산)가 아직 매도 가능한 상태</strong>입니다. 대형주에 치명적인 물량은 아니지만 <strong>'남은 물량'은 기억해 둘 숫자</strong>입니다.
+          CFO 콜레트 크레스의 9/17 Form 144(34,918주)는 9/16 성과주식 지급분으로, 통상적인 매도입니다.
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 계획은 그대로, 중단 조건을 하나 추가</h4>
+        <table class="entry-table">
+          <tr><th>구간</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>9/17~ · $210~225</td><td><strong>1차 1/3 — 조건 충족</strong></td><td>W34·W37 조건 모두 충족. 실행했다면 유지, 안 했다면 이 구간에서 유효.</td></tr>
+          <tr><td>$200 부근 (선행 P/E 약 16.6배)</td><td><strong>2차 1/3</strong></td><td>이익 추정 변화 없이 금리·서사만으로 빠진 경우에 한함.</td></tr>
+          <tr><td>하이퍼스케일러 설비투자 가이던스 하향 (신규)</td><td><strong>2·3차 중단</strong></td><td>서사가 데이터로 바뀌는 순간. 10월 말 실적 시즌이 첫 확인 시점.</td></tr>
+          <tr><td>법무부 Groq 거래 조치 공식화</td><td><strong>진입 중단 · 내용부터 분류</strong></td><td>W37 규칙 유지. 이번 주 추가 보도 없음.</td></tr>
+        </table>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">NVDA</span>
+          <span class="broker-market">나스닥 · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능</span>
+        </div>
+        <div class="broker-note">
+          <strong>기록 요청:</strong> 1차 매수를 실행했다면 <strong>체결가·수량</strong>을 알려주십시오. 다음 리포트부터 포트폴리오 표에 '보유'로 올리고 IonQ처럼 규칙선을 따로 관리하겠습니다.
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:16px;">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          stockanalysis.com(9/18 조회) — 일별 종가·선행 P/E·이동평균·컨센서스 · CNBC(2026.09.17) — 젠슨 황 발언 · CNBC(2026.09.10) — TSMC 8월 매출 ·
+          Fortune·24/7 Wall St.(2026.09.14) — 9/14 반도체 매도 · Neowin — 화웨이 어센드 960DT 일정 · Investing.com — 스티븐스 매도 내역 ·
+          StockTitan — Form 144(2026.09.02 스티븐스 신탁 500만 주, 2026.09.17 크레스) · MarketBeat(2026.09.17)
+        </p>
+      </div>
+    </div>
+
+    <!-- TER 신규 카드 -->
+    <div class="stock-card">
+      <div class="stock-header">
+        <div class="stock-name">Teradyne</div>
+        <div class="stock-score">70</div>
+      </div>
+      <div class="stock-ticker">TER · 나스닥 · 9/18 장중 $360.47 (9/14 종가 $329.20, 하루 -13.3%) · 52주 $115.09~$487.91 · 고점 대비 -26% · 신규 관찰</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">선행 P/E</div>
+          <div class="metric-value">37.0</div>
+          <div class="metric-sub">PEG 1.01</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">TTM 매출</div>
+          <div class="metric-value">$44.6억</div>
+          <div class="metric-sub">+57.9% YoY</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">영업이익률</div>
+          <div class="metric-value">31%</div>
+          <div class="metric-sub">매출총이익률 59%</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">잉여현금흐름</div>
+          <div class="metric-value" style="color:#6bcb77;">$8.0억</div>
+          <div class="metric-sub">TTM</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">순현금</div>
+          <div class="metric-value" style="color:#6bcb77;">$4.17억</div>
+          <div class="metric-sub">시총 $564억</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">P/S</div>
+          <div class="metric-value">12.4배</div>
+          <div class="metric-sub">선행 9.9배</div>
+        </div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">저평가도</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:57%"></div></div>
+          </div>
+          <div class="score-item-value">17<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">성장성</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:83%"></div></div>
+          </div>
+          <div class="score-item-value">25<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">해자</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:80%"></div></div>
+          </div>
+          <div class="score-item-value">20<span style="font-size:11px;color:#7a8ba3">/25</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">리스크 관리</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:53%"></div></div>
+          </div>
+          <div class="score-item-value">8<span style="font-size:11px;color:#7a8ba3">/15</span></div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 왜 이 종목인가 — '로봇 회사'로 사면 안 되는 로봇 회사</h4>
+        <p>
+          테라다인은 사업이 둘입니다. <strong>① 반도체 테스트 장비</strong> — 완성된 칩이 제대로 작동하는지 검사하는 기계입니다. 이익의 대부분이 여기서 나옵니다.
+          <strong>② 로봇</strong> — 협동로봇 1위권인 유니버설로봇(UR)과 물류 이동로봇 MiR을 갖고 있습니다. UR은 이번 분기 7세대 제품을 내놨습니다.
+        </p>
+        <p>
+          이름만 보면 피지컬 AI의 '로봇' 종목 같지만, <strong>주가를 움직이는 건 ①입니다.</strong> 최근 12개월 매출 <strong>+57.9%</strong>는 AI 가속기·HBM처럼 복잡한 칩일수록 검사 시간이 길어지는 구조에서 나왔습니다(신형 UltraFLEXplus 수요).
+          즉 이 종목은 <strong>"AI 칩이 몇 개 팔리느냐"에 비례하는 통행료</strong>이고, 로봇 사업은 그 위에 얹힌 <strong>공짜 옵션</strong>입니다.
+          이걸 로봇 비중으로 샀다가 AI 칩 사이클에 흔들리면 <strong>산 이유와 떨어지는 이유가 달라서</strong> 버티기 어렵습니다.
+        </p>
+        <p>
+          9/14 <strong>-13.3%</strong>는 에세이 충격일 가장 큰 낙폭 중 하나였고(일부 매체는 벵갈루루 증설 보도를 함께 거론 — <strong>단일 원인 확정 불가</strong>), 이후 나흘간 약 +9.5% 되돌렸습니다.
+          <strong>서사 하나에 하루 13%가 움직이는 종목</strong>이라는 걸 확인한 주입니다. 살 이유(칩 수에 비례)와 조심할 이유(칩 수 우려에 가장 먼저 반응)가 같은 곳에 있습니다.
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 장점</h4>
+        <ul>
+          <li><strong>희석 없이 돈을 법니다.</strong> 잉여현금흐름 $8.0억, 순현금 $4.17억. 지난주부터 우리가 쓰는 첫 번째 기준 — <strong>"주주가 아니라 고객에게서 돈을 받는 회사"</strong> — 에 맞습니다.</li>
+          <li><strong>성장 대비 가격.</strong> 선행 P/E 37배지만 PEG 1.01 — 이익 성장률과 배수가 거의 같다는 뜻입니다. 1년 +215%라는 숫자에 비하면 배수는 과열이 아닙니다.</li>
+          <li><strong>과점 시장.</strong> 반도체 테스트는 소수 업체가 나눠 갖는 시장이고, 고객 칩 설계에 맞춰 검사 프로그램이 짜이기 때문에 <strong>한 번 들어가면 바꾸기 어렵습니다</strong>(해자 20/25).</li>
+          <li><strong>로봇은 공짜 옵션.</strong> 휴머노이드가 늦어져도 협동로봇은 이미 공장에서 팔리고 있습니다. 테슬라 공급망 실사 같은 4차 뉴스가 쌓이면 이 옵션의 가치가 재평가될 수 있습니다.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 단점 · 리스크 — 반드시 알고 투자하세요</h4>
+        <ul>
+          <li><strong>베타 1.78.</strong> 시장이 1% 움직이면 1.8% 가까이 움직입니다. 9/14가 실전 사례입니다.</li>
+          <li><strong>1년 +215% 뒤의 종목입니다.</strong> 고점 대비 -26%라지만 1년 전 $115대였습니다. 이미 많은 기대가 가격에 있습니다.</li>
+          <li><strong>테스트 장비는 경기순환 산업입니다.</strong> 칩 투자가 쉬면 장비 주문은 칩 매출보다 크게 줄어듭니다. '속도 조절론'이 데이터가 되면 가장 먼저 숫자로 확인될 곳입니다.</li>
+          <li><strong>의견 하향 보도.</strong> 베어드의 '중립' 하향이 보도됐으나 날짜를 확인하지 못했습니다. 컨센서스 목표가 $446(17명, 매수)은 참고치일 뿐입니다.</li>
+          <li><strong>로봇 사업의 이익 기여가 작습니다.</strong> 피지컬 AI '로봇' 노출을 원한다면 이 종목은 기대보다 로봇이 적습니다.</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 엔비디아와 같은 규칙: 판정 전에는 사지 않는다</h4>
+        <table class="entry-table">
+          <tr><th>구간</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>지금 ~ 10/27 실적</td><td><strong>관찰 · 진입 없음</strong></td><td>W34 엔비디아 규칙과 동일. 서사 충격 직후라 실적이 첫 '데이터 판정'입니다.</td></tr>
+          <tr><td>10/27 AI 테스트 수요 가이던스 유지 · $330~360</td><td><strong>1차 검토 — AI 비중 중 소규모</strong></td><td>$329.20(9/14 종가)은 이번 서사 충격의 바닥 가격입니다.</td></tr>
+          <tr><td>하이퍼스케일러 설비투자 하향 확인</td><td><strong>관찰 종료</strong></td><td>레버리지가 큰 칸은 수요 둔화의 첫 피해자입니다.</td></tr>
+        </table>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">TER</span>
+          <span class="broker-market">나스닥 · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · 현재 관찰</span>
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:16px;">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          stockanalysis.com(9/18 조회) — TER 시세·밸류에이션·재무·컨센서스·52주 범위 · ad-hoc-news(2026.09.14) — 9/14 급락 ·
+          Fortune·24/7 Wall St.(2026.09.14) — AI 속도 조절론 매도세 · Teradyne 제품 발표 — UR 7세대 · 실적일 10/27(stockanalysis 기준, 회사 미확정)
+        </p>
+      </div>
+    </div>
+
+    <div class="stock-card" style="border-color:rgba(255,215,61,0.2);">
+      <div class="stock-section" style="margin-bottom:0;">
+        <h4 class="cons">📋 기존 워치리스트 · 응용단 점검</h4>
+        <ul>
+          <li><strong>Symbotic(SYM) 58점 유지 · $42.15</strong>(9/18 장중 -5.5%) — 니덤이 목표가 $75 → $60(9/15). 지난주 바클레이즈 $38에 이어 두 번째 하향입니다. 재평가 조건(11월 실적의 월마트 외 매출 비중)은 그대로입니다.</li>
+          <li><strong>Unitree(상하이 STAR)</strong> — 9/18 조회 시 ¥514.98(페이지 시각 표기 불명확), 상장 첫날 고점 ¥1,100 대비 약 -53%. 중국 증권당국이 휴머노이드 상장 후보에 <strong>"반복 매출·손실 축소·실질 혁신"</strong>을 요구하는 창구지도를 했다는 보도(Digitimes 9/9). MIIT 휴머노이드 표준 초안은 9/23까지 의견수렴.</li>
+          <li><strong>Serve Robotics(SERV) $4.26</strong> — 52주 저점($4.17) 부근. 우버가 보유 지분 전량을 매각했습니다. 응용단 확증 실패 사례로 계속 기록합니다.</li>
+          <li><strong>Mobileye(MBLY) $7.95</strong> — 선행 P/E 19배·순현금 $14.4억으로 숫자상 싸지만, CEO 교체·GAAP 영업손실(-19%)이 겹쳐 <strong>점수 보류</strong>. 10/22 실적 후 재검토.</li>
+          <li><strong>Aurora(AUR)</strong> — 9/23 인베스터데이. 자율주행 트럭 상용화 일정이 나오는 날입니다(관찰만).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kr-related">
+      <div class="kr-flag">🇰🇷 한국 연관</div>
+      <p>
+        <strong>보스턴다이내믹스 IPO, 내년은 사실상 무산</strong>(조선비즈 9/15, 현대차 고위 관계자). 5년 누적 영업손실 약 <strong>1.7조 원</strong>(2025년 약 5,284억 원), 아틀라스의 현대차 미국공장(HMGMA) 대규모 배치 목표는 <strong>2028년</strong>으로 밀렸습니다.
+        유니트리 가격표 하락, 중국 당국 창구지도에 이어 <strong>한국에서도 휴머노이드 '상장 가격표'가 늦춰진 것</strong>입니다.
+      </p>
+      <p>
+        레인보우로보틱스 ₩426,000(9/17 종가), LG이노텍 ₩515,000(9/16 종가). 이번 주 두 종목 모두 <strong>새 수주 공시는 확인되지 않았습니다.</strong>
+        우리 판정은 3주째 같습니다 — <strong>밸류체인은 맞고, 종목은 아직.</strong> 테슬라 공급망 실사가 한국 부품사로 확대된다는 <strong>공식 발표</strong>가 나오면 그때 다시 봅니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ 🚀 우주 ══════════════════ -->
+  <div class="sector-card sector-space">
+    <div class="sector-title">🚀 우주 — 비중 30%</div>
+    <div class="sector-issue">이번 주 이슈: 로켓랩이 '빚' 대신 '주식'을 택했고, 9/24 하루에 공급 이벤트 두 개가 겹친다</div>
+
+    <div class="thesis">
+      <div class="thesis-head">
+        <span>섹터 테제 점수</span>
+        <span><span class="thesis-score">92</span> <span class="thesis-delta down">▼ 1 (9/11 금 93)</span></span>
+      </div>
+      <div class="thesis-bar-bg"><div class="thesis-bar" style="width:92%;background:#81c784;"></div></div>
+      <div class="thesis-why">
+        지난주 테제를 내린 이유는 <strong>"정부 예산은 금리에 반응하지 않지만 의회에 반응한다"</strong>였습니다. 이번 주 그 의회의 답이 나왔습니다 —
+        <strong>12/11까지의 임시예산(CR)</strong>이 하원 370대48, 상원 90대6으로 통과돼 10/1 셧다운은 피했습니다. 그러나 임시예산은 <strong>'작년 수준 유지·신규 사업 금지'</strong>입니다.
+        신임 우주군 참모총장 쉬스 장군은 <strong>"임시예산 하에선 우주군 사업의 약 10%가 진행 불가"</strong>라고 밝혔습니다(Breaking Defense 9/15).
+        FY27 우주군 요청액 <strong>$712억</strong> vs FY26 확정 <strong>$400억</strong> — <strong>우리 테제는 정확히 이 차이 위에 서 있습니다.</strong>
+        골든돔은 요청액 약 $175억 중 <strong>기본예산 반영이 $4억뿐</strong>이고 나머지는 예산조정 법안에 달려 있습니다. 이번 주 SDA·NSSL·골든돔 신규 계약은 <strong>확인되지 않았습니다.</strong>
+        좋은 쪽: 스타십 14차 비행이 <strong>9/28(이후)</strong>, 첫 궤도 비행에 스타링크 V3 26기 탑재(Space.com). 지난주 우려가 부분적으로 현실화됐기에 -1점.
+      </div>
+    </div>
+
+    <div class="analysis">
+      <h3>📖 심층 분석 — 같은 'ATM'인데 왜 다르게 보나: 로켓랩 $19.4억 vs 오클로 $10억</h3>
+      <p>
+        9/14~16 로켓랩은 <strong>시장가 주식 발행(ATM)으로 $19.44억</strong>을 조달했다고 밝혔습니다. 발행 주식 <strong>2,930만 주</strong>(기존 주식의 약 5%), 평균 약 <strong>$66.36</strong>(자체 계산).
+        이 돈으로 이리듐 인수 현금 대금을 전부 충당하고, 준비해 뒀던 <strong>$36억 브리지론(단기 인수금융)을 해지</strong>했습니다. 대신 이리듐의 $17.75억 기존 대출에 보증을 섭니다(GovConWire 9/16).
+      </p>
+      <p>
+        지난주 제가 쓴 규칙은 <strong>"희석하는 회사는 피한다"</strong>였고, 로켓랩은 이번 주 희석한 회사입니다. 그럼 규칙 위반일까요? 지난주 오클로의 $10억 ATM과 나란히 놓으면 차이가 보입니다.
+      </p>
+      <table class="entry-table">
+        <tr><th>기준</th><th>로켓랩 (9/14~16)</th><th>오클로 (9/11)</th></tr>
+        <tr><td>돈의 용도</td><td><strong>배당을 주는 회사(이리듐) 인수 대금</strong></td><td>운영·개발 자금 (TTM 매출 $121만)</td></tr>
+        <tr><td>대체한 것</td><td><strong>$36억 브리지론 해지</strong> — 금리 5% 시대의 차입 비용 제거</td><td>없음 — 5월 $10억 소진 후 추가</td></tr>
+        <tr><td>물량 상태</td><td><strong>이미 팔린 물량</strong>(발행 주간 주가 +7.7%로 소화)</td><td><strong>앞으로 팔 물량</strong> — 매수자에게 매일의 공급</td></tr>
+      </table>
+      <p>
+        <strong>그래서 규칙을 다듬습니다.</strong> 피할 것은 '희석' 자체가 아니라 <strong>① 매출 없는 회사가 운영비를 주주에게서 조달하는 희석</strong>과 <strong>② 아직 시장에 나오지 않은 남은 물량</strong>입니다.
+        로켓랩의 이번 발행은 ①이 아니고, ②는 이미 소화됐습니다. 흥미로운 건 발행이 진행되던 9/11~17에 로켓랩 주가가 <strong>+7.7%</strong> 올랐다는 점입니다 — <strong>$19억 매물을 받아준 수요가 있었다</strong>는 뜻입니다.
+        다만 9/18 -5.2%로 발행 평균가(약 $66) 아래로 내려왔습니다. <strong>새 주주들이 이미 손실 구간</strong>에 있다는 것도 적어둡니다.
+      </p>
+    </div>
+
+    <!-- RKLB 규칙 점검 -->
+    <div class="stock-card" style="border-color:rgba(129,199,132,0.3);">
+      <div class="stock-header">
+        <div class="stock-name">📋 규칙 점검 — Rocket Lab</div>
+        <div class="stock-score">68</div>
+      </div>
+      <div class="stock-ticker">RKLB · 나스닥 · 9/17 종가 $67.82 · 9/18 장중 약 $64.13 (9/11 $62.95 → 약 +1.9%) · 68점 유지 · 진입 구간 $60~65 안</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">ATM 조달</div>
+          <div class="metric-value">$19.44억</div>
+          <div class="metric-sub">2,930만 주 · 약 5% 희석</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">브리지론</div>
+          <div class="metric-value" style="color:#6bcb77;">$36억 → 해지</div>
+          <div class="metric-sub">이리듐 대출 $17.75억 보증</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">EV/매출</div>
+          <div class="metric-value">46.9배</div>
+          <div class="metric-sub">선행 P/S 33.2배</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">수주잔고</div>
+          <div class="metric-value">$23.6억</div>
+          <div class="metric-sub">Q2 · 약 45% 12개월 내</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">이리듐 스프레드</div>
+          <div class="metric-value" style="color:#ffd93d;">~12.8%</div>
+          <div class="metric-sub">W37 9.6% → 확대 · 자체 계산</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">현금 / 부채</div>
+          <div class="metric-value">$23.0억</div>
+          <div class="metric-sub">부채 $1.34억</div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 규칙끼리 부딪쳤다 — 가격 규칙은 '사라', 날짜 규칙은 '기다려라'</h4>
+        <p>
+          지난주 행동 지침은 <strong>"9/17 이후 $60~65 유지 시 1차 — 우주 비중 계획의 1/4"</strong>이었습니다.
+          9/17 종가는 $67.82로 구간 <strong>위</strong>였고, 9/18 장중 약 $64로 구간 <strong>안</strong>에 다시 들어왔습니다. 가격 규칙만 보면 지금이 1차입니다.
+        </p>
+        <p>
+          그런데 <strong>9/24(목)</strong>에 두 개의 이벤트가 겹칩니다. ① 오전 8:30(ET) <strong>이리듐 임시 주주총회</strong>(발행주식 1억 598만 주의 과반 찬성 필요, 부결 시 로켓랩이 받는 해지 수수료 $2.236억),
+          ② 같은 날 <strong>SpaceX 락업 해제 최대 3.284억 주</strong>(이후 10/9·10/24·12/8 추가, Motley Fool 9/15).
+          지난주 용어 사전에서 제가 쓴 규칙은 <strong>"테마에서 가장 큰 종목의 락업 날짜 전후 1주는 신규 진입을 미룬다"</strong>였습니다.
+          <strong>규칙끼리 부딪칠 때는 더 보수적인 쪽을 따릅니다.</strong> 1차는 <strong>9/25 이후, 주총 결과를 본 뒤</strong>로 옮깁니다. 5거래일을 기다리는 비용은 작고, 그 사이 공짜로 두 개의 정보가 나옵니다.
+        </p>
+        <ul>
+          <li><strong>스프레드가 넓어졌습니다.</strong> 로켓랩 $64.13 기준 이리듐 주주가 받을 가치는 $27 + 0.4주 = <strong>약 $52.65</strong>, 이리듐 $46.66 → <strong>약 12.8%</strong>(자체 계산). 이리듐이 9/15 주당 $0.60 배당락을 거쳤다는 점을 감안해도 약 11.4%로, 지난주 9.6%보다 넓습니다. <strong>시장의 '성사' 확신이 오히려 조금 줄었습니다.</strong> ISS·글래스루이스(의결권 자문사) 권고는 찾지 못했습니다.</li>
+          <li><strong>FCC 절차가 시작됐습니다.</strong> 9/17 면허 이전 신청이 접수돼 의견 제출 10/15, 반대 의견 10/30, 재반박 11/9 일정입니다. <strong>접수는 승인이 아닙니다.</strong> 종결 목표는 2027년 중반. SpaceX는 8/28 제출서에서 이리듐의 주파수 공유 행태를 문제 삼았지만 거래 자체엔 반대하지 않는다고 했습니다.</li>
+          <li><strong>뉴트론은 여전히 날짜가 없습니다.</strong> 페어링 시험 완료, 아키메데스 엔진 400회+ 연소시험. 스페이스플라이트나우는 "2026년 데뷔 창이 좁아지고 있다"(8/10). 일렉트론은 9/11 올해 16번째(통산 95번째) 발사.</li>
+          <li><strong>내부자:</strong> 9/12~18 매도 없음. 참고로 검색엔진에 "벡 CEO 9/15~16 매도 $48.75/$54"가 나오는데 <strong>2025년 거래</strong>입니다. 혼동하지 마십시오.</li>
+        </ul>
+        <p>
+          <strong>점수 68 유지:</strong> 약 5% 희석으로 주당 가치 -1, 브리지론 해지로 재무 리스크 +1. 레이먼드제임스 신규 '시장수익률 상회'($80, 9/11).
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 행동 — 날짜 두 개를 지난 뒤에</h4>
+        <table class="entry-table">
+          <tr><th>구간</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>9/18 ~ 9/24</td><td><strong>대기</strong></td><td>이리듐 주총 + SpaceX 락업 동시. 날짜 규칙 우선.</td></tr>
+          <tr><td>9/25~ · 주총 가결 · $60~65</td><td><strong>1차 — 우주 계획의 1/4</strong></td><td>W34 가격 규칙 + 이벤트 통과. 크기는 그대로 작게.</td></tr>
+          <tr><td>주총 부결</td><td><strong>2차 보류 · 전략 재평가</strong></td><td>해지 수수료 $2.236억은 현금이지만 '위성 통신 사업자' 전략이 무너집니다. 이미 조달한 $19.4억의 용처가 새 질문이 됩니다.</td></tr>
+          <tr><td>$58 하회 (7월 저점 이탈)</td><td><strong>추가 매수 중단</strong></td><td>W34 방어선 유지.</td></tr>
+        </table>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">RKLB</span>
+          <span class="broker-market">나스닥 · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · 9/25 이후</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">SPCX (SpaceX)</span>
+          <span class="broker-market">상장 · 미국</span>
+          <span class="broker-badge broker-partial">△ 가능 · 락업 4회 남음(9/24~12/8)</span>
+        </div>
+        <div class="broker-note">
+          <strong>시간 참고:</strong> 이리듐 주총은 9/24 오전 8:30(ET) = <strong>한국시간 9/24 밤 9:30</strong>, 미국 정규장 개장 한 시간 전입니다. 결과는 한국시간 9/25 아침에 확인하면 충분합니다.
+          SpaceX는 공모가 <strong>$135</strong>(CNBC) 대비 9/17 종가 $154.81로 +14.7%입니다(일부 데이터 사이트의 공모가 $150 표기는 CNBC 보도와 불일치).
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:12px;">
+        <h4 class="source">📚 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          GovConWire(2026.09.16) — $19.44억 ATM·브리지론 해지·대출 보증 · SEC S-4/A(StockTitan) — 주총 9/24·과반 요건·해지수수료·교환비율 ·
+          Yahoo/Stocktwits(2026.09.17) — FCC 접수·의견 일정 · stockanalysis.com(9/18) — RKLB·IRDM·SPCX 시세·EV/매출 · GlobeNewswire(2026.09.11) — 일렉트론 16번째 ·
+          Spaceflight Now(2026.08.10)·NSF — 뉴트론 · secform4.com — 내부자 거래 · Motley Fool(2026.09.15) — SpaceX 9/24 락업 · CNBC(2026.06.12) — SpaceX 공모가 ·
+          Breaking Defense(2026.09.15) — 쉬스 참모총장 · CRA(2026.09) — 임시예산 표결 · Air &amp; Space Forces·TWZ — 골든돔 예산 · Space.com — 스타십 14차
+        </p>
+      </div>
+    </div>
+
+    <!-- KRMN 미니 카드 -->
+    <div class="stock-card" style="border-color:rgba(255,215,61,0.2);">
+      <div class="stock-header">
+        <div class="stock-name" style="font-size:17px;">Karman — 선행 시그널 포착</div>
+        <div class="stock-score" style="font-size:22px;color:#ffd93d;">60</div>
+      </div>
+      <div class="stock-ticker">KRMN · NYSE · 9/18 장중 $36.25 · 52주 $33.99~$118.38 (고점 대비 -69%) · 신규 관찰 · 점수 잠정</div>
+      <div class="stock-section">
+        <h4 class="why">🔍 왜 적어 두나 — 이번 주 우주 섹터에서 확인된 유일한 '$100만급 내부자 매수'</h4>
+        <p>
+          카르만은 미사일·발사체·위성에 들어가는 <strong>부품·서브시스템 공급사</strong>입니다. 9/16 <strong>스티넷 이사가 공개시장에서 27,000주(약 $100만)를 매수</strong>했습니다.
+          이번 주 로켓랩·플래닛·AST 등 우리가 본 우주 종목의 내부자 거래는 <strong>전부 매도이거나 세금 원천징수</strong>였습니다(검색 범위 내). 선행 시그널 1순위 소스(SEC Form 4)에서 나온 드문 '매수'라 기록합니다.
+        </p>
+        <p>
+          숫자도 우주 섹터 안에선 눈에 띕니다 — EV/매출 <strong>9.3배</strong>(로켓랩 46.9배), 선행 P/S 5.5배, EBITDA 마진 26%, 2분기 매출 +58%(유기적 +24.4%), 수주잔고 <strong>$13억</strong>, 2026 가이던스 상향·이미 95% 확보. 구겐하임 신규 '매수'($63, 9/15 전후).
+        </p>
+        <p>
+          <strong>그런데 점수를 '잠정'으로 두는 이유:</strong> ① 9/14 <strong>CFO 교체</strong>, ② 9/9 하루 <strong>-11%의 원인을 찾지 못했습니다</strong>, ③ 순부채 약 <strong>$8.24억</strong>(금리 5% 시대), P/E 135배,
+          ④ 골든돔·국방예산 노출도를 확인하지 못했습니다. <strong>CFO 교체와 원인 모를 급락이 같은 주에 있었다면, 이사 한 명의 매수가 그 두 물음표를 지우지 못합니다.</strong>
+          점수 18/20/15/7 = 60(잠정). 다음 실적에서 CFO 교체 사유와 잔고를 확인하기 전까지 <strong>진입 없음</strong>.
+        </p>
+      </div>
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">KRMN</span>
+          <span class="broker-market">NYSE · 미국</span>
+          <span class="broker-badge broker-partial">△ 가능 · 관찰 단계</span>
+        </div>
+      </div>
+      <div class="stock-section" style="margin-top:12px;">
+        <h4 class="source">📚 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          stockanalysis.com(9/18) — KRMN 시세·밸류에이션·재무 · SEC Form 4(2026.09.16) — 스티넷 이사 매수 · 구겐하임 커버리지 개시(9/15 전후, 보도 기준) · CFO 교체(9/14, 보도 기준)
+        </p>
+      </div>
+    </div>
+
+    <div class="stock-card" style="border-color:rgba(255,255,255,0.08);">
+      <div class="stock-section" style="margin-bottom:0;">
+        <h4 class="cons">📋 기존 워치리스트</h4>
+        <ul>
+          <li><strong>Planet Labs(PL) 66점 유지 · $16.23</strong>(9/11 $16.45) — 9/15 CEO 13.5만 주 감소는 <strong>성과주식 세금 원천징수</strong>이지 재량 매도가 아닙니다. 수주잔고 $8.15억(전 분기 대비 -10%, 전년 대비 +11%). 관찰 조건(3분기 잔고 반등) 그대로.</li>
+          <li><strong>AST SpaceMobile(ASTS) $58.15</strong>(9/18 -6.7%) — EV/매출 203배, 부채 $29.9억, 9/15 증권 집단소송 광고. <strong>워치리스트 편입 없음.</strong></li>
+          <li><strong>Intuitive Machines(LUNR) $13.90</strong> — SXM-11 위성 인도(9/15), 잔고 $18억. 9/17 +6.6%. 관찰만.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kr-related">
+      <div class="kr-flag">🇰🇷 한국 연관 — 누리호 5차 10/7</div>
+      <p>
+        누리호 5차 발사가 <strong>10/7</strong>로 잡혔습니다(위성 15기). 한화에어로스페이스가 발사 관제의 약 75%를 맡아 44명이 투입됩니다(서울신문 9/17).
+        한화에어로스페이스 ₩1,078,000(9/18, -1.7%) · 52주 ₩783,000~1,655,000, 쎄트렉아이 ₩78,600 · 52주 ₩45,650~224,000.
+      </p>
+      <p>
+        <strong>날짜가 정해진 이벤트의 전형적 패턴</strong>을 기억하십시오 — 발사 전 기대 매수, 발사 후 결과와 무관하게 차익실현. 쎄트렉아이는 52주 고점 대비 약 -65%로,
+        이미 한 번의 기대가 꺼진 종목입니다. <strong>발사 성공은 기술 뉴스이고, 수주 공시가 투자 근거입니다.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════════════ ⚛️ SMR ══════════════════ -->
+  <div class="sector-card sector-smr">
+    <div class="sector-title">⚛️ SMR (소형 원자로) — 비중 10%</div>
+    <div class="sector-issue">이번 주 이슈: 'AI 전력' 테제가 처음으로 AI 업계 안에서 도전받았고, 우라늄 스팟은 3주째 $90에 막혔다</div>
+
+    <div class="thesis">
+      <div class="thesis-head">
+        <span>섹터 테제 점수</span>
+        <span><span class="thesis-score">85</span> <span class="thesis-delta down">▼ 2 (9/11 금 87)</span></span>
+      </div>
+      <div class="thesis-bar-bg"><div class="thesis-bar" style="width:85%;background:#ff9f43;"></div></div>
+      <div class="thesis-why">
+        <strong>-2점의 이유 둘.</strong> ① 우리 SMR 테제의 수요 축은 <strong>"AI 데이터센터가 전기를 원한다"</strong>입니다. 9/14 그 축이 <strong>AI 업계 수장의 입</strong>에서 처음 흔들렸고,
+        AI 전력 바스켓이 가장 크게 반응했습니다 — GE버노바 -8.6%(하루), 컨스텔레이션 주간 <strong>-10.2%</strong>, 탈렌 -6.1%, 비스트라 -4.9%.
+        ② 제가 세운 확인 기준 <strong>"우라늄 스팟 $90 위 2주 연속"</strong>이 3주째 미통과입니다(선물 9/17 $89.70, 주간 보합).
+        <strong>상쇄한 것:</strong> 장기계약(텀) 가격 <strong>$96.50</strong>은 2007년 고점($95)을 넘은 명목 사상 최고, 카자톰프롬은 2026년 생산능력을 32,777tU → <strong>29,697tU(-9.4%)</strong>로 줄이며
+        "어떤 스팟 가격에도 증산하지 않는다"고 했습니다. 하원은 9/16 <strong>'요금납부자 보호법'을 417대3</strong>으로 통과시켰고, NRC는 홀텍의 팰리세이즈 SMR-300 부지 사전공사를 허용했습니다(9/15 발표).
+      </div>
+    </div>
+
+    <div class="analysis">
+      <h3>📖 심층 분석 — 우라늄 스팟은 왜 $90에서 멈추나: 가장 큰 현물 매수자가 지갑을 닫았다</h3>
+      <p>
+        우라늄 가격은 두 개입니다. <strong>스팟(현물)</strong>은 지금 당장 사는 가격, <strong>텀(장기계약)</strong>은 전력회사가 몇 년 뒤 받을 물량을 미리 계약하는 가격입니다.
+        지금 텀은 <strong>사상 최고 $96.50</strong>, 스팟은 <strong>$90 아래</strong>에 3주째 갇혀 있습니다. 실수요(전력회사)는 가장 강한데, 현물 가격은 못 오르는 것입니다.
+      </p>
+      <p>
+        이유를 찾으려면 <strong>현물시장의 큰 손</strong>을 봐야 합니다. 스프랏 우라늄 신탁(SPUT)은 우라늄 <strong>8,170만 파운드</strong>를 실물로 보유한 펀드입니다.
+        SPUT는 보통 <strong>주가가 순자산가치(NAV) 이상일 때 새 지분을 팔아 그 돈으로 현물을 삽니다.</strong> 그런데 9/17 기준 NAV $21.58에 가격 $19.40 — <strong>10.12% 할인</strong>입니다.
+        할인 상태에서 새 지분을 팔면 기존 투자자 가치가 깎이니, <strong>현물을 살 돈을 모을 수 없습니다</strong>(자체 해석). 9월 매입 기록도, 1/26 이후 ATM 갱신도 찾지 못했습니다.
+      </p>
+      <p>
+        <strong>여기서 배울 것:</strong> 스팟은 <strong>금융 수요(펀드)</strong>가, 텀은 <strong>실수요(전력회사)</strong>가 정합니다. 지금 실수요는 최고, 금융 수요는 정지.
+        그렇다면 제 확인 기준 "스팟 $90 돌파"는 사실상 <strong>"SPUT 할인 해소"</strong>를 기다리는 것과 같습니다. 그래서 다음 주부터 <strong>SPUT 할인율을 선행 지표로 함께 기록</strong>합니다.
+        할인이 5% 안쪽으로 좁혀지면 스팟 돌파 확률이 올라간다는 가설입니다.
+      </p>
+      <p>
+        <strong>요금납부자 보호법(Ratepayer Protection Act)</strong>에 대해 한 줄: 대형 데이터센터가 필요한 발전·송전 비용을 스스로 부담하게 하는 법으로, 하원 417대3 통과 후 상원 대기입니다.
+        데이터센터가 전기를 직접 조달해야 한다는 방향은 소형 원자로에 유리하게 읽혀 9/17 오클로 +11~13%, 누스케일 +9~10%, X-에너지 +12%였지만, <strong>우라늄 광산주는 따라가지 않았습니다</strong>(24/7 Wall St. "정책 헤드라인 반등").
+        이 법은 오클로의 $10억 ATM도, 누스케일의 TTM 매출 $1,070만(-81%)도 바꾸지 않습니다. <strong>매수 금지 유지.</strong>
+      </p>
+    </div>
+
+    <!-- BWXT 규칙 점검 -->
+    <div class="stock-card">
+      <div class="stock-header">
+        <div class="stock-name">BWX Technologies</div>
+        <div class="stock-score">73</div>
+      </div>
+      <div class="stock-ticker">BWXT · NYSE · 9/18 장중 $145.64 (9/11 $150.12 → 주간 -3.0%) · 52주 신저가 $144.33 · 고점 $241.82 대비 -40% · 73점 유지</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">선행 P/E</div>
+          <div class="metric-value">29.1</div>
+          <div class="metric-sub">가이던스 중간값 약 30.7배</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">EV/EBITDA</div>
+          <div class="metric-value">31.0배</div>
+          <div class="metric-sub">TTM · W37 22.9는 가이던스 기준</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">TTM 매출</div>
+          <div class="metric-value">$35.1억</div>
+          <div class="metric-sub">+22.7% YoY</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">주식 수 변화</div>
+          <div class="metric-value" style="color:#6bcb77;">+0.11%</div>
+          <div class="metric-sub">1년 · 희석 없음</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">잉여현금흐름</div>
+          <div class="metric-value">$3.17억</div>
+          <div class="metric-sub">TTM · ROE 28%</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">베타</div>
+          <div class="metric-value">0.74</div>
+          <div class="metric-sub">공매도 3.25%</div>
+        </div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">저평가도</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:67%"></div></div>
+          </div>
+          <div class="score-item-value">20<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">성장성</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:70%"></div></div>
+          </div>
+          <div class="score-item-value">21<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">해자</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:92%"></div></div>
+          </div>
+          <div class="score-item-value">23<span style="font-size:11px;color:#7a8ba3">/25</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">리스크 관리</div>
+            <div class="score-bar"><div class="score-bar-fill fill-mid" style="width:60%"></div></div>
+          </div>
+          <div class="score-item-value">9<span style="font-size:11px;color:#7a8ba3">/15</span></div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 규칙 점검 — 제 규칙표에 모순이 있었습니다</h4>
+        <p>
+          지난주 BWXT 진입 전략표를 다시 보면, 1차 매수 구간은 <strong>"9/17~9/28 · $145~155"</strong>, 추가 매수 중단 조건은 <strong>"$147.74(52주 저점) 종가 이탈"</strong>이었습니다.
+          <strong>$145~147.74 구간은 '사라'와 '멈춰라'가 동시에 적용되는 칸</strong>이었고, 이번 주 주가가 정확히 그 칸에 들어왔습니다 — 52주 신저가 <strong>$144.33</strong>, 9/18 장중 $145.64.
+          표를 쓸 때 두 줄이 겹치는지 확인하지 않은 제 실수입니다.
+        </p>
+        <p>
+          <strong>판단:</strong> 규칙끼리 부딪칠 때는 보수적인 쪽입니다. 52주 저점 이탈은 제가 직접 <strong>"싸다가 아니라 아직 바닥을 모른다는 뜻"</strong>이라고 적은 조건입니다.
+          1차를 <strong>9/29 인베스터데이 이후</strong>로 옮깁니다. 7거래일 뒤 회사가 중장기 목표를 직접 발표하는 날이 정해져 있으므로 <strong>기다리는 비용이 거의 없습니다.</strong>
+          앞으로 모든 진입 전략표는 <strong>'매수 구간'과 '중단 조건'이 겹치지 않는지</strong> 먼저 확인하고 싣겠습니다.
+        </p>
+        <p>
+          <strong>점수 73 유지:</strong> 가격이 내려와 저평가도 19 → 20, 대신 해군 원자로가 주력인데도 <strong>AI 전력 바스켓과 함께 팔리는</strong> 패턴이 확인돼 리스크 10 → 9.
+          다만 낙폭은 주간 -3.0%로 컨스텔레이션(-10.2%)의 3분의 1 이하 — <strong>바스켓에 묶여 있어도 바닥이 다르다</strong>는 우리 논리는 이번 주에도 작동했습니다.
+          구겐하임 신규 '매수'($192, 9/15 전후), 제프리스 신규 '매수'($181, 9/3 전후).
+        </p>
+        <p>
+          <strong>인베스터데이 기대치 — 웰스파고의 선제 코멘트(8/27):</strong> 중장기 목표는 매출 한 자릿수 중후반·EBITDA 한 자릿수 후반 이상 성장으로 컨센서스와 <strong>"대체로 부합"</strong>할 것,
+          EBITDA 21배로 방산 동종사 대비 <strong>약 60% 프리미엄</strong>. 원전 1기당 BWXT 공급 가능액 추정은 <strong>AP1000 수억 달러 초반, CANDU $5~10억, SMR $5,000만~1억</strong>입니다.
+          아래 한국 연관의 '미국 원전 8기(AP1000 6기 거론)'와 연결되는 숫자지만, <strong>확인된 수주가 아니라 추정치의 연결</strong>입니다.
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 정정판</h4>
+        <table class="entry-table">
+          <tr><th>구간</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>지금 ~ 9/28</td><td><strong>대기</strong></td><td>52주 신저가 갱신 중. W37 규칙표의 겹침 구간 — 보수적인 쪽 적용.</td></tr>
+          <tr><td>9/29 목표 '컨센 부합 이상' · $155 이하</td><td><strong>1차 — SMR 계획의 1/3</strong></td><td>회사가 직접 말한 숫자를 확인한 뒤.</td></tr>
+          <tr><td>9/29 목표가 컨센 하회</td><td><strong>관찰로 강등</strong></td><td>세 번 연속 실적 후 하락한 이력에 네 번째가 더해지는 셈.</td></tr>
+          <tr><td>인베스터데이 후에도 $144.33 아래 종가 지속</td><td><strong>1차 보류 유지</strong></td><td>바닥 확인 전에는 크기를 늘리지 않습니다.</td></tr>
+        </table>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">📋 기존 워치리스트 점검 — Cameco · Oklo · NuScale · Centrus</h4>
+        <ul>
+          <li><strong>Cameco(CCJ) 73점 유지 · $91.36(주간 -5.5%)</strong> — W34 진입 구간 $85~90까지 <strong>약 1.5%</strong> 남았습니다. 이번 주 회사 자체 뉴스는 없었고, AI 전력 바스켓과 함께 빠졌습니다. 텀 가격 사상 최고는 카메코 실현단가에 직접 유리합니다. <strong>구간 도달 시 1차 검토 — 단, 9/29 BWXT와 같은 주에 SMR 비중을 한꺼번에 채우지 않습니다.</strong></li>
+          <li><strong>Oklo(OKLO) 매수 금지 유지 · $37.80</strong> — 법안 반등 +11~13% 이후에도 9/14 임원 1명 추가 매도(Form 4). 5개 투자은행을 통한 $10억 ATM 진행 중.</li>
+          <li><strong>NuScale(SMR) 매수 금지 유지 · $8.31</strong> — UBS '매도' $6. TTM 매출 $1,070만(-81%).</li>
+          <li><strong>Centrus(LEU) 보류 · $145.43</strong> — $5억 공모 직후인데 9/17 안타레스와 다년 HALEU 공급계약(선급금 포함, 금액 비공개). <strong>고객에게서 돈을 받는 계약</strong>이라는 점은 좋지만, 공모 워런트 물량 소화 확인이 먼저입니다.</li>
+        </ul>
+      </div>
+
+      <div class="kr-related">
+        <div class="kr-flag">🇰🇷 한국 연관 — 두산에너빌리티 '미국 원전 8기'</div>
+        <p>
+          지난주 "서명은 9/18 전후로 거론"이라고 적었는데, <strong>이번 주 서명은 확인되지 않았습니다.</strong>
+          3,500억 달러 대미 투자 협상에 포함된 <strong>원전 8기·약 1,200억 달러(약 161조 원)</strong> 패키지는 AP1000 6기 + APR1400 2기 구성으로 논의되지만, 미국은 AP1000을 선호하고 <strong>노형을 두고 이견</strong>이 있습니다(뉴시스 9/17).
+          김정관 산업부 장관과 러트닉 상무장관의 추가 협의도 없었다는 보도입니다(한국일보 9/16). 두산에너빌리티 수주 추정은 약 32조~40조 원 이상(파이낸셜뉴스 9/10)으로 <strong>매체 추정치</strong>입니다.
+        </p>
+        <p>
+          <strong>판단 유지:</strong> 확인되지 않은 합의에 선반영된 주가는 서명 내용이 보도와 다르면 되돌려집니다. APR1400 비중이 늘면 한전기술·현대건설의 역할이 커지고, AP1000 중심이면 웨스팅하우스 지분 49%의 카메코가 간접 수혜입니다.
+          <strong>어느 쪽이든 '정부 발표' 전 추격 매수는 권하지 않습니다.</strong>
+        </p>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">BWXT</span>
+          <span class="broker-market">NYSE · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · 9/29 이후</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">CCJ (Cameco)</span>
+          <span class="broker-market">NYSE · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · $85~90 대기</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">두산에너빌리티 (034020)</span>
+          <span class="broker-market">KOSPI · 한국</span>
+          <span class="broker-badge broker-partial">△ 가능 · 정부 발표 전 비권고</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">SMR · OKLO</span>
+          <span class="broker-market">NYSE · 미국</span>
+          <span class="broker-badge broker-no">✗ 매수 금지 유지</span>
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:16px;">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          stockanalysis.com(9/18) — BWXT·CCJ·OKLO·SMR·LEU·CEG·VST·TLN 시세·밸류에이션 · Investing.com(2026.08.27) — 웰스파고 BWXT 코멘트 · BusinessWire(2026.08.31) — 9/29 인베스터데이 ·
+          secform4.com — BWXT·Oklo 내부자 거래 · Cameco — 8월 말 스팟 $89.68·텀 $96.50 · TradingEconomics·metalcharts — 우라늄 선물(9/17~18) · Sprott(9/17) — SPUT 보유량·NAV·할인율 ·
+          Discovery Alert(2026.09.18) — 카자톰프롬 생산능력 · 24/7 Wall St.(2026.09.17) — 요금납부자 보호법·SMR주 반등 · GlobeNewswire(2026.09.15) — 홀텍 NRC 면제 ·
+          PR Newswire(2026.09.17) — Centrus·Antares HALEU · Motley Fool·CNBC(2026.09.14) — AI 전력주 급락 · 뉴시스(9/17)·한국일보(9/16)·파이낸셜뉴스(9/10) — 한미 원전 협상
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ 💊 제약바이오 ══════════════════ -->
+  <div class="sector-card sector-bio">
+    <div class="sector-title">💊 제약바이오 — 비중 10%</div>
+    <div class="sector-issue">이번 주 이슈: 3주 전 경고했던 '이진 이벤트'는 호재로 끝났다 — 그러나 이미 -46% 뒤였다</div>
+
+    <div class="thesis">
+      <div class="thesis-head">
+        <span>섹터 테제 점수</span>
+        <span><span class="thesis-score">81</span> <span class="thesis-delta up">▲ 1 (9/11 금 80)</span></span>
+      </div>
+      <div class="thesis-bar-bg"><div class="thesis-bar" style="width:81%;background:#ce93d8;"></div></div>
+      <div class="thesis-why">
+        <strong>FDA가 제 속도로 일했습니다.</strong> 9/17 울트라제닉스의 산필리포 A형 유전자치료제 <strong>FAYUVI(UX111)가 PDUFA 기한보다 이틀 먼저 '정식 승인'</strong>을 받았습니다 — 이 질환 최초의 승인 치료제이고, 우선심사권(PRV)도 함께 받았습니다.
+        내부자 매수도 2주 연속입니다 — Inhibrx 이사 <strong>$50만</strong>(9/16, 주당 $100), Nuvation(NAMS) CEO <strong>$22.65만</strong>(9/14), 오팔아이의 ACOG <strong>$106만</strong>(9/14).
+        10년물이 5%를 찍은 주에 바이오 ETF(XBI)는 <strong>주간 보합</strong>(연초 대비 +26%)으로 버텼습니다. 바이오엔텍은 폐암 3상에서 전체생존기간 <strong>18.5개월 vs 10개월</strong>(9/14)을 냈습니다. +1점.
+      </div>
+    </div>
+
+    <!-- RARE 사후 점검 2주차 -->
+    <div class="datawarn" style="margin-bottom:20px;background:rgba(107,203,119,0.06);border-color:rgba(107,203,119,0.2);">
+      <div class="datawarn-title" style="color:#6bcb77;">📋 사후 점검 2주차 — Ultragenyx(RARE): 경고했던 이벤트는 '호재'로 끝났다</div>
+      <p>
+        <strong>무슨 일이 있었나.</strong> 9/17 FDA가 FAYUVI를 <strong>신경발달이 보존된 소아 MPS IIIA 환자</strong> 대상으로 정식 승인했습니다. 회사의 두 번째 유전자치료제이고, 받은 PRV로 <strong>보유 PRV가 2개</strong>가 됐습니다.
+        정가 <strong>$395만</strong>, 30~60일 내 출하 시작, JP모건 추정 최대 매출 <strong>$2~2.5억</strong>. 주가는 9/17 <strong>+12.6%</strong>($14.50), 9/18 장중 $14.86.
+      </p>
+      <p style="margin-top:8px;">
+        <strong>여기서 기록할 비대칭.</strong> W34에서 제가 "완전한 이진 이벤트"라고 경고한 9/19는 <strong>좋은 쪽으로 열렸습니다.</strong> 그런데 W34 기준가 $26.81 대비 지금 가격은 여전히 <strong>-44.6%</strong>이고,
+        원금을 회복하려면 <strong>+80%</strong>가 필요합니다(자체 계산). <strong>-46%를 한 번 맞으면, 그다음 호재 +12.6%는 손실의 일부만 메웁니다.</strong> 이것이 이진 이벤트 섹터에서 <strong>진입 시점보다 비중 상한이 더 중요한 이유</strong>입니다.
+      </p>
+      <p style="margin-top:8px;">
+        <strong>재평가: 61 → 63점(▲2)</strong> — 성장성 14 → 16(승인 제품 추가). 시총 약 $14.6억, TTM 매출 $7.17억 → P/S 약 2배. 현금 $4.36억 ÷ 2분기 소진 $9,700만 = <strong>약 4.5분기</strong>(자체 계산). PRV 2개 매각이 현금 보강 수단이지만 매각가는 확인하지 못했습니다.
+        애널리스트 목표가는 <strong>$18(웰스파고)~$39(캐너코드·캔터)</strong>로 두 배 넘게 갈립니다.
+        <strong>행동: 신규 진입 금지 유지.</strong> 지난주 재평가 조건은 "UX111 결정 + 비용 절감 계획"이었고, 첫째만 충족됐습니다. 둘째는 <strong>11/3 실적</strong>에서 확인합니다.
+      </p>
+    </div>
+
+    <!-- QURE 상태 카드 -->
+    <div class="stock-card">
+      <div class="stock-header">
+        <div class="stock-name">uniQure</div>
+        <div class="stock-score">63</div>
+      </div>
+      <div class="stock-ticker">QURE · 나스닥 · 9/18 장중 $43.90 (9/10 $44.47 → -1.3%) · 52주 $8.73~$71.50 · 63점 유지 · 관찰</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">시가총액</div>
+          <div class="metric-value">$30.4억</div>
+          <div class="metric-sub">EV $27.9억</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">보유 현금</div>
+          <div class="metric-value">$8.10억</div>
+          <div class="metric-sub">"2030년까지"</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">공매도 비중</div>
+          <div class="metric-value" style="color:#ffd93d;">14.24%</div>
+          <div class="metric-sub">유통주식 대비</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">핵심 데이터</div>
+          <div class="metric-value">~9/30</div>
+          <div class="metric-sub">4년 추적 · 24명 · 6/30 컷</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">평균 목표가</div>
+          <div class="metric-value">$68.86</div>
+          <div class="metric-sub">12명 · 참고치</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">1년 수익률</div>
+          <div class="metric-value">+205%</div>
+          <div class="metric-sub">변동성 자체가 리스크</div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 이번 주 점검 — 달라진 것은 없고, 시계만 줄었다</h4>
+        <p>
+          9/12~18 회사 자체 뉴스는 확인되지 않았습니다. 회사가 <strong>"9월 중"</strong>이라고 안내한 AMT-130 <strong>4년 추적 데이터</strong>는 9/18 현재 미발표 — 남은 시간은 <strong>8거래일</strong>입니다.
+          지난주 세운 새 바이오 규칙(PDUFA + 6개월 내 임상 발표 + 학회 일정을 모두 적기 전엔 점수를 매기지 않는다)을 그대로 유지하며 일정표를 갱신합니다.
+        </p>
+        <table class="entry-table">
+          <tr><th>날짜</th><th>이벤트</th><th>성격</th></tr>
+          <tr class="highlight-row"><td>~9/30</td><td><strong>AMT-130 4년 추적 데이터</strong> (24명, 6/30 데이터 컷)</td><td>⚠️ 이진 이벤트 — 3년 효과(진행 75% 둔화) 유지 여부</td></tr>
+          <tr><td>11월 초 (자체 추정: 9/2 신청 + 60일)</td><td>FDA 신청 접수 · 우선심사 부여 여부</td><td>⚠️ 규제 이벤트</td></tr>
+          <tr><td>2027년 5월 전후 (우선심사 시, 자체 계산)</td><td>가속승인 결정 — 승인 전 확증 시험 등록 진행 필요</td><td>⚠️ 최종 이진 이벤트</td></tr>
+          <tr><td>2027년 상반기</td><td>AMT-260(뇌전증) 데이터</td><td>파이프라인 다변화</td></tr>
+        </table>
+        <p>
+          <strong>공매도 14.24%</strong>는 이 이벤트에 양쪽으로 크게 걸린 돈이 있다는 뜻입니다. 결과가 좋으면 공매도 청산으로 급등, 나쁘면 급락 — <strong>어느 쪽이든 하루 두 자릿수 움직임을 전제</strong>하십시오.
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 진입 전략 — 지난주와 동일</h4>
+        <table class="entry-table">
+          <tr><th>구간</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>지금 ~ 4년 데이터 발표</td><td><strong>진입 없음 · 관찰</strong></td><td>RARE의 교훈: 이벤트 직전 진입은 동전 던지기.</td></tr>
+          <tr><td>4년 데이터 효과 유지</td><td><strong>바이오 한도의 1/3까지</strong></td><td>11월 접수 이벤트가 남아 있어 크기는 작게.</td></tr>
+          <tr><td>4년 데이터 효과 둔화</td><td><strong>관찰 종료</strong></td><td>외부 대조군 설계에서 효과가 줄면 FDA 설득 근거가 사라집니다.</td></tr>
+        </table>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">📋 이번 주 AI 신약 · FDA 캘린더</h4>
+        <ul>
+          <li><strong>슈뢰딩거(SDGR) 주간 약 +60%</strong> — 9/17 하루 +26.4%. 두 후보물질을 NEA·RA캐피털이 세운 분사 회사 테크토라(시리즈A $5,500만)에 넘긴 거래가 촉매로 거론되지만 <strong>조건은 비공개</strong>입니다. 컨센서스 목표가 $21.43이 현재가($29.03)보다 낮습니다. <strong>조건을 모르는 거래로 오른 가격은 따라가지 않습니다.</strong></li>
+          <li><strong>리커전(RXRX) $3.655</strong> — REC-4881(FAP) 2상 데이터 11월 학회 본회의 발표 예정. 현금 $5.57억, 2028년 초까지.</li>
+          <li><strong>인실리코(홍콩 3696)</strong> — 렌토서팁 3상 진행 중, 네이처 바이오테크놀로지(9/7)에 노화 시계 분석 게재. AI 발굴 신약 FDA 완전승인은 <strong>여전히 0건</strong>입니다.</li>
+          <li><strong>다가오는 FDA 결정(우리 워치리스트 외, FDA의 속도를 읽는 지표):</strong> 9/22 아이오니스 질가너센(알렉산더병) · 9/26 미럼 질루르기서팁(FOP, 우선심사) · 10/10 머크·다이이찌 I-DXd(소세포폐암, 우선심사).</li>
+        </ul>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">QURE (uniQure)</span>
+          <span class="broker-market">나스닥 · 미국 (본사 네덜란드)</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · 데이터 후</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">RARE (Ultragenyx)</span>
+          <span class="broker-market">나스닥 · 미국</span>
+          <span class="broker-badge broker-partial">△ 가능 · 11/3 전 진입 금지</span>
+        </div>
+        <div class="broker-row">
+          <span class="broker-ticker">SDGR (Schrödinger)</span>
+          <span class="broker-market">나스닥 · 미국</span>
+          <span class="broker-badge broker-partial">△ 가능 · 추격 비권고</span>
+        </div>
+        <div class="broker-note">
+          <strong>거래 팁:</strong> uniQure 데이터는 미국 장 전·후에 나올 가능성이 높습니다. <strong>갭 상승·하락에는 지정가·손절 주문이 의도대로 작동하지 않습니다.</strong> 발표 당일 추격보다 다음 날 가격을 보고 판단하십시오.
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:16px;">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          GlobeNewswire(2026.09.17) — FAYUVI 승인·PRV · Reuters/Investing.com(2026.09.17) — 정가·JP모건 최대매출 추정 · Investing.com(2026.09.18) — 목표가 조정 · ts2(2026.09.17) — 9/17 종가 ·
+          Ultragenyx IR — Q2 현금·소진 · stockanalysis.com(9/18) — RARE·QURE·SDGR·RXRX·XBI 시세 · SEC 8-K(2026.07.29·09.02) — uniQure Q2·BLA ·
+          BioPharm International — 우선심사 일정 · OpenInsider — 바이오 내부자 매수 · pdufa.bio·Merck·Mirum — PDUFA 일정 · Bloomberg(2026.09.14) — 바이오엔텍 · Fortune(2026.09.09) — 인실리코
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ 🔮 양자 ══════════════════ -->
+  <div class="sector-card sector-quantum">
+    <div class="sector-title">🔮 양자컴퓨팅 — 비중 10% (IonQ 보유 중)</div>
+    <div class="sector-issue">이번 주 이슈: 논문 4편이 상 받은 날 +9.5%, 다음 날 -6% — 그리고 먼저 정정할 것이 있다</div>
+
+    <div class="thesis">
+      <div class="thesis-head">
+        <span>섹터 테제 점수</span>
+        <span><span class="thesis-score">66</span> <span class="thesis-delta flat">— 보합 (9/11 금 66)</span></span>
+      </div>
+      <div class="thesis-bar-bg"><div class="thesis-bar" style="width:66%;background:#a78bfa;"></div></div>
+      <div class="thesis-why">
+        <strong>정부 돈은 더 들어왔고, 정부 주식은 시장에 나왔습니다.</strong>
+        좋은 쪽: 에너지부(DOE)가 9/17 <strong>최대 $2.15억 규모 'Genesis Q' 경연</strong>을 발표했습니다 — 논리 큐비트 100개 달성에 $1억, 150·200개에 각 $5,000만 보너스.
+        IBM의 양자 파운드리 자회사 안데론은 9/16 <strong>CHIPS $10억</strong> 지원을 확정했습니다(IBM도 $10억 매칭). 네이처 커뮤니케이션즈(9/17)엔 IBM 칩에서 표면 코드 오류 억제가 임계값 아래로 내려간 결과가 실렸습니다.
+        나쁜 쪽: DOE 경연의 <strong>FY26 실제 예산은 $250만뿐</strong>이고 나머지는 의회 예산에 달려 있습니다. 미 정부가 받은 <strong>D-Wave 주식 710만 주가 재매도 등록</strong>됐고(9/10, 단일 출처), 퀀티넘은 $52.88로 <strong>공모가 $60 아래</strong>입니다. 상쇄되어 보합.
+      </div>
+    </div>
+
+    <div class="stock-card">
+      <div class="stock-header">
+        <div class="stock-name">IonQ <span style="font-size:13px;color:#6bcb77;font-weight:700;">보유 중 · 3주(株)</span></div>
+        <div class="stock-score">67</div>
+      </div>
+      <div class="stock-ticker">IONQ · NYSE · 9/17 종가 $40.34 (+9.5%) · 9/18 장중 약 $37.92 (-6.0%) · 9/11 $36.75 → 주간 약 +3.2% · 68점 → 67점 (▼1)</div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">시가총액</div>
+          <div class="metric-value">$150.7억</div>
+          <div class="metric-sub">발행주식 3.97억 주</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">P/S</div>
+          <div class="metric-value">약 61배</div>
+          <div class="metric-sub">TTM · 통합 가이던스 기준 약 33배</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">공매도 비중</div>
+          <div class="metric-value">10.29%</div>
+          <div class="metric-sub">유통주식 대비</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">3주 평가액</div>
+          <div class="metric-value">약 $113.8</div>
+          <div class="metric-sub">9/18 장중 기준</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">이익실현선 $55</div>
+          <div class="metric-value">+45.0%</div>
+          <div class="metric-sub">현재가 기준 거리</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">손절선 $25.89</div>
+          <div class="metric-value" style="color:#ff6b6b;">-31.7%</div>
+          <div class="metric-sub">= 52주 저점</div>
+        </div>
+      </div>
+
+      <div class="score-breakdown">
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">저평가도</div>
+            <div class="score-bar"><div class="score-bar-fill fill-low" style="width:50%"></div></div>
+          </div>
+          <div class="score-item-value">15<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">성장성</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:87%"></div></div>
+          </div>
+          <div class="score-item-value">26<span style="font-size:11px;color:#7a8ba3">/30</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">해자</div>
+            <div class="score-bar"><div class="score-bar-fill fill-high" style="width:84%"></div></div>
+          </div>
+          <div class="score-item-value">21<span style="font-size:11px;color:#7a8ba3">/25</span></div>
+        </div>
+        <div class="score-item">
+          <div style="flex:1">
+            <div class="score-item-label">리스크 관리</div>
+            <div class="score-bar"><div class="score-bar-fill fill-low" style="width:33%"></div></div>
+          </div>
+          <div class="score-item-value">5<span style="font-size:11px;color:#7a8ba3">/15</span></div>
+        </div>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="why">🔍 보유 점검 — 먼저 정정합니다</h4>
+        <p>
+          지난주 저는 <strong>"SEC EDGAR 확인 결과 8/1~9/11 공개시장 매도 0건 — 첫 신뢰 조건 충족"</strong>이라고 썼습니다. <strong>사실과 달랐습니다.</strong>
+          <strong>존 레이먼드 이사가 9/10 공개시장에서 2,407주를 주당 $37.21(약 $9만)에 매도</strong>했습니다(Form 4, 거래코드 S). 3/19에 만든 사전 매매계획(10b5-1)에 따른 거래입니다.
+          9/11에는 CEO 드 마시 16,121주, CFO 싱 6,272주, 법무책임자 다시에 4,457주가 빠졌는데, 이건 <strong>성과주식 지급 시 세금 원천징수</strong>(코드 F)로 시장 매도가 아닙니다. 9/10 Form 144(매도 예정 통지)도 4건 제출됐습니다.
+        </p>
+        <p>
+          규모는 작고 계획 매도이지만, 제가 조건을 <strong>'충족'</strong>이라고 쓴 문장은 틀렸습니다. 조건 상태를 <strong>"대체로 유지 — 소규모 계획 매도 1건"</strong>으로 고치고, 확인 부실을 반영해 <strong>리스크 점수 6 → 5, 총점 68 → 67</strong>로 내립니다.
+          9/10 Form 144 4건이 실제 매도로 이어졌는지는 다음 Form 4로 확인하겠습니다.
+        </p>
+        <p>
+          <strong>이번 주 뉴스를 '질'로 분류하면:</strong> IEEE 양자 주간(토론토)에서 논문 9편 발표, <strong>최우수 논문상 4개</strong>.
+          9/16 ORNL·엔비디아와의 DQAOA-GPT는 <strong>GPU 시뮬레이션만</strong>이고 양자 하드웨어에서 돌린 결과가 아닙니다.
+          9/17 시놉시스와의 결과(Ansys LS-DYNA 시뮬레이션 최대 <strong>14.6% 가속</strong>)는 36큐비트 포르테에서 검증됐지만 <strong>매출 조건은 공개되지 않았습니다.</strong>
+          9/17 IonQ +9.5%가 양자 ETF(QTUM) +2%의 네 배였다는 점에서 24/7 Wall St.는 "양자 전체의 재평가가 아니라 IonQ 스토리에 대한 입찰"이라고 썼고, <strong>9/18 트리플 위칭일에 대부분 반납</strong>했습니다.
+          <strong>논문은 기술의 증거이지 매출의 증거가 아닙니다.</strong>
+        </p>
+        <p>
+          <strong>경쟁 구도의 새 변수(자체 해석):</strong> IonQ가 SkyWater 인수로 노리는 자리는 '미국 내 양자칩 생산'입니다. 이번 주 IBM이 정부 $10억을 받아 <strong>순수 양자 파운드리</strong>를 올버니에 짓기로 확정했습니다.
+          IonQ는 CHIPS 지분투자 명단에 여전히 없습니다. 반대로 DOE 'Genesis Q'(10/19 신청 마감)는 논리 큐비트 로드맵(Superion 10K, 2027년 결함허용 시연)을 가진 IonQ가 참여할 만한 경연이지만, <strong>당장의 돈이 아니라 조건부 상금</strong>입니다.
+        </p>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="pros">✅ 계속 보유하는 이유</h4>
+        <ul>
+          <li><strong>희석 수단이 새로 생기지 않았습니다.</strong> IonQ 명의의 ATM 프로그램은 확인되지 않았고, 8/7 재매도 등록(195.9만 주)은 기존 주주 물량이지 신주가 아닙니다.</li>
+          <li><strong>규칙선이 멀리 있습니다.</strong> $55까지 +45%, $25.89까지 -31.7%. 주간 변동 ±10%는 이 종목의 평상 범위입니다.</li>
+          <li><strong>애널리스트 중 '매도'는 MarketBeat 기준 1명.</strong> 크레이그-할럼이 9/18 매수 유지. 평균 목표가 $67~69(출처별).</li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="cons">⚠️ 추가 매수를 하지 않는 이유</h4>
+        <ul>
+          <li><strong>금리 인상 사이클에서 가장 긴 듀레이션 자산입니다.</strong> TTM 순손실 -$13.6억, 매출 대비 61배. 10/28 추가 인상 확률 약 50%.</li>
+          <li><strong>신뢰 조건이 '충족'에서 '대체로 유지'로 내려왔습니다.</strong> 소규모라도 확인 누락이 있었던 만큼, 다음 두 번의 Form 4 흐름을 더 봅니다.</li>
+          <li><strong>10% 상한은 그대로.</strong></li>
+        </ul>
+      </div>
+
+      <div class="stock-section">
+        <h4 class="strategy">🎯 이번 주 IonQ 행동 지침</h4>
+        <table class="entry-table">
+          <tr><th>상황</th><th>행동</th><th>근거</th></tr>
+          <tr class="highlight-row"><td>현재 약 $37.9</td><td><strong>보유 유지 · 추가 매수 없음</strong></td><td>규칙선 모두 멀리 있음.</td></tr>
+          <tr><td>$55 도달</td><td><strong>1/3 매도</strong> (W35 규칙)</td><td>현재가 대비 +45.0%.</td></tr>
+          <tr><td>$25.89 종가 이탈</td><td><strong>전량 매도</strong> (W35 규칙)</td><td>52주 저점 = 시장이 매긴 최저 신뢰선. 현재가 대비 -31.7%.</td></tr>
+          <tr><td>11/4 3분기 실적 (stockanalysis 기준, 회사 미확정)</td><td><strong>단독 매출·현금 소진·RPO 세 개만 본다</strong></td><td>W37의 '11/11 추정'을 갱신. 통합 매출은 인수 효과입니다.</td></tr>
+          <tr><td>신규 대규모 주식 발행 공시</td><td><strong>보유 근거 재검토</strong></td><td>W37 규칙 유지.</td></tr>
+        </table>
+      </div>
+
+      <div class="broker-box">
+        <h4>🏦 삼성증권 거래 가능 여부</h4>
+        <div class="broker-row">
+          <span class="broker-ticker">IONQ</span>
+          <span class="broker-market">NYSE · 미국</span>
+          <span class="broker-badge broker-yes">✓ 거래 가능 · 보유 중 (3주·株)</span>
+        </div>
+        <div class="broker-note">
+          <strong>보유자 참고:</strong> 3주 평가액 약 <strong>$113.8</strong>(9/18 장중). 규칙 가격($55·$25.89)에 삼성증권 앱 해외주식 <strong>가격 알림</strong>이 걸려 있는지 한 번만 확인하십시오.
+        </div>
+      </div>
+
+      <div class="stock-section" style="margin-top:16px;">
+        <h4 class="source">📚 분석 근거 출처</h4>
+        <p style="font-size:12px;color:#7a8ba3;">
+          stockanalysis.com(9/18) — IONQ 일별 종가·시총·TTM 실적·컨센서스 · SEC EDGAR Form 4 — 레이먼드 이사 9/10 매도(코드 S)·9/11 원천징수(코드 F) · Finviz — 공매도 ·
+          IonQ 뉴스룸(2026.09.14~17) — IEEE 논문·수상·ORNL·시놉시스 · 24/7 Wall St.·Motley Fool(2026.09.17) — 9/17 상승 해석 · MarketBeat — 의견 분포 ·
+          energy.gov·The Quantum Insider(2026.09.17~18) — Genesis Q 경연 · IBM 뉴스룸(2026.09.16) — 안데론 CHIPS $10억 · Quartz(2026.09.08)·NIST — CHIPS 지분투자 · Quantum Computing Report — 과학·동종사 뉴스
+        </p>
+      </div>
+    </div>
+
+    <div class="stock-card" style="border-color:rgba(167,139,250,0.2);">
+      <div class="stock-section" style="margin-bottom:0;">
+        <h4 class="cons">📋 동종사 주간 (9/11 종가 → 9/18 장중)</h4>
+        <ul>
+          <li><strong>Rigetti(RGTI) $15.27 → $15.13</strong> · <strong>D-Wave(QBTS) $16.80 → $16.64</strong> — 정부 지분투자 확정 후 한 주. D-Wave는 정부 보유 주식 재매도 등록(9/10, -3.8%)으로 <strong>'정부가 주주'라는 호재가 '정부도 팔 수 있다'로</strong> 뒤집힌 첫 사례입니다.</li>
+          <li><strong>Quantinuum(QNT) $49.03 → $52.88</strong> — 6/4 공모가 $60 아래. 180일 락업이면 12월 초 만료 전후(통상 관행 기준, 미확인).</li>
+          <li><strong>Xanadu(XNDU) $8.62 → $7.45(-13.6%)</strong> · <strong>Infleqtion(INFQ) $13.12 → $12.78</strong> · <strong>QUBT $7.99 → $8.31</strong>(카타르 HBKU와 3년 프레임워크 계약).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kr-related">
+      <div class="kr-flag">🇰🇷 한국 연관</div>
+      <p>
+        D-Wave가 <strong>10/28 서울에서 'Qubits Asia 2026'</strong>을 엽니다. 국내 양자 테마주는 해외 기업의 한국 행사 소식만으로도 움직이는 경향이 있습니다.
+        <strong>행사 개최는 마케팅이고, 국내 기업과의 계약 공시가 투자 근거</strong>입니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════ 포트폴리오 ══════ -->
+  <div class="portfolio">
+    <h2>🧭 포트폴리오 대시보드</h2>
+    <div class="portfolio-subtitle">
+      <strong style="color:#e0e6ed;">목표 비중 변경은 없습니다.</strong>
+      이번 주 바뀐 건 <strong style="color:#e0e6ed;">실행 날짜</strong>입니다 — 엔비디아는 조건 충족, 로켓랩·BWXT는 <strong style="color:#e0e6ed;">규칙끼리 부딪쳐 보수적인 쪽(날짜 뒤로)</strong>을 택했습니다.
+    </div>
+
+    <div class="allocation">
+      <div class="alloc-row">
+        <span class="alloc-label">🤖 피지컬 AI</span>
+        <span class="alloc-bar-bg"><span class="alloc-bar ai" style="width:100%"></span></span>
+        <span class="alloc-pct">40%</span>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label">🚀 우주</span>
+        <span class="alloc-bar-bg"><span class="alloc-bar space" style="width:75%"></span></span>
+        <span class="alloc-pct">30%</span>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label">⚛️ SMR</span>
+        <span class="alloc-bar-bg"><span class="alloc-bar smr" style="width:25%"></span></span>
+        <span class="alloc-pct">10%</span>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label">💊 제약바이오</span>
+        <span class="alloc-bar-bg"><span class="alloc-bar bio" style="width:25%"></span></span>
+        <span class="alloc-pct">10%</span>
+      </div>
+      <div class="alloc-row">
+        <span class="alloc-label">🔮 양자</span>
+        <span class="alloc-bar-bg"><span class="alloc-bar quantum" style="width:25%"></span></span>
+        <span class="alloc-pct">10%</span>
+      </div>
+    </div>
+
+    <table class="portfolio-table">
+      <tr>
+        <th>종목</th><th>섹터</th><th>점수</th><th>직전</th><th>상태</th>
+      </tr>
+      <tr>
+        <td><strong>IONQ</strong></td><td>🔮 양자</td><td>67</td><td class="negative">▼1</td>
+        <td class="status-hold">3주(株) 보유 · 추가매수 X</td>
+      </tr>
+      <tr>
+        <td><strong>NVDA</strong></td><td>🤖 AI</td><td>83</td><td class="negative">▼1</td>
+        <td class="status-wait">1차 1/3 조건 충족 · 실행 여부 확인</td>
+      </tr>
+      <tr>
+        <td><strong>BWXT</strong></td><td>⚛️ SMR</td><td>73</td><td class="status-watch">—</td>
+        <td class="status-wait">1차 → 9/29 이후로 연기</td>
+      </tr>
+      <tr>
+        <td><strong>CCJ</strong></td><td>⚛️ SMR</td><td>73</td><td class="status-watch">—</td>
+        <td class="status-wait">$85~90 대기 (1.5% 남음)</td>
+      </tr>
+      <tr>
+        <td><strong>TER</strong></td><td>🤖 AI</td><td>70</td><td class="status-watch">신규</td>
+        <td class="status-watch">관찰 (10/27 실적)</td>
+      </tr>
+      <tr>
+        <td><strong>RKLB</strong></td><td>🚀 우주</td><td>68</td><td class="status-watch">—</td>
+        <td class="status-wait">1차 → 9/25 이후 (9/24 주총·락업)</td>
+      </tr>
+      <tr>
+        <td><strong>PL</strong></td><td>🚀 우주</td><td>66</td><td class="status-watch">—</td>
+        <td class="status-watch">관찰 (3Q 잔고)</td>
+      </tr>
+      <tr>
+        <td><strong>QURE</strong></td><td>💊 바이오</td><td>63</td><td class="status-watch">—</td>
+        <td class="status-watch">관찰 (~9/30 4년 데이터)</td>
+      </tr>
+      <tr>
+        <td><strong>RARE</strong></td><td>💊 바이오</td><td>63</td><td class="positive">▲2</td>
+        <td class="negative">진입 금지 (11/3 비용계획)</td>
+      </tr>
+      <tr>
+        <td><strong>KRMN</strong></td><td>🚀 우주</td><td>60</td><td class="status-watch">신규</td>
+        <td class="status-watch">관찰 · 잠정 (CFO 교체)</td>
+      </tr>
+      <tr>
+        <td><strong>SYM</strong></td><td>🤖 AI</td><td>58</td><td class="status-watch">—</td>
+        <td class="status-watch">관찰 (월마트 외 매출)</td>
+      </tr>
+      <tr>
+        <td><strong>SMR · OKLO</strong></td><td>⚛️ SMR</td><td class="negative">제외</td><td>—</td>
+        <td class="negative">매수 금지</td>
+      </tr>
+    </table>
+
+    <div class="cash-note">
+      <strong>이번 주 행동 요약</strong><br>
+      ① <strong>NVDA 1차(1/3) 조건 충족</strong> — 9/17 종가 $219.34. 실행했다면 체결가를 알려주십시오. 2차는 $200, <strong>하이퍼스케일러 설비투자 하향 시 중단</strong>(신규 조건).<br>
+      ② <strong>RKLB 1차 → 9/25 이후</strong> — 9/24 이리듐 주총과 SpaceX 락업(최대 3.28억 주)이 같은 날. 가결 + $60~65 유지 시 우주 계획의 1/4.<br>
+      ③ <strong>BWXT 1차 → 9/29 인베스터데이 이후</strong> — 지난주 규칙표의 매수 구간과 중단 조건이 겹쳤던 것을 정정. 52주 신저가 $144.33.<br>
+      ④ <strong>IONQ 보유 유지</strong> — 내부자 매도 '0건' 서술 정정(소규모 계획 매도 1건). 규칙선 $55 / $25.89 그대로.<br>
+      ⑤ <strong>희석 규칙 정교화</strong> — 피할 것은 '희석 자체'가 아니라 <strong>매출 없는 회사의 운영비 희석</strong>과 <strong>아직 남은 물량</strong>.<br>
+      ⑥ <strong>다음 주 화요일(9/22) 과제</strong> — (가) 이리듐 주총 의결권 자문사 권고 (나) uniQure 4년 데이터 발표 여부 (다) 하이퍼스케일러 설비투자 관련 발언 (라) SPUT 할인율(9/17 10.12%) 추적.
+    </div>
+  </div>
+
+  <!-- ══════ 애널리스트 뷰 ══════ -->
+  <div class="analyst-view">
+    <h2>🎙️ 애널리스트 뷰 — 규칙끼리 부딪친 주</h2>
+    <p>
+      MK, 이번 주는 제 규칙이 <strong>서로 부딪친 첫 주</strong>였습니다.
+    </p>
+    <p>
+      로켓랩은 가격 규칙($60~65)이 "사라"고 할 때 날짜 규칙(락업 전후 1주)이 "기다려라"고 했습니다. BWXT는 한 표 안에서 매수 구간과 중단 조건이 겹쳤습니다.
+      두 경우 모두 <strong>보수적인 쪽</strong>을 택했습니다. 이유는 단순합니다 — <strong>두 이벤트 모두 날짜가 정해져 있고(9/24, 9/29), 날짜가 정해진 이벤트 앞에서 기다리는 비용은 거의 0</strong>이기 때문입니다.
+      반대로 BWXT의 겹침은 제가 표를 쓸 때 두 줄을 대조하지 않아서 생긴 <strong>작성 실수</strong>입니다. IonQ 내부자 매도 '0건' 서술도 확인이 부족했습니다. 두 가지 모두 본문에 정정으로 남겼습니다.
+      <strong>규칙은 틀리지 않는 것이 아니라, 틀렸을 때 고칠 수 있게 적어두는 것</strong>입니다.
+    </p>
+    <p>
+      시장 전체로 보면, 이번 주 가장 중요한 교훈은 <strong>"예고된 악재는 약하다"</strong>입니다. 연준은 2023년 이후 처음 금리를 올렸는데 S&amp;P는 한 주 -0.3%였습니다.
+      반면 아무도 달력에 적지 않은 에세이 한 편이 AI 전력주를 하루 8% 넘게 끌어내렸습니다. 우리가 매주 금리를 가장 먼저 보는 건 맞지만,
+      <strong>우리 포트폴리오의 절반(피지컬 AI 40% + SMR 10%)은 금리보다 'AI 설비투자가 계속되느냐'는 서사에 더 크게 묶여 있다</strong>는 걸 이번 주가 숫자로 보여줬습니다.
+    </p>
+    <p>
+      그 서사를 확인할 수 있는 날은 정해져 있습니다. <strong>9/30 마이크론 실적</strong>(메모리 = AI 설비투자의 가장 빠른 계기판), 그리고 <strong>10월 말 하이퍼스케일러 실적</strong>입니다.
+      그 전까지 저는 <strong>이미 조건이 충족된 것(NVDA 1차)만 실행하고, 날짜가 걸린 것(RKLB·BWXT)은 날짜 뒤로</strong> 미룹니다.
+      다음 두 주는 9/24(이리듐·SpaceX 락업) → 9/28(스타십) → 9/29(BWXT) → 9/30(PCE·마이크론·uniQure 기한)로 <strong>이벤트가 매일 있습니다.</strong> 이런 구간에서는 종목을 고르는 능력보다 <strong>순서를 지키는 능력</strong>이 수익을 정합니다.
+    </p>
+  </div>
+
+  <!-- ══════ 전문가 레퍼런스 ══════ -->
+  <div class="experts">
+    <h2>🎙️ 전문가 · 기관 레퍼런스</h2>
+    <div class="sub">이번 주 판단의 근거가 된 발언·보도를 모았습니다. 원문 인용이 확인된 것만 따옴표로 쓰고, 나머지는 요지로 정리했습니다.</div>
+
+    <div class="expert-item">
+      <div class="expert-name">케빈 워시 (Kevin Warsh)</div>
+      <div class="expert-role">연준 의장 · FOMC 기자회견 · 2026.09.16</div>
+      <div class="expert-quote">
+        "The plain fact is that inflation is too high and has been for too long." (물가는 너무 높고, 너무 오래 그래 왔다)<br>
+        "I'm not in the forward guidance business." (나는 선제 안내를 하지 않는다)<br>
+        "Inflation risks are to the upside." (물가 위험은 위쪽이다)
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> '선제 안내를 안 한다'는 말은 <strong>매 지표 발표가 그대로 금리 결정의 재료</strong>가 된다는 뜻입니다. 10/28 인상 확률이 50% 안팎에서 흔들리는 이유이고,
+        9/30 PCE(워시 자체 추정 헤드라인 약 3.6%·근원 약 3.2%)가 다음 관문입니다. 그는 금리 상승 원인으로 <strong>하이퍼스케일러 차입</strong>을 직접 언급했습니다 — AI 투자와 금리가 같은 문장에 묶인 첫 연준 의장 발언으로 기록해 둡니다.
+      </div>
+      <div class="expert-src">📎 Federal Reserve — FOMC 기자회견 전문(2026.09.16) · FOMC 성명·경제전망(SEP)</div>
+    </div>
+
+    <div class="expert-item">
+      <div class="expert-name">ING</div>
+      <div class="expert-role">글로벌 투자은행 · FOMC 후 코멘트 · 2026.09.18 보도</div>
+      <div class="expert-quote">
+        "green light to markets to fully price in a hike in October if data and energy prices suggest so" (지표와 에너지 가격이 그렇게 가리키면 10월 인상을 완전히 반영해도 된다는 신호를 시장에 줬다)
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> 10월 인상의 조건을 <strong>'지표'와 '에너지 가격'</strong> 두 개로 명시했습니다. 브렌트 선물은 내렸지만 실물(오만 $130+)은 아니라는 점에서, <strong>유가 선물이 아니라 실물 가격이 다음 인상의 변수</strong>일 수 있습니다.
+      </div>
+      <div class="expert-src">📎 Investing.com(2026.09.18)</div>
+    </div>
+
+    <div class="expert-item">
+      <div class="expert-name">길 루리아 (Gil Luria)</div>
+      <div class="expert-role">D.A. 데이비슨 애널리스트 · AI 속도 조절론 매도세 당일 · 2026.09.14</div>
+      <div class="expert-quote">
+        (보도 인용) 하이퍼스케일러들이 "just all stop building data centers"(그냥 다 같이 데이터센터 건설을 멈출 수도) 있다.
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> 극단적 시나리오를 말한 것이지 전망이 아닙니다. 그러나 핵심을 찌릅니다 — <strong>설비투자는 '해야 하는 지출'이 아니라 '선택하는 지출'</strong>이고, 선택은 서사에 따라 바뀔 수 있습니다.
+        반대 증거로 TSMC 8월 사상 최고 매출과 젠슨 황의 '내년 두 배' 발언을 함께 놓으십시오. <strong>둘 중 어느 쪽이 맞는지는 10월 말 하이퍼스케일러 가이던스가 정합니다.</strong>
+      </div>
+      <div class="expert-src">📎 Fortune(2026.09.14) — AI slowdown stocks</div>
+    </div>
+
+    <div class="expert-item">
+      <div class="expert-name">쉬스 장군 (Gen. Schiess)</div>
+      <div class="expert-role">미 우주군 참모총장(9/3 취임) · 2026.09.15 보도</div>
+      <div class="expert-quote">
+        (보도 요지) 임시예산 하에서는 우주군 사업의 <strong>약 10분의 1</strong>이 진행될 수 없다.
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> 우주 테제의 기둥인 '정부 예산'이 <strong>셧다운은 피했지만 신규 사업은 멈춘</strong> 상태를 수치로 확인한 발언입니다. 12/11 임시예산 만료가 다음 날짜입니다.
+      </div>
+      <div class="expert-src">📎 Breaking Defense(2026.09.15)</div>
+    </div>
+
+    <div class="expert-item">
+      <div class="expert-name">웰스파고 (Wells Fargo)</div>
+      <div class="expert-role">BWXT 투자의견 '비중유지' 상향·목표가 $170 · 2026.08.27</div>
+      <div class="expert-quote">
+        (요지) 9/29 인베스터데이 중장기 목표는 컨센서스와 <strong>"roughly in line"</strong>(대체로 부합). EBITDA 21배로 방산 동종사 대비 <strong>약 60% 프리미엄</strong>.
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> 인베스터데이에 '서프라이즈'를 기대하지 말라는 선제 경고입니다. 그래서 우리의 1차 조건은 '서프라이즈'가 아니라 <strong>'컨센 부합 이상 + $155 이하'</strong>입니다.
+      </div>
+      <div class="expert-src">📎 Investing.com(2026.08.27) — Wells Fargo upgrades BWX Technologies</div>
+    </div>
+
+    <div class="expert-item">
+      <div class="expert-name">24/7 Wall St.</div>
+      <div class="expert-role">IonQ 9/17 급등 분석 · 2026.09.17</div>
+      <div class="expert-quote">
+        "bidding IonQ's story, not repricing quantum broadly" (양자 전체를 재평가한 게 아니라 IonQ의 스토리에 입찰한 것)
+      </div>
+      <div class="expert-read">
+        <strong>어떻게 읽나:</strong> 개별 종목이 섹터 ETF보다 네 배 오르면, 그 초과분은 대개 <strong>뉴스의 질보다 뉴스의 양</strong>에 대한 반응입니다. 다음 날 반납이 그 판단을 확인했습니다.
+      </div>
+      <div class="expert-src">📎 24/7 Wall St.(2026.09.17)</div>
+    </div>
+  </div>
+
+  <!-- ══════ 용어 사전 ══════ -->
+  <div class="glossary">
+    <h2>📖 이번 주 용어 사전</h2>
+    <div class="sub">이번 주 주제는 <strong style="color:#e0e6ed;">'정해진 날짜와 정해지지 않은 서사'</strong>입니다. 점도표, ATM, 트리플 위칭, 그리고 정식 승인과 가속 승인.</div>
+
+    <div class="term">
+      <div class="term-name">점도표</div>
+      <div class="term-en">Dot Plot (Summary of Economic Projections)</div>
+      <p>
+        연준 위원 18~19명이 각자 <strong>"올해 말·내년 말·그 이후 금리가 얼마여야 하나"</strong>를 점 하나씩 찍어 공개하는 표입니다. 분기마다(3·6·9·12월) 나옵니다.
+        시장은 보통 <strong>점들의 중간값</strong>을 연준의 '경로'로 읽습니다.
+      </p>
+      <p>
+        <strong>약속이 아니라 의견</strong>이라는 점이 중요합니다. 그래서 점도표의 가치는 절대값보다 <strong>지난번 대비 얼마나 움직였나</strong>에 있습니다.
+      </p>
+      <div class="term-apply">
+        <strong>이번 주 적용:</strong> 2026년 말 중간값 3.8% → <strong>4.1%</strong>(올해 한 번 더), 2027년 말 3.6% → <strong>4.1%</strong>(내년 인하 없음). 시장은 앞의 숫자에 안도했고(9/17 랠리), 뒤의 숫자는 아직 가격에 덜 들어갔을 수 있습니다.
+        <strong>MK의 실전 규칙:</strong> 점도표가 나오면 <strong>'올해'보다 '내년' 숫자의 변화</strong>를 먼저 보십시오. 성장주 가치는 올해 금리보다 몇 년치 금리 경로에 더 민감합니다.
+      </div>
+    </div>
+
+    <div class="term">
+      <div class="term-name">시장가 주식 발행 (ATM)</div>
+      <div class="term-en">At-the-Market Offering</div>
+      <p>
+        회사가 한 번에 대량으로 공모하는 대신, <strong>증권사를 통해 시장에서 매일 조금씩 새 주식을 파는 방식</strong>입니다. 할인 발행이 없고 조용하다는 장점이 있지만,
+        매수자 입장에선 <strong>매일 보이지 않는 매도 물량</strong>이 있다는 뜻입니다.
+      </p>
+      <p>
+        같은 ATM이라도 <strong>① 돈을 어디에 쓰는지 ② 무엇을 대체하는지 ③ 이미 팔렸는지, 앞으로 팔 건지</strong>에 따라 의미가 완전히 다릅니다.
+      </p>
+      <div class="term-apply">
+        <strong>이번 주 적용:</strong> 로켓랩 $19.44억 ATM(이리듐 인수 대금, $36억 브리지론 대체, <strong>이미 소화</strong>) vs 오클로 $10억 ATM(운영 자금, 대체 없음, <strong>앞으로 팔 물량</strong>).
+        <strong>MK의 실전 규칙:</strong> ATM 뉴스를 보면 "얼마나?"보다 <strong>"남은 한도가 얼마인가?"</strong>를 먼저 확인하십시오. 남은 한도가 곧 앞으로의 매도 물량입니다.
+      </div>
+    </div>
+
+    <div class="term">
+      <div class="term-name">트리플 위칭</div>
+      <div class="term-en">Triple Witching</div>
+      <p>
+        주가지수 선물·지수 옵션·개별주식 옵션 <strong>세 종류의 파생상품 만기가 같은 날</strong> 겹치는 날입니다. 3·6·9·12월 셋째 금요일.
+        만기에 맞춰 포지션을 정리하거나 넘기는 거래가 몰려 <strong>거래량이 급증하고, 특히 옵션이 많이 걸린 종목의 가격이 평소보다 크게 흔들립니다.</strong>
+      </p>
+      <div class="term-apply">
+        <strong>이번 주 적용:</strong> 9/18은 옵션 명목가 약 <strong>$7조</strong>가 만기되는 역대 두 번째 규모의 트리플 위칭(블룸버그, 시타델증권 인용). 전날 +9.5% 오른 IonQ가 -6%, 로켓랩이 -5.2%.
+        <strong>MK의 실전 규칙:</strong> 트리플 위칭일의 급등락은 <strong>정보가 아니라 수급</strong>일 가능성이 높습니다. 그날 가격으로 규칙을 발동하지 말고 <strong>다음 거래일 종가</strong>로 확인하십시오. 다음은 12/18입니다.
+      </div>
+    </div>
+
+    <div class="term">
+      <div class="term-name">정식 승인 vs 가속 승인</div>
+      <div class="term-en">Traditional (Full) Approval vs Accelerated Approval</div>
+      <p>
+        <strong>정식 승인</strong>은 약이 실제 임상 결과(생존·기능 개선)를 개선한다는 증거로 받는 승인입니다.
+        <strong>가속 승인</strong>은 심각한 질환에서 <strong>'결과를 예측할 만한 대리 지표'</strong>(예: 혈중 수치, 영상 소견)로 먼저 승인하고, 시판 후 <strong>확증 시험</strong>으로 효과를 증명하게 하는 제도입니다. 확증에 실패하면 승인이 철회될 수 있습니다.
+      </p>
+      <div class="term-apply">
+        <strong>이번 주 적용:</strong> 울트라제닉스 FAYUVI는 <strong>정식 승인</strong>, 3주 전 같은 회사의 GENGLYCOS는 <strong>가속 승인</strong>이었습니다. uniQure AMT-130은 <strong>가속 승인</strong>을 신청했고, 승인 전 확증 시험 등록이 진행돼야 합니다.
+        <strong>MK의 실전 규칙:</strong> "FDA 승인" 헤드라인을 보면 <strong>어떤 승인인지</strong>부터 확인하십시오. 가속 승인은 <strong>두 번째 시험(확증)이 남은 승인</strong>입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ 추천 원문 ══════ -->
+  <div class="readings">
+    <h2>📰 이번 주 추천 원문</h2>
+
+    <div class="reading-item">
+      <div class="reading-sector macro">거시 · 이번 주 최우선</div>
+      <div class="reading-title"><a href="https://www.cnbc.com/2026/09/16/fed-rate-decision-september-2026.html" style="color:#e0e6ed;">9월 FOMC — 연준 금리 결정 라이브 기사 (인상·점도표·기자회견)</a></div>
+      <div class="reading-source">CNBC · 2026.09.16</div>
+      <div class="reading-why">
+        인상 결정·점도표·워시 기자회견을 한 페이지에서 볼 수 있습니다. <strong>2027년 점도표(3.6% → 4.1%)</strong>가 어떻게 보도되는지 눈여겨보십시오.
+      </div>
+    </div>
+
+    <div class="reading-item">
+      <div class="reading-sector ai">피지컬 AI</div>
+      <div class="reading-title"><a href="https://fortune.com/2026/09/14/ai-slowdown-stocks-nvidia-meta/" style="color:#e0e6ed;">AI 속도 조절론과 엔비디아·메타 주가 (9/14 시장 반응 기사)</a></div>
+      <div class="reading-source">Fortune · 2026.09.14</div>
+      <div class="reading-why">
+        이번 주 사건의 원문. <strong>같은 뉴스에 칩 주식은 빠지고 하이퍼스케일러는 오른 이유</strong>를 직접 읽어보시길 권합니다 — 설비투자의 '주는 쪽'과 '받는 쪽'이 갈리는 구조가 보입니다.
+      </div>
+    </div>
+
+    <div class="reading-item">
+      <div class="reading-sector space">우주</div>
+      <div class="reading-title"><a href="https://breakingdefense.com/2026/09/budget-impasse-imperils-1-in-10-space-force-programs-new-chief-says/" style="color:#e0e6ed;">Budget impasse imperils 1 in 10 Space Force programs, new chief says</a></div>
+      <div class="reading-source">Breaking Defense · 2026.09.15</div>
+      <div class="reading-why">
+        우주 테제 -1점의 근거. <strong>임시예산이 '셧다운 회피'와 '신규 사업 중단'을 동시에 의미</strong>한다는 걸 현장 책임자의 말로 확인할 수 있습니다.
+      </div>
+    </div>
+
+    <div class="reading-item">
+      <div class="reading-sector smr">SMR</div>
+      <div class="reading-title"><a href="https://247wallst.com/investing/2026/09/17/oklo-jumps-13-nuscale-power-climbs-10-does-the-house-data-center-power-vote-reach-nuclear/" style="color:#e0e6ed;">Oklo jumps 13%, NuScale climbs 10% — does the House data center power vote reach nuclear?</a></div>
+      <div class="reading-source">24/7 Wall St. · 2026.09.17</div>
+      <div class="reading-why">
+        요금납부자 보호법이 원자력에 실제로 무엇을 바꾸는지, 그리고 <strong>왜 우라늄 광산주는 따라가지 않았는지</strong>. '정책 헤드라인 반등'을 구분하는 연습 자료입니다.
+      </div>
+    </div>
+
+    <div class="reading-item">
+      <div class="reading-sector bio">바이오</div>
+      <div class="reading-title"><a href="https://www.globenewswire.com/news-release/2026/09/17/3364357/20739/en/ultragenyx-announces-approval-of-fayuvi-gene-therapy-the-first-ever-fda-approved-treatment-for-sanfilippo-syndrome-type-a-mps-iiia.html" style="color:#e0e6ed;">Ultragenyx Announces Approval of FAYUVI, the First-Ever FDA-Approved Treatment for Sanfilippo Syndrome Type A</a></div>
+      <div class="reading-source">GlobeNewswire · 2026.09.17</div>
+      <div class="reading-why">
+        사후 점검 2주차의 원문. <strong>승인 대상 환자군(신경발달 보존 소아)</strong>이 얼마나 좁게 정의됐는지 확인하면, 최대 매출 추정 $2~2.5억의 맥락이 보입니다.
+      </div>
+    </div>
+
+    <div class="reading-item">
+      <div class="reading-sector quantum">양자</div>
+      <div class="reading-title"><a href="https://www.energy.gov/science/articles/doe-launches-competition-accelerate-development-worlds-first-fault-tolerant" style="color:#e0e6ed;">DOE launches competition to accelerate development of the world's first fault-tolerant quantum computer</a></div>
+      <div class="reading-source">U.S. Department of Energy · 2026.09.17</div>
+      <div class="reading-why">
+        '논리 큐비트 100개'라는 정부의 첫 공식 목표치. 상금 구조와 함께 <strong>FY26 실제 예산($250만)</strong>을 대조해 읽으십시오 — 발표 금액과 집행 금액의 차이가 양자 섹터 뉴스를 읽는 기본기입니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ FOOTER ══════ -->
+  <div class="footer">
+    <strong>MK 애널리스트 딥다이브 · 2026년 9월 18일 (금) · W38</strong><br>
+    데이터 기준: 2026년 9월 17일(목) 미국 정규장 종가 + 9/18(금) 미 동부 12:45 전후 장중 시세(본문에 '장중'으로 표기) · 직전 비교 기준은 9/11(금) 딥다이브 (9/15 화요일 회차는 발행 기록이 없어 비교에서 제외)<br>
+    <br>
+    본 리포트는 <strong>정보 제공 목적</strong>으로 작성되었으며, 특정 종목의 매수·매도를 권유하지 않습니다.<br>
+    모든 수치는 공개 자료를 기준으로 하며, 출처가 확인되지 않은 값은 <strong>추정하지 않고 공란 또는 '확인 불가'로 표기</strong>했습니다. '자체 계산'·'자체 해석' 표기는 공개 수치로 산출·추론한 값입니다.<br>
+    작성: AI 애널리스트(Anthropic Claude) — 본문 '이번 주의 사건'의 이해상충 고지를 참고하십시오.<br>
+    투자에 따른 손익은 투자자 본인에게 귀속되며, <strong>최종 판단은 본인의 몫</strong>입니다.
+  </div>
+
+</div>
+</body>
+</html>
